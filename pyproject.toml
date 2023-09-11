@@ -3,6 +3,7 @@ name = "chocolatey-choco"
 version = "0.0.2"
 authors = ["Andrew Udvare <audvare@gmail.com>"]
 description = "Minimal choco command for use on non-Windows platforms."
+homepage = "https://github.com/Tatsh/pychoco"
 license = "MIT"
 packages = [{ include = "choco" }]
 readme = "README.md"
