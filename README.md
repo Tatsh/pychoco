@@ -5,7 +5,7 @@ Minimal choco command for use on non-Windows platforms.
 ## Installation
 
 ```shell
-pip install pychoco
+pip install chocolatey-choco
 ```
 
 ## Command line usage
