@@ -9,7 +9,7 @@ from ..constants import PYCHOCO_TOML_PATH
 __all__ = ('config',)
 
 
-@click.command()
+@click.command('set')
 @click.option('-n', '--name', required=True, type=click.Choice(['defaultPushSource']))
 @click.option('-v', '--value', required=True)
 def set_(name: str, value: str) -> None:

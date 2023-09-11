@@ -9,7 +9,7 @@ from ..constants import PYCHOCO_API_KEYS_TOML_PATH
 __all__ = ('apikey',)
 
 
-@click.command()
+@click.command('list')
 def list_() -> None:
     """List API keys. Does not display the API key values."""
     if PYCHOCO_API_KEYS_TOML_PATH.exists():

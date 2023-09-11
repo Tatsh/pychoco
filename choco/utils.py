@@ -57,16 +57,22 @@ def setup_logging(debug: bool | None = False) -> None:
 
 
 def generate_unique_id() -> str:
+    """Generates a unique ID for elements in ``_rels/.rels``."""
     return f'R{str(uuid.uuid4()).replace("-", "")}'.upper()
 
 
 def get_unique_tag_text(root: Element | Any, tag_name: str) -> str:
+    """
+    Gets text from a tag named ``tag_name``. This assumes there is only a single element of that
+    type in the tree. This will raise if the returned string is zero-length.
+    """
     text = assert_not_none(assert_not_none(root[0].find(tag_name)).text).strip()
     assert len(text) > 0, f'No value in {tag_name}'
     return text
 
 
 def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
+    """Appends a directory recursively to a zip file."""
     for item in listdir(root):
         if item.endswith('.nupkg'):
             continue
@@ -80,6 +86,7 @@ def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
 
 
 def get_default_push_source() -> str:
+    """Gets the default push source URL."""
     try:
         with PYCHOCO_TOML_PATH.open() as f:
             return cast(str, cast(Container, tomlkit.load(f)['pychoco'])['defaultPushSource'])

@@ -12,7 +12,10 @@ RELS_XML_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8" ?>
     Target="/package/services/metadata/core-properties/${psmdcp_filename}"
     Id="${psmdcp_id}"
   />
-    </Relationships>\n''')
+</Relationships>\n''')
+"""Used in construction of ``_rels/.rels`` file.
+
+:meta hide-value:"""
 PSMDCP_XML_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8" ?>
 <coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:dcterms="http://purl.org/dc/terms/"
@@ -26,7 +29,10 @@ PSMDCP_XML_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8" ?>
   <lastModifiedBy
   >choco, Version=2.2.2.0, Culture=neutral, PublicKeyToken=79d02ea9cad655eb;Microsoft Windows NT 10.0.22621.0;.NET Framework 4.8</lastModifiedBy>
 </coreProperties>
-\n''')
+\n''')  #: :meta hide-value:
+"""Used in construction of ``packages/services/metadata/core-properties/{id}.psmdcp``.
+
+:meta hide-value:"""
 NUSPEC_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
@@ -43,6 +49,9 @@ NUSPEC_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8"?>
     <packageSourceUrl>https://a-url-can-be-same-as-project</packageSourceUrl>
   </metadata>
 </package>\n''')
+"""Used in construction of the Nuspec file.
+
+:meta hide-value:"""
 CHOCOLATEY_INSTALL_PS1_TEMPLATE = string.Template('''$$ErrorActionPreference = 'Stop'
 $$packageName = '${package_id}'
 $$${package_id}Version    = '1.0'
@@ -59,3 +68,6 @@ Install-ChocolateyZipPackage @packageArgs
 ## Unzips a file to the specified location - auto overwrites existing content
 ## - https://chocolatey.org/docs/helpers-get-chocolatey-unzip
 #Get-ChocolateyUnzip @packageArgs\n''')
+"""Chocolatey PowerShell install template.
+
+:meta hide-value:"""
