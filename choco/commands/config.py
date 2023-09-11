@@ -13,6 +13,7 @@ __all__ = ('config',)
 @click.option('-n', '--name', required=True, type=click.Choice(['defaultPushSource']))
 @click.option('-v', '--value', required=True)
 def set_(name: str, value: str) -> None:
+    """Set a configuration value."""
     PYCHOCO_TOML_PATH.parent.mkdir(parents=True, exist_ok=True)
     if PYCHOCO_TOML_PATH.exists():
         with PYCHOCO_TOML_PATH.open() as f:
