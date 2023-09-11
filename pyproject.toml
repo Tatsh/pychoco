@@ -123,6 +123,7 @@ logging-modules = ["logging", "loguru"]
 [tool.pylint."messages control"]
 disable = [
   "invalid-docstring-quote",
+  "invalid-triple-quote",
   "magic-value-comparison",
   "missing-class-docstring",
   "missing-function-docstring",
