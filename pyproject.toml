@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chocolatey-choco"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["Andrew Udvare <audvare@gmail.com>"]
 description = "Minimal choco command for use on non-Windows platforms."
 homepage = "https://github.com/Tatsh/pychoco"
