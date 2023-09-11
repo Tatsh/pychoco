@@ -11,7 +11,7 @@ __all__ = ('apikey',)
 
 @click.command('list')
 def list_() -> None:
-    """List API keys. Does not display the API key values."""
+    """Lists sources associated with API keys. Does not display the API key values."""
     if PYCHOCO_API_KEYS_TOML_PATH.exists():
         with open(PYCHOCO_API_KEYS_TOML_PATH) as f:
             for key in sorted(tomlkit.load(f)):
@@ -19,8 +19,8 @@ def list_() -> None:
 
 
 @click.command()
-@click.option('-k', '--key', required=True)
-@click.option('-s', '--source', required=True)
+@click.option('-k', '--key', required=True, help='API key.', metavar='API_KEY')
+@click.option('-s', '--source', required=True, help='Source URI.', metavar='SOURCE_URL')
 def add(key: str, source: str) -> None:
     """Add an API key for a source."""
     PYCHOCO_API_KEYS_TOML_PATH.parent.mkdir(parents=True, exist_ok=True)

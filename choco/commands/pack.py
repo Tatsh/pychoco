@@ -19,10 +19,10 @@ __all__ = ('pack',)
 
 
 @click.command()
-@click.option('-d', '--debug', is_flag=True)
+@click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 @click.argument('work_dir', type=click.Path(file_okay=False, resolve_path=True), default='.')
 def pack(work_dir: str = '.', debug: bool = False) -> None:
-    """Pack a package for distribution."""
+    """Create a package file for distribution."""
     setup_logging(debug)
     if not (nuspecs := glob.glob('*.nuspec', root_dir=work_dir)):
         logger.error('No nuspec files found.')

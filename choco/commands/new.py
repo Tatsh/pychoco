@@ -9,7 +9,7 @@ from ..templates import CHOCOLATEY_INSTALL_PS1_TEMPLATE, NUSPEC_TEMPLATE
 
 def validate_name(_ctx: click.Context, _param: click.Parameter, value: str) -> str:
     if not re.match(VALID_NAME_RE, value):
-        raise click.BadParameter(f'format must be "{VALID_NAME_RE}"')
+        raise click.BadParameter(f'Format must match "{VALID_NAME_RE}".')
     if Path(value).exists():
         raise click.BadParameter('Directory already exists.')
     return value

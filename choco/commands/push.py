@@ -11,7 +11,11 @@ from ..utils import get_default_push_source
 
 
 @click.command()
-@click.option('-s', '--source', default=get_default_push_source)
+@click.option('-s',
+              '--source',
+              default=get_default_push_source,
+              help='Source to upload to.',
+              metavar='URL')
 @click.argument('package', type=click.Path(dir_okay=False, readable=True))
 def push(package: str, source: str) -> None:
     """Push a package to a source."""

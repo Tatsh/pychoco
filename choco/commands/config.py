@@ -10,8 +10,13 @@ __all__ = ('config',)
 
 
 @click.command('set')
-@click.option('-n', '--name', required=True, type=click.Choice(['defaultPushSource']))
-@click.option('-v', '--value', required=True)
+@click.option('-n',
+              '--name',
+              required=True,
+              type=click.Choice(['defaultPushSource']),
+              help='Key to set.',
+              metavar='KEY')
+@click.option('-v', '--value', required=True, help='Value to set.', metavar='VALUE')
 def set_(name: str, value: str) -> None:
     """Set a configuration value."""
     PYCHOCO_TOML_PATH.parent.mkdir(parents=True, exist_ok=True)
