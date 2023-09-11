@@ -1,23 +1,26 @@
 pychoco
 =====================================
-
+Minimal choco command for use on non-Windows platforms.
 
 Commands
 --------
-
-.. click:: instagram_archiver.main:main
-  :prog: ia
+.. click:: choco.main:main
+  :prog: choco
   :nested: full
-
 
 Library
 -------
-.. automodule:: choco.name_of_module
+.. automodule:: choco.utils
    :members:
 
-Submodule
+Constants
 ---------
-.. automodule:: choco.submodule
+.. automodule:: choco.constants
+   :members:
+
+Templates
+---------
+.. automodule:: choco.templates
    :members:
 
 Typing
