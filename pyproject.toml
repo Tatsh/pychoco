@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pychoco"
+name = "chocolatey-choco"
 version = "0.0.1"
 authors = ["Andrew Udvare <audvare@gmail.com>"]
 description = "Minimal choco command for use on non-Windows platforms."
