@@ -15,6 +15,7 @@ NUSPEC_FIELD_ID: Final[str] = f'{NUSPEC_XSD_URI_PREFIX}id'
 NUSPEC_FIELD_TAGS: Final[str] = f'{NUSPEC_XSD_URI_PREFIX}tags'
 NUSPEC_FIELD_VERSION: Final[str] = f'{NUSPEC_XSD_URI_PREFIX}version'
 
+#: Uninstall PowerShell template.
 CHOCOLATEY_UNINSTALL_PS1: Final[str] = '''$$ErrorActionPreference = 'Stop'
 [array]$$key = Get-UninstallRegistryKey -SoftwareName "PACKAGE_NAME"
 if ($$key.Count -eq 1) {
@@ -37,6 +38,7 @@ elseif ($$key.Count -gt 1) {
   Write-Warning "Please alert package maintainer the following keys were matched:"
   $$key | ForEach-Object { Write-Warning "- $$($$_.DisplayName)" }
 }\n'''
+#: Used in creating the ``[Content-Types].xml`` file.
 CONTENT_TYPES_XML: Final[str] = '''<?xml version="1.0" encoding="utf-8"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml" />
@@ -44,6 +46,9 @@ CONTENT_TYPES_XML: Final[str] = '''<?xml version="1.0" encoding="utf-8"?>
   <Default Extension="ps1" ContentType="application/octet" />
   <Default Extension="nuspec" ContentType="application/octet" />
 </Types>\n'''
+#: Where pychoco's main configuration file is by default.
 PYCHOCO_TOML_PATH: Final[Path] = Path(xdg_config_home) / 'pychoco/config.toml'
+#: Where pychoco's API key list is stored.
 PYCHOCO_API_KEYS_TOML_PATH: Final[Path] = Path(xdg_config_home) / 'pychoco/api.toml'
+#: Valid name for a package regular expression.
 VALID_NAME_RE: Final[str] = r'^[0-9a-z-]+(\.(commandline|install|portable))?$'
