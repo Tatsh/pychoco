@@ -12,7 +12,7 @@ __all__ = ('config',)
 @click.command()
 @click.option('-n', '--name', required=True, type=click.Choice(['defaultPushSource']))
 @click.option('-v', '--value', required=True)
-def config_set(name: str, value: str) -> None:
+def set_(name: str, value: str) -> None:
     PYCHOCO_TOML_PATH.parent.mkdir(parents=True, exist_ok=True)
     if PYCHOCO_TOML_PATH.exists():
         with PYCHOCO_TOML_PATH.open() as f:
@@ -33,4 +33,4 @@ def config() -> None:
     """Manage configuration."""
 
 
-config.add_command(config_set, 'set')
+config.add_command(set_, 'set')
