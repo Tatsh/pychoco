@@ -10,6 +10,18 @@ pip install pychoco
 
 ## Command line usage
 
-```shell
-pychoco
+```plain
+Usage: choco [OPTIONS] COMMAND [ARGS]...
+
+  Root command.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  apikey
+  config
+  new
+  pack
+  push
 ```

@@ -1,11 +1,23 @@
 """Utility functions."""
+from os import listdir
+from pathlib import Path
 from types import FrameType
+from typing import Any, cast
+from xml.etree.ElementTree import Element
 import logging
 import sys
+import uuid
+import zipfile
 
 from loguru import logger
+from tomlkit.container import Container
+import tomlkit
 
-__all__ = ('setup_logging',)
+from .constants import PYCHOCO_TOML_PATH
+from .typing import assert_not_none
+
+__all__ = ('append_dir_to_zip_recursive', 'generate_unique_id', 'get_default_push_source',
+           'get_unique_tag_text', 'setup_logging')
 
 
 class InterceptHandler(logging.Handler):  # pragma: no cover
@@ -42,3 +54,34 @@ def setup_logging(debug: bool | None = False) -> None:
             level='INFO',
             sink=sys.stderr,
         ),))
+
+
+def generate_unique_id() -> str:
+    return f'R{str(uuid.uuid4()).replace("-", "")}'.upper()
+
+
+def get_unique_tag_text(root: Element | Any, tag_name: str) -> str:
+    text = assert_not_none(assert_not_none(root[0].find(tag_name)).text).strip()
+    assert len(text) > 0, f'No value in {tag_name}'
+    return text
+
+
+def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
+    for item in listdir(root):
+        if item.endswith('.nupkg'):
+            continue
+        abs_item = root / item
+        if abs_item.is_dir():
+            logger.debug(f'Recursing into {abs_item}')
+            append_dir_to_zip_recursive(abs_item, z)
+        else:
+            logger.debug(f'Adding {abs_item}')
+            z.write(abs_item)
+
+
+def get_default_push_source() -> str:
+    try:
+        with PYCHOCO_TOML_PATH.open() as f:
+            return cast(str, cast(Container, tomlkit.load(f)['pychoco'])['defaultPushSource'])
+    except (KeyError, FileNotFoundError):
+        return 'https://push.chocolatey.org'

@@ -1,14 +1,15 @@
-"""Main command."""
-from loguru import logger
 import click
 
-from .utils import setup_logging
-
-__all__ = ('main',)
+from choco.commands import apikey, config, new, pack, push
 
 
-@click.command()
-@click.option('-d', '--debug', is_flag=True, help='Enable debug level logging')
-def main(debug: bool = False) -> None:
-    """Entry point."""
-    setup_logging(debug)
+@click.group()
+def main() -> None:
+    """Minimal choco command."""
+
+
+main.add_command(apikey, 'apikey')
+main.add_command(config, 'config')
+main.add_command(new, 'new')
+main.add_command(pack, 'pack')
+main.add_command(push, 'push')
