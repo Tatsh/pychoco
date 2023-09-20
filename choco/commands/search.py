@@ -183,6 +183,8 @@ def search(
         root = parse_xml(r.text)
         for entry in ([e] for e in root.findall(FEED_ENTRY_TAG)):
             id_url = get_unique_tag_text(entry, FEED_ID_TAG)
+            if id_url in results:
+                continue
             if id_only:
                 results[id_url] = try_get(lambda: get_unique_tag_text(entry, FEED_TITLE_TAG),
                                           'no title?')
