@@ -58,10 +58,10 @@ requires = ["poetry-core"]
 [tool.poetry.scripts]
 choco = "choco:main"
 
-[tool.commitizen]
+[tool.cz]
 tag_format = "v$version"
-version_files = ["README.md", "package.json", "pyproject.toml"]
-version_provider = "poetry"
+version_files = ["README.md", "package.json"]
+version_provider = "pep621"
 
 [tool.isort]
 case_sensitive = true
