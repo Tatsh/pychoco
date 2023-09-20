@@ -38,5 +38,5 @@
     "ruff": "poetry run ruff check .",
     "test": "poetry run pytest"
   },
-  "version": "0.0.3"
+  "version": "0.1.0"
 }
