@@ -47,6 +47,7 @@ pycache
 pychoco
 pylance
 pypackages
+pyproject
 pytest
 pytest's
 pytype
