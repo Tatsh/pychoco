@@ -2,7 +2,7 @@
 from os import listdir
 from pathlib import Path
 from types import FrameType
-from typing import Any, cast
+from typing import Any, Callable, TypeVar, cast
 from xml.etree.ElementTree import Element
 import logging
 import sys
@@ -18,6 +18,8 @@ from .typing import assert_not_none
 
 __all__ = ('append_dir_to_zip_recursive', 'generate_unique_id', 'get_default_push_source',
            'get_unique_tag_text', 'setup_logging')
+
+T = TypeVar('T')
 
 
 class InterceptHandler(logging.Handler):  # pragma: no cover
@@ -69,6 +71,13 @@ def get_unique_tag_text(root: Element | Any, tag_name: str) -> str:
     text = assert_not_none(assert_not_none(root[0].find(tag_name)).text).strip()
     assert len(text) > 0, f'No value in {tag_name}'
     return text
+
+
+def try_get(fn: Callable[[], T], default: T) -> T:
+    try:
+        return fn()
+    except Exception:
+        return default
 
 
 def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
