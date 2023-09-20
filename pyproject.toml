@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "chocolatey-choco"
-version = "0.0.3"
+version = "0.1.0"
 authors = ["Andrew Udvare <audvare@gmail.com>"]
 description = "Minimal choco command for use on non-Windows platforms."
 homepage = "https://github.com/Tatsh/pychoco"
@@ -57,6 +57,11 @@ requires = ["poetry-core"]
 
 [tool.poetry.scripts]
 choco = "choco:main"
+
+[tool.commitizen]
+tag_format = "v$version"
+version_files = ["README.md", "package.json", "pyproject.toml"]
+version_provider = "poetry"
 
 [tool.isort]
 case_sensitive = true
