@@ -1,4 +1,5 @@
 from typing import cast
+import sys
 
 from defusedxml.ElementTree import fromstring as parse_xml
 import click
@@ -180,6 +181,8 @@ def search(
         except requests.exceptions.HTTPError as e:
             click.secho(f'Error occurred: {e}', err=True)
             click.Abort()
+        if debug:
+            click.secho(r.text, file=sys.stderr)
         root = parse_xml(r.text)
         for entry in ([e] for e in root.findall(FEED_ENTRY_TAG)):
             id_url = get_unique_tag_text(entry, FEED_ID_TAG)
