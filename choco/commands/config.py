@@ -29,7 +29,7 @@ def set_(name: str, value: str) -> None:
         config_['pychoco'] = tomlkit.table()
     if name == 'defaultPushSource':
         value = value.rstrip('/')
-    cast(Table, config_['pychoco']).add(name, value)  # pylint: disable=no-member
+    cast(Table, config_['pychoco']).add(name, value)
     with PYCHOCO_TOML_PATH.open('w') as f:
         tomlkit.dump(config_, f)
 

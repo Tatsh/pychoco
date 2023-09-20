@@ -20,7 +20,6 @@
     "jmredfern.sort-selection",
     "lextudio.restructuredtext",
     "ms-python.isort",
-    "ms-python.pylint",
     "ms-python.vscode-pylance",
     "naumovs.color-highlight",
     "nhoizey.gremlins",
