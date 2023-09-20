@@ -27,4 +27,5 @@ Commands:
   new
   pack
   push
+  search
 ```

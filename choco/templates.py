@@ -1,5 +1,8 @@
 import string
 
+__all__ = ('CHOCOLATEY_INSTALL_PS1_TEMPLATE', 'NUSPEC_TEMPLATE', 'PSMDCP_XML_TEMPLATE',
+           'RELS_XML_TEMPLATE', 'SEARCH_RESULT_TEMPLATE')
+
 RELS_XML_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8" ?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship
@@ -16,6 +19,8 @@ RELS_XML_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8" ?>
 """Used in construction of ``_rels/.rels`` file.
 
 :meta hide-value:"""
+last_modified_by = ('choco, Version=2.2.2.0, Culture=neutral, PublicKeyToken=79d02ea9cad655eb;'
+                    'Microsoft Windows NT 10.0.22621.0;.NET Framework 4.8')
 PSMDCP_XML_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8" ?>
 <coreProperties xmlns:dc="http://purl.org/dc/elements/1.1/"
   xmlns:dcterms="http://purl.org/dc/terms/"
@@ -26,8 +31,7 @@ PSMDCP_XML_TEMPLATE = string.Template('''<?xml version="1.0" encoding="utf-8" ?>
   <dc:identifier>${package_id}</dc:identifier>
   <version>${version}</version>
   <keywords>${keywords}</keywords>
-  <lastModifiedBy
-  >choco, Version=2.2.2.0, Culture=neutral, PublicKeyToken=79d02ea9cad655eb;Microsoft Windows NT 10.0.22621.0;.NET Framework 4.8</lastModifiedBy>
+  <lastModifiedBy>''' + last_modified_by + '''</lastModifiedBy>
 </coreProperties>
 \n''')  #: :meta hide-value:
 """Used in construction of ``packages/services/metadata/core-properties/{id}.psmdcp``.
@@ -69,5 +73,24 @@ Install-ChocolateyZipPackage @packageArgs
 ## - https://chocolatey.org/docs/helpers-get-chocolatey-unzip
 #Get-ChocolateyUnzip @packageArgs\n''')
 """Chocolatey PowerShell install template.
+
+:meta hide-value:"""
+
+SEARCH_RESULT_TEMPLATE = string.Template('''${title} ${version} ${state} ${cached_state}
+ Title: ${title} | Published: ${publish_date}
+ Package approved as a trusted package on ${approval_date}.
+ Package testing status: ${testing_status}.
+ Number of Downloads: ${num_downloads} | Downloads for this version: ${num_version_downloads}
+ Package url ${package_url}
+ Chocolatey Package Source: ${package_src_uri}
+ Tags: ${tags}
+ Software Site: ${site}
+ Software License: ${license}
+ Documentation: ${documentation_uri}
+ Summary: ${summary}
+ Description: ${description}
+ Release Notes: ${release_notes_uri}
+''')
+"""Search result template.
 
 :meta hide-value:"""
