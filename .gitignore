@@ -8,3 +8,5 @@
 /htmlcov/
 /node_modules/
 /yarn-error.log
+__pycache__
+docs/
