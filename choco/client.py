@@ -16,6 +16,7 @@ from .constants import (FEED_ENTRY_TAG, FEED_ID_TAG, FEED_NAMESPACES, NUGET_API_
 from .typing import ConfigKey, SearchResult
 from .utils import InvalidEntryError, entry_to_search_result, tag_text_or
 
+#: Authentication details.
 Auth = tuple[str, str] | HTTPBasicAuth
 
 
