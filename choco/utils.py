@@ -101,7 +101,6 @@ def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
 
 class InvalidEntryError(ValueError):
     """Thrown when an ``<entry>`` is invalid."""
-    pass
 
 
 def parse_boolean_tag(tag: Element | None) -> bool:
