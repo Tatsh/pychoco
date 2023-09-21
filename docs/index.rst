@@ -1,6 +1,6 @@
 pychoco
 =====================================
-Minimal choco command for use on non-Windows platforms.
+Minimal ``choco`` command for use on non-Windows platforms.
 
 Commands
 --------
