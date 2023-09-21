@@ -11,6 +11,7 @@ import sys
 import uuid
 import zipfile
 
+from dateutil.parser import isoparse
 from loguru import logger
 
 # isort: off
@@ -113,7 +114,7 @@ def parse_boolean_tag(tag: Element | None) -> bool:
 
 
 def parse_iso_date_tag(tag: Element | None) -> datetime | None:
-    return datetime.fromisoformat(tag.text) if tag is not None and tag.text else None
+    return isoparse(tag.text) if tag is not None and tag.text else None
 
 
 def parse_int_tag(tag: Element | None, default: int = 0) -> int:

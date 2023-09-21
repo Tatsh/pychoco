@@ -5,6 +5,7 @@ automodule
 choco
 commandline
 commitizen
+dateutil
 dcterms
 defusedxml
 direnv
@@ -24,6 +25,7 @@ htmlcov
 idonly
 includeprograms
 inlinevar
+isoparse
 isort
 jinja
 levelname
