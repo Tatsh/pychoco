@@ -32,11 +32,13 @@ class ChocolateyClient:
         self.session = requests.Session()
 
     def get_keys_available(self) -> Iterator[str]:
+        """Return an iterator of the sources that have keys."""
         if self.api_keys_path.exists():
             with self.api_keys_path.open() as f:
                 yield from sorted(tomlkit.load(f))
 
     def add_key(self, key: str, source: str) -> None:
+        """Add an API key for a source."""
         self.api_keys_path.parent.mkdir(parents=True, exist_ok=True)
         if self.api_keys_path.exists():
             with self.api_keys_path.open() as f:
@@ -48,6 +50,7 @@ class ChocolateyClient:
             tomlkit.dump(keys, f)
 
     def config_set(self, name: ConfigKey, value: str) -> None:
+        """Set a configuration value."""
         self.config_path.parent.mkdir(parents=True, exist_ok=True)
         if self.config_path.exists():
             with self.config_path.open() as f:
@@ -70,6 +73,10 @@ class ChocolateyClient:
             return 'https://push.chocolatey.org'
 
     def update_api_key_header(self, source: str | None = None) -> None:
+        """
+        Updates the shared session API key header. If one does not exist, the existing header is
+        removed if it is present.
+        """
         source = source or self.get_default_push_source()
         try:
             self.session.headers.update({NUGET_API_KEY_HTTP_HEADER: self.api_keys[source]})
@@ -108,6 +115,7 @@ class ChocolateyClient:
                page: int | None = None,
                page_size: bool = False,
                source: str | None = None) -> Iterator[SearchResult]:
+        """Search packages. Returns a deduplicated iterator of results."""
         self.update_api_key_header(source)
         ns = FEED_NAMESPACES
         api_v2 = self._get_api_v2(source)
