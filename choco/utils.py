@@ -3,7 +3,7 @@ from datetime import datetime
 from os import listdir
 from pathlib import Path
 from types import FrameType
-from typing import Any, Callable, TypeVar, cast
+from typing import Callable, TypeVar, cast
 from xml.etree.ElementTree import Element
 import logging
 import re
@@ -25,10 +25,10 @@ from .constants import (
     METADATA_PROJECT_URL_TAG, METADATA_PUBLISHED_TAG, METADATA_RELEASE_NOTES_TAG, METADATA_TAGS_TAG,
     METADATA_VERSION_DOWNLOAD_COUNT_TAG, METADATA_VERSION_TAG)
 # isort: on
-from .typing import SearchResult, TestingStatus, assert_not_none
+from .typing import SearchResult, TestingStatus
 
 __all__ = ('append_dir_to_zip_recursive', 'entry_to_search_result', 'generate_unique_id',
-           'get_unique_tag_text', 'setup_logging', 'tag_text_or')
+           'setup_logging', 'tag_text_or')
 
 T = TypeVar('T')
 
@@ -74,17 +74,11 @@ def generate_unique_id() -> str:
     return f'R{str(uuid.uuid4()).replace("-", "")}'.upper()
 
 
-def get_unique_tag_text(root: Element | Any, tag_name: str) -> str:
+def try_get(fn: Callable[[], T], default: T | None = None) -> T | None:
     """
-    Gets text from a tag named ``tag_name``. This assumes there is only a single element of that
-    type in the tree. This will raise if the returned string is zero-length.
+    Try to return a value by calling ``fn``. If an exception occurs, return the default value
+    specified.
     """
-    text = assert_not_none(assert_not_none(root[0].find(tag_name)).text).strip()
-    assert len(text) > 0, f'No value in {tag_name}'
-    return text
-
-
-def try_get(fn: Callable[[], T], default: T) -> T:
     try:
         return fn()
     except Exception:
@@ -106,6 +100,7 @@ def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
 
 
 class InvalidEntryError(ValueError):
+    """Thrown when an ``<entry>`` is invalid."""
     pass
 
 
@@ -125,10 +120,12 @@ def parse_int_tag(tag: Element | None, default: int = 0) -> int:
 
 
 def tag_text_or(tag: Element | None, default: str | None = None) -> str | None:
+    """Return text from a tag or the default value specified."""
     return tag.text if tag is not None and tag.text else default
 
 
 def entry_to_search_result(entry: Element, ns: dict[str, str] = FEED_NAMESPACES) -> SearchResult:
+    """Convert an ``<entry>`` to a ``SearchResult`` dict."""
     metadata = entry.find(FEED_PROPERTIES_TAG, ns)
     if not metadata:
         raise InvalidEntryError()
