@@ -70,7 +70,8 @@
     "_build/**",
     "build/**",
     "dist/**",
-    "htmlcov/**"
+    "htmlcov/**",
+    "tests/feeds/**"
   ],
   "language": "en-GB",
   "languageSettings": [
