@@ -4,10 +4,10 @@ from typing import Final
 from xdg.BaseDirectory import xdg_config_home
 
 __all__ = ('CHOCOLATEY_UNINSTALL_PS1', 'CONTENT_TYPES_XML', 'FEED_AUTHOR_TAG', 'FEED_ENTRY_TAG',
-           'FEED_ENTRY_TAG', 'FEED_ID_TAG', 'FEED_SUMMARY_TAG', 'FEED_TITLE_TAG',
+           'FEED_ID_TAG', 'FEED_NAMESPACES', 'FEED_SUMMARY_TAG', 'FEED_TITLE_TAG',
            'FEED_UPDATED_TAG', 'METADATA_DESCRIPTION_TAG', 'METADATA_DOCS_URL_TAG',
-           'METADATA_DOWNLOAD_CACHE_STATUS_TAG', 'METADATA_DOWNLOAD_COUNT_TAG',
-           'METADATA_GALLERY_DETAILS_URL_TAG', 'METADATA_IS_APPROVED_TAG',
+           'METADATA_DOWNLOAD_COUNT_TAG', 'METADATA_GALLERY_DETAILS_URL_TAG',
+           'METADATA_IS_APPROVED_TAG', 'METADATA_IS_DOWNLOAD_CACHE_AVAILABLE',
            'METADATA_LICENSE_URL_TAG', 'METADATA_PACKAGE_APPROVED_DATE_TAG',
            'METADATA_PACKAGE_SOURCE_URL_TAG', 'METADATA_PACKAGE_STATUS_TAG',
            'METADATA_PACKAGE_TEST_RESULT_STATUS_DATE_TAG',
@@ -18,37 +18,37 @@ __all__ = ('CHOCOLATEY_UNINSTALL_PS1', 'CONTENT_TYPES_XML', 'FEED_AUTHOR_TAG', '
            'NUSPEC_FIELD_TAGS', 'NUSPEC_FIELD_VERSION', 'PYCHOCO_API_KEYS_TOML_PATH',
            'PYCHOCO_TOML_PATH', 'VALID_NAME_RE')
 
-ATOM_XSD_URI_PREFIX: Final[str] = '{http://www.w3.org/2005/Atom}'
-FEED_AUTHOR_TAG: Final[str] = f'{ATOM_XSD_URI_PREFIX}author'
-FEED_ENTRY_TAG: Final[str] = f'{ATOM_XSD_URI_PREFIX}entry'
-FEED_ID_TAG: Final[str] = f'{ATOM_XSD_URI_PREFIX}id'
-FEED_PROPERTIES_TAG: Final[
-    str] = '{http://schemas.microsoft.com/ado/2007/08/dataservices/metadata}properties'
-FEED_SUMMARY_TAG: Final[str] = f'{ATOM_XSD_URI_PREFIX}summary'
-FEED_TITLE_TAG: Final[str] = f'{ATOM_XSD_URI_PREFIX}title'
-FEED_UPDATED_TAG: Final[str] = f'{ATOM_XSD_URI_PREFIX}updated'
-METADATA_XSD_URI_PREFIX: Final[str] = '{http://schemas.microsoft.com/ado/2007/08/dataservices}'
-METADATA_DESCRIPTION_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}Description'
-METADATA_DOCS_URL_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}DocsUrl'
-METADATA_DOWNLOAD_CACHE_STATUS_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}DownloadCacheStatus'
-METADATA_DOWNLOAD_COUNT_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}DownloadCount'
-METADATA_GALLERY_DETAILS_URL_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}GalleryDetailsUrl'
-METADATA_IS_APPROVED_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}IsApproved'
-METADATA_LICENSE_URL_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}LicenseUrl'
-METADATA_PACKAGE_APPROVED_DATE_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}PackageApprovedDate'
-METADATA_PACKAGE_SOURCE_URL_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}PackageSourceUrl'
-METADATA_PACKAGE_STATUS_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}PackageStatus'
-METADATA_PACKAGE_TEST_RESULT_STATUS_DATE_TAG = (f'{METADATA_XSD_URI_PREFIX}PackageTestResult'
-                                                'StatusDate')
-METADATA_PACKAGE_TEST_RESULT_STATUS_TAG: Final[str] = (f'{METADATA_XSD_URI_PREFIX}PackageTest'
-                                                       'ResultStatus')
-METADATA_PROJECT_URL_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}ProjectUrl'
-METADATA_PUBLISHED_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}Published'
-METADATA_RELEASE_NOTES_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}ReleaseNotes'
-METADATA_SUMMARY_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}Summary'
-METADATA_TAGS_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}Tags'
-METADATA_VERSION_DOWNLOAD_COUNT_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}VersionDownloadCount'
-METADATA_VERSION_TAG: Final[str] = f'{METADATA_XSD_URI_PREFIX}Version'
+FEED_NAMESPACES: Final[dict[str, str]] = {
+    '': 'http://www.w3.org/2005/Atom',
+    'd': 'http://schemas.microsoft.com/ado/2007/08/dataservices',
+    'm': 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata'
+}
+FEED_AUTHOR_TAG: Final[str] = 'author'
+FEED_ENTRY_TAG: Final[str] = 'entry'
+FEED_ID_TAG: Final[str] = 'id'
+FEED_PROPERTIES_TAG: Final[str] = 'm:properties'
+FEED_SUMMARY_TAG: Final[str] = 'summary'
+FEED_TITLE_TAG: Final[str] = 'title'
+FEED_UPDATED_TAG: Final[str] = 'updated'
+METADATA_DESCRIPTION_TAG: Final[str] = 'd:Description'
+METADATA_DOCS_URL_TAG: Final[str] = 'd:DocsUrl'
+METADATA_DOWNLOAD_COUNT_TAG: Final[str] = 'd:DownloadCount'
+METADATA_GALLERY_DETAILS_URL_TAG: Final[str] = 'd:GalleryDetailsUrl'
+METADATA_IS_APPROVED_TAG: Final[str] = 'd:IsApproved'
+METADATA_IS_DOWNLOAD_CACHE_AVAILABLE: Final[str] = 'd:IsDownloadCacheAvailable'
+METADATA_LICENSE_URL_TAG: Final[str] = 'd:LicenseUrl'
+METADATA_PACKAGE_APPROVED_DATE_TAG: Final[str] = 'd:PackageApprovedDate'
+METADATA_PACKAGE_SOURCE_URL_TAG: Final[str] = 'd:PackageSourceUrl'
+METADATA_PACKAGE_STATUS_TAG: Final[str] = 'd:PackageStatus'
+METADATA_PACKAGE_TEST_RESULT_STATUS_DATE_TAG = 'd:PackageTestResultStatusDate'
+METADATA_PACKAGE_TEST_RESULT_STATUS_TAG: Final[str] = 'd:PackageTestResultStatus'
+METADATA_PROJECT_URL_TAG: Final[str] = 'd:ProjectUrl'
+METADATA_PUBLISHED_TAG: Final[str] = 'd:Published'
+METADATA_RELEASE_NOTES_TAG: Final[str] = 'd:ReleaseNotes'
+METADATA_SUMMARY_TAG: Final[str] = 'd:Summary'
+METADATA_TAGS_TAG: Final[str] = 'd:Tags'
+METADATA_VERSION_DOWNLOAD_COUNT_TAG: Final[str] = 'd:VersionDownloadCount'
+METADATA_VERSION_TAG: Final[str] = 'd:Version'
 """Feed ``d:Version`` tag.
 
 :meta hide-value:"""
@@ -121,5 +121,9 @@ PYCHOCO_API_KEYS_TOML_PATH: Final[Path] = Path(xdg_config_home) / 'pychoco/api.t
 :meta hide-value:"""
 VALID_NAME_RE: Final[str] = r'^[0-9a-z-]+(\.(commandline|install|portable))?$'
 """Valid name for a package regular expression.
+
+:meta hide-value:"""
+NUGET_API_KEY_HTTP_HEADER: Final[str] = 'X-NuGet-ApiKey'
+"""NuGet API key HTTP header.
 
 :meta hide-value:"""

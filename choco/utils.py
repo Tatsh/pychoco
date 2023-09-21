@@ -1,23 +1,33 @@
 """Utility functions."""
+from datetime import datetime
 from os import listdir
 from pathlib import Path
 from types import FrameType
 from typing import Any, Callable, TypeVar, cast
 from xml.etree.ElementTree import Element
 import logging
+import re
 import sys
 import uuid
 import zipfile
 
 from loguru import logger
-from tomlkit.container import Container
-import tomlkit
 
-from .constants import PYCHOCO_TOML_PATH
-from .typing import assert_not_none
+# isort: off
+from .constants import (
+    FEED_NAMESPACES, FEED_PROPERTIES_TAG, FEED_SUMMARY_TAG, FEED_TITLE_TAG,
+    METADATA_DESCRIPTION_TAG, METADATA_DOCS_URL_TAG, METADATA_DOWNLOAD_COUNT_TAG,
+    METADATA_GALLERY_DETAILS_URL_TAG, METADATA_IS_APPROVED_TAG,
+    METADATA_IS_DOWNLOAD_CACHE_AVAILABLE, METADATA_LICENSE_URL_TAG,
+    METADATA_PACKAGE_APPROVED_DATE_TAG, METADATA_PACKAGE_SOURCE_URL_TAG,
+    METADATA_PACKAGE_TEST_RESULT_STATUS_DATE_TAG, METADATA_PACKAGE_TEST_RESULT_STATUS_TAG,
+    METADATA_PROJECT_URL_TAG, METADATA_PUBLISHED_TAG, METADATA_RELEASE_NOTES_TAG, METADATA_TAGS_TAG,
+    METADATA_VERSION_DOWNLOAD_COUNT_TAG, METADATA_VERSION_TAG)
+# isort: on
+from .typing import SearchResult, TestingStatus, assert_not_none
 
-__all__ = ('append_dir_to_zip_recursive', 'generate_unique_id', 'get_default_push_source',
-           'get_unique_tag_text', 'setup_logging')
+__all__ = ('append_dir_to_zip_recursive', 'entry_to_search_result', 'generate_unique_id',
+           'get_unique_tag_text', 'setup_logging', 'tag_text_or')
 
 T = TypeVar('T')
 
@@ -94,10 +104,53 @@ def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
             z.write(abs_item)
 
 
-def get_default_push_source() -> str:
-    """Gets the default push source URL."""
+class InvalidEntryError(ValueError):
+    pass
+
+
+def parse_boolean_tag(tag: Element | None) -> bool:
+    return ((tag.text or 'false') if tag is not None else 'false') == 'true'
+
+
+def parse_iso_date_tag(tag: Element | None) -> datetime | None:
+    return datetime.fromisoformat(tag.text) if tag is not None and tag.text else None
+
+
+def parse_int_tag(tag: Element | None, default: int = 0) -> int:
     try:
-        with PYCHOCO_TOML_PATH.open() as f:
-            return cast(str, cast(Container, tomlkit.load(f)['pychoco'])['defaultPushSource'])
-    except (KeyError, FileNotFoundError):
-        return 'https://push.chocolatey.org'
+        return int(tag.text) if tag is not None and tag.text else default
+    except ValueError:
+        return default
+
+
+def tag_text_or(tag: Element | None, default: str | None = None) -> str | None:
+    return tag.text if tag is not None and tag.text else default
+
+
+def entry_to_search_result(entry: Element, ns: dict[str, str] = FEED_NAMESPACES) -> SearchResult:
+    metadata = entry.find(FEED_PROPERTIES_TAG, ns)
+    if not metadata:
+        raise InvalidEntryError()
+    return SearchResult(
+        approval_date=parse_iso_date_tag(metadata.find(METADATA_PACKAGE_APPROVED_DATE_TAG, ns)),
+        description=tag_text_or(metadata.find(METADATA_DESCRIPTION_TAG, ns)),
+        documentation_uri=tag_text_or(metadata.find(METADATA_DOCS_URL_TAG, ns)),
+        is_approved=parse_boolean_tag(metadata.find(METADATA_IS_APPROVED_TAG, ns)),
+        is_cached=parse_boolean_tag(metadata.find(METADATA_IS_DOWNLOAD_CACHE_AVAILABLE)),
+        license=tag_text_or(metadata.find(METADATA_LICENSE_URL_TAG, ns)),
+        num_downloads=parse_int_tag(metadata.find(METADATA_DOWNLOAD_COUNT_TAG, ns)),
+        num_version_downloads=parse_int_tag(metadata.find(METADATA_VERSION_DOWNLOAD_COUNT_TAG, ns)),
+        package_src_uri=tag_text_or(metadata.find(METADATA_PACKAGE_SOURCE_URL_TAG, ns)),
+        package_url=tag_text_or(metadata.find(METADATA_GALLERY_DETAILS_URL_TAG, ns)),
+        publish_date=parse_iso_date_tag(metadata.find(METADATA_PUBLISHED_TAG, ns)),
+        release_notes_uri=tag_text_or(metadata.find(METADATA_RELEASE_NOTES_TAG, ns)),
+        site=tag_text_or(metadata.find(METADATA_PROJECT_URL_TAG, ns)),
+        summary=tag_text_or(entry.find(FEED_SUMMARY_TAG, ns)),
+        tags=re.split(r'\s+', cast(str, tag_text_or(metadata.find(METADATA_TAGS_TAG, ns), ''))),
+        testing_status=cast(
+            TestingStatus,
+            tag_text_or(metadata.find(METADATA_PACKAGE_TEST_RESULT_STATUS_TAG, ns), 'Failing')),
+        testing_date=parse_iso_date_tag(
+            metadata.find(METADATA_PACKAGE_TEST_RESULT_STATUS_DATE_TAG, ns)),
+        title=tag_text_or(entry.find(FEED_TITLE_TAG, ns)),
+        version=tag_text_or(metadata.find(METADATA_VERSION_TAG, ns)))

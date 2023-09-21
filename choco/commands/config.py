@@ -1,10 +1,7 @@
-from typing import cast
-
-from tomlkit.items import Table
 import click
-import tomlkit
 
-from ..constants import PYCHOCO_TOML_PATH
+from ..client import ChocolateyClient
+from ..typing import ConfigKey
 
 __all__ = ('config',)
 
@@ -17,21 +14,9 @@ __all__ = ('config',)
               help='Key to set.',
               metavar='KEY')
 @click.option('-v', '--value', required=True, help='Value to set.', metavar='VALUE')
-def set_(name: str, value: str) -> None:
+def set_(name: ConfigKey, value: str) -> None:
     """Set a configuration value."""
-    PYCHOCO_TOML_PATH.parent.mkdir(parents=True, exist_ok=True)
-    if PYCHOCO_TOML_PATH.exists():
-        with PYCHOCO_TOML_PATH.open() as f:
-            config_ = tomlkit.load(f)
-    else:
-        config_ = tomlkit.document()
-    if 'pychoco' not in config_:
-        config_['pychoco'] = tomlkit.table()
-    if name == 'defaultPushSource':
-        value = value.rstrip('/')
-    cast(Table, config_['pychoco']).add(name, value)
-    with PYCHOCO_TOML_PATH.open('w') as f:
-        tomlkit.dump(config_, f)
+    ChocolateyClient().config_set(name, value)
 
 
 @click.group()

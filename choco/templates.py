@@ -83,7 +83,7 @@ SEARCH_RESULT_TEMPLATE = string.Template('''${title} ${version} ${state} ${cache
  Number of Downloads: ${num_downloads} | Downloads for this version: ${num_version_downloads}
  Package url ${package_url}
  Chocolatey Package Source: ${package_src_uri}
- Tags: ${tags}
+ Tags:${tags}
  Software Site: ${site}
  Software License: ${license}
  Documentation: ${documentation_uri}
@@ -92,5 +92,10 @@ SEARCH_RESULT_TEMPLATE = string.Template('''${title} ${version} ${state} ${cache
  Release Notes: ${release_notes_uri}
 ''')
 """Search result template.
+
+:meta hide-value:"""
+ALL_VERSIONS_SEARCH_RESULT_TEMPLATE = string.Template(
+    '${title} ${version} ${state} ${cached_state}')
+"""Search result template when ``--all-versions`` is used.
 
 :meta hide-value:"""
