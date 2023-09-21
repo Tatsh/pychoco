@@ -23,6 +23,9 @@ FEED_NAMESPACES: Final[dict[str, str]] = {
     'd': 'http://schemas.microsoft.com/ado/2007/08/dataservices',
     'm': 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata'
 }
+"""Namespaces used in parsing package feeds.
+
+:meta hide-value:"""
 FEED_AUTHOR_TAG: Final[str] = 'author'
 FEED_ENTRY_TAG: Final[str] = 'entry'
 FEED_ID_TAG: Final[str] = 'id'
