@@ -10,6 +10,12 @@ Commands
 
 Library
 -------
+.. automodule:: choco.client
+   :members:
+
+.. automodule:: choco.packaging
+   :members:
+
 .. automodule:: choco.utils
    :members:
 
