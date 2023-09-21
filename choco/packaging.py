@@ -13,7 +13,7 @@ from .constants import (CHOCOLATEY_UNINSTALL_PS1, CONTENT_TYPES_XML, NUSPEC_FIEL
                         NUSPEC_FIELD_VERSION, VALID_NAME_RE)
 from .templates import (CHOCOLATEY_INSTALL_PS1_TEMPLATE, NUSPEC_TEMPLATE, PSMDCP_XML_TEMPLATE,
                         RELS_XML_TEMPLATE)
-from .utils import append_dir_to_zip_recursive, generate_unique_id, get_unique_tag_text
+from .utils import append_dir_to_zip_recursive, generate_unique_id, tag_text_or
 
 __all__ = ('is_valid_package_name', 'new_package')
 
@@ -47,8 +47,9 @@ def pack(work_dir: str = '.') -> zipfile.ZipFile:
         raise ValueError(f'Only one nuspec file should be present in {work_dir}.')
     with (Path(work_dir) / nuspecs[0]).open() as spec:
         root = parse_xml(spec).getroot()
-    package_id = get_unique_tag_text(root, NUSPEC_FIELD_ID)
-    version = get_unique_tag_text(root, NUSPEC_FIELD_VERSION)
+    package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
+    package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
+    version = tag_text_or(root.find(NUSPEC_FIELD_VERSION))
     sha = hashlib.sha1()
     sha.update(f'{package_id}{version}{datetime.now()}'.encode())
     psmdcp_filename = f'{sha.hexdigest()}.psmdcp'
@@ -65,9 +66,9 @@ def pack(work_dir: str = '.') -> zipfile.ZipFile:
         z.writestr(
             f'package/services/metadata/core-properties/{psmdcp_filename}',
             PSMDCP_XML_TEMPLATE.safe_substitute(
-                creator=get_unique_tag_text(root, NUSPEC_FIELD_AUTHORS),
-                description=get_unique_tag_text(root, NUSPEC_FIELD_DESCRIPTION),
-                keywords=get_unique_tag_text(root, NUSPEC_FIELD_TAGS),
+                creator=tag_text_or(root.find(NUSPEC_FIELD_AUTHORS)),
+                description=tag_text_or(root.find(NUSPEC_FIELD_DESCRIPTION)),
+                keywords=tag_text_or(root.find(NUSPEC_FIELD_TAGS)),
                 package_id=package_id,
                 version=version))
         return z
