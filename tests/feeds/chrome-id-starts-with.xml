@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<feed xml:base="http://community.chocolatey.org/api/v2/" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">Search</title>
+  <id>http://community.chocolatey.org/api/v2/Search</id>
+  <updated>2023-09-21T18:29:17Z</updated>
+  <link rel="self" title="Search" href="Search" />
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='chrome-remote-desktop-chrome',Version='63.0.3239.17')</id>
+    <title type="text">chrome-remote-desktop-chrome</title>
+    <summary type="text">Chrome Remote Desktop application</summary>
+    <updated>2023-09-21T15:03:12Z</updated>
+    <author>
+      <name>Chrome Remote Desktop Release Managers</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='chrome-remote-desktop-chrome',Version='63.0.3239.17')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='chrome-remote-desktop-chrome',Version='63.0.3239.17')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/chrome-remote-desktop-chrome/63.0.3239.17" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>63.0.3239.17</d:Version>
+      <d:Title>Chrome Remote Desktop for Chrome</d:Title>
+      <d:Description>###Access other computers or allow another user to access your computer securely over the Internet.
+
+Chrome Remote Desktop allows users to remotely access another computer through Chrome browser or a Chromebook.  Computers can be made available on an short-term basis for scenarios such as ad hoc remote support, or on a more long-term basis for remote access to your applications and files.  All connections are fully secured.
+
+Chrome Remote Desktop is fully cross-platform.  Provide remote assistance to Windows, Mac and Linux users, or access your Windows (XP and above) and Mac (OS X 10.6 and above) desktops at any time, all from the Chrome browser on virtually any device, including Chromebooks.
+
+For information about privacy, please see the Google Privacy Policy and the Chrome Privacy Policy.
+
+Stay tuned for future updates!
+	
+**[PACKAGE NOTES](https://github.com/bcurran3/ChocolateyPackages/blob/master/chrome-remote-desktop-chrome/readme.md)**</d:Description>
+      <d:Tags xml:space="preserve"> remote desktop chrome app </d:Tags>
+      <d:Copyright></d:Copyright>
+      <d:Created m:type="Edm.DateTime">2017-11-30T10:36:43</d:Created>
+      <d:Dependencies>googlechrome::</d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">27464</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">27065</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/chrome-remote-desktop-chrome/63.0.3239.17</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/chrome-remote-desktop-chrome/63.0.3239.17</d:ReportAbuseUrl>
+      <d:IconUrl>https://lh3.googleusercontent.com/ofXLzG7zzqOJE-AS-mnSt7nto6iVicXjHwHVZSZ5vdgg5AODzAUu_AvFHjWwV4MyUH0G8yDrhQ=w50-h50-e365</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2017-11-30T10:36:43</d:Published>
+      <d:LicenseUrl></d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>pnEf/r8HxQbvQRQ9Cyt8f1RhwieW+beKqLuSQUsDBTfR//FWrHPqLkaSXnPyD5oBT4YTzgxPvglZLktgkpNW0w==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">6007</d:PackageSize>
+      <d:ProjectUrl>https://chrome.google.com/webstore/detail/chrome-remote-desktop/gbchcmhmhahfdphkhkmpfmihenigjmpp</d:ProjectUrl>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/bcurran3/ChocolateyPackages/tree/master/chrome-remote-desktop-chrome</d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/95fb19ad45c647411aba3a2db3a64b76</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Passing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2020-07-10T19:27:10</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2017-11-30T11:11:55</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2017-12-07T17:21:08</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2017-12-07T17:21:08</d:PackageApprovedDate>
+      <d:PackageReviewer>AdmiringWorm</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">false</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Checked</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2017-12-07T19:34:56</d:DownloadCacheDate>
+      <d:DownloadCache></d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2017-11-30T15:09:38</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='chromelpass-chrome',Version='2.8.1')</id>
+    <title type="text">chromelpass-chrome</title>
+    <summary type="text">KeePass integration for Chrome using KeePassHttp</summary>
+    <updated>2023-09-20T21:03:12Z</updated>
+    <author>
+      <name>Perry Nguyen</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='chromelpass-chrome',Version='2.8.1')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='chromelpass-chrome',Version='2.8.1')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/chromelpass-chrome/2.8.1" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.8.1</d:Version>
+      <d:Title>chromeIPass for Chrome</d:Title>
+      <d:Description>![Screenshot of chromelpass](https://lh3.googleusercontent.com/kIQanVjID-0As07I4exLsZB9CRxQwd0C-Wasgg4twqe9A-gha49g3j7WlkVmtoQHjWIwAbmE6w=s640-h400-e365-rw)
+
+###KeePass integration for browser Chrome using KeePassHttp
+
+Like chromeIPass? Use Android? Checkout KeepShare in the Play store https://play.google.com/store/apps/details?id=com.hanhuy.android.keepshare
+
+KeePass integration for browser Chrome using KeePassHttp
+
+chromeIPass brings KeePass integration to the Google Chrome browser!
+
+Please visit us on https://github.com/pfn/passifox for detailed and illustrated documentation.
+	
+####PACKAGING NOTE: This installs no software. It installs a registry key for the extension that Chrome will see and then ask you for permission to enable the extension if you are in Chrome or on the next run. Chrome will install the latest version of the extension. The mentioned version is the version at time of packaging, you can ignore it. Chrome will handle updates to the extension.</d:Description>
+      <d:Tags xml:space="preserve"> chromelpass chromeipass keepass keepasshttp chrome extension </d:Tags>
+      <d:Copyright></d:Copyright>
+      <d:Created m:type="Edm.DateTime">2017-06-23T21:01:54</d:Created>
+      <d:Dependencies>googlechrome::|keepass::|keepass-keepasshttp::</d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">2115</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">2115</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/chromelpass-chrome/2.8.1</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/chromelpass-chrome/2.8.1</d:ReportAbuseUrl>
+      <d:IconUrl>http://keepass.info/help/images/plockb_64.png</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2017-06-23T21:01:54</d:Published>
+      <d:LicenseUrl></d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>03tYmU6RzMwkZ/g+/5+DfmO2UZnA76a2iAT8jVfHTKx+WyjZ5hGEhnuoCxv83ota6orzVc/aKsURtZbUUiKD1w==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">5291</d:PackageSize>
+      <d:ProjectUrl>https://chrome.google.com/webstore/detail/chromeipass/ompiailgknfdndiefoaoiligalphfdae</d:ProjectUrl>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/bcurran3/ChocolateyPackages/tree/master/chromelpass-chrome</d:PackageSourceUrl>
+      <d:DocsUrl>https://github.com/pfn/passifox/blob/master/documentation/chromeIPass.md#2-installation</d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/f96eea82b39936f806d7a117a4671583</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Passing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2020-07-09T14:02:13</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2017-06-23T21:33:41</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2017-06-24T14:43:22</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2017-06-24T14:43:22</d:PackageApprovedDate>
+      <d:PackageReviewer>AdmiringWorm</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">false</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Checked</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2017-06-24T15:45:53</d:DownloadCacheDate>
+      <d:DownloadCache></d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2017-06-23T21:54:44</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='chrometana-chrome',Version='2.0.1')</id>
+    <title type="text">chrometana-chrome</title>
+    <summary type="text">Chrometana lets your redirect Bing to the search engine of your choice.</summary>
+    <updated>2023-09-18T16:48:27Z</updated>
+    <author>
+      <name>Theo</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='chrometana-chrome',Version='2.0.1')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='chrometana-chrome',Version='2.0.1')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/chrometana-chrome/2.0.1" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.0.1</d:Version>
+      <d:Title>Chrometana for Chrome</d:Title>
+      <d:Description>###Redirect all Bing (and therefore Cortana) searches to a search engine of your choice!
+
+Recommended by Engadget, CNET, Gizmodo, IBTimes, WIndowsClub and more!
+
+"This handy Chrome extension thwarts Microsoft's attempt to make Bing a thing." - CNET
+
+Bing is an unfortunate thing. Defeat it with Chrometana, allowing for all Bing search requests to redirect to a search engine of your choice. Currently supports Google, Yahoo, and DuckDuckGo redirects for all Bing searches, even Cortana ones! Make sure you're using Chrome as your default browser for this to work properly.
+	
+**[PACKAGE NOTES](https://github.com/bcurran3/ChocolateyPackages/blob/master/chrometana-chrome/readme.md)**</d:Description>
+      <d:Tags xml:space="preserve"> chrometana redirect bing chrome extension </d:Tags>
+      <d:Copyright></d:Copyright>
+      <d:Created m:type="Edm.DateTime">2017-11-30T11:14:19</d:Created>
+      <d:Dependencies>googlechrome::</d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">1253</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">1253</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/chrometana-chrome/2.0.1</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/chrometana-chrome/2.0.1</d:ReportAbuseUrl>
+      <d:IconUrl>https://lh3.googleusercontent.com/wLhNKizfdoUs6TrxossCXLGW8oCAPMB7LbjKINu0Baqp3HaO6XUK0xWU5rx4rayWO-XjkFjgjto=w26-h26-e365</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2017-11-30T11:14:19</d:Published>
+      <d:LicenseUrl></d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>3izgiwSK1un+kEdHe3qlfOqaDeKxyYt7JB8z7Zmt1y42xc1LpbsXmtn2r+FQYcCgBc0lOp7PV/WK7TpeJPLJew==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">5553</d:PackageSize>
+      <d:ProjectUrl>https://chrome.google.com/webstore/detail/chrometana-redirect-bing/kaicbfmipfpfpjmlbpejaoaflfdnabnc</d:ProjectUrl>
+      <d:ReleaseNotes>http://chrometana.theo.li/</d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/bcurran3/ChocolateyPackages/tree/master/chrometana-chrome</d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/dde4247e64dd9572677f84737c149867</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Passing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2020-07-10T19:34:23</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2017-11-30T11:46:59</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2017-12-07T17:21:39</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2017-12-07T17:21:39</d:PackageApprovedDate>
+      <d:PackageReviewer>AdmiringWorm</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">false</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Checked</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2017-12-07T19:34:57</d:DownloadCacheDate>
+      <d:DownloadCache></d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2017-11-30T15:09:44</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='chromehue-chrome',Version='1.1.6')</id>
+    <title type="text">chromehue-chrome</title>
+    <summary type="text">A Chrome extention to control your Phillips Hue lights.</summary>
+    <updated>2023-09-20T19:48:10Z</updated>
+    <author>
+      <name>Nicolas VARROT</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='chromehue-chrome',Version='1.1.6')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='chromehue-chrome',Version='1.1.6')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/chromehue-chrome/1.1.6" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>1.1.6</d:Version>
+      <d:Title>ChromeHue for Philips Hue for Chrome</d:Title>
+      <d:Description>![Screenshot of ChromeHue for Philps Hue for Chrome](https://lh3.googleusercontent.com/izYijZj4TFPOB0TyAnk_sirUHCGjnrPRdfB8h9COdiH6PdS9-lNRbraB6fkNwCzpvtwcWEAIsQ=s640-h400-e365-rw)	
+
+ChromeHue allows you to control the Philips Hue bulbs from your browser by using a nice user-friendly UI.
+
+###Features list:
+
+* Switch bulbs on/off (for lights and groups)
+* Change brightness (for lights and groups)
+* Change hue (lights and groups)
+* Blink bulbs (lights and groups)
+* Enable color loop (lights and groups)
+* Display/edit bulb informations
+* Create/edit/delete groups
+* Very easy setup and friendly UI
+* Auto-discover your bridge on your local network
+
+####PACKAGING NOTE: This installs no software. It installs a registry key for the extension that Chrome will see and then ask you for permission to enable the extension if you are in Chrome or on the next run. Chrome will install the latest version of the extension. The mentioned version is the version at time of packaging, you can ignore it. Chrome will handle updates to the extension.</d:Description>
+      <d:Tags xml:space="preserve"> phillips hue chromehue chrome extension </d:Tags>
+      <d:Copyright></d:Copyright>
+      <d:Created m:type="Edm.DateTime">2017-02-09T05:47:55</d:Created>
+      <d:Dependencies>googlechrome::</d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">804</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">804</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/chromehue-chrome/1.1.6</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/chromehue-chrome/1.1.6</d:ReportAbuseUrl>
+      <d:IconUrl>https://lh3.googleusercontent.com/OIQJh8j4tB60WJLJrj8ppciA70drYMn5vVz00pXbepYXNaCkc2foBN6IAEqBP7UiYWZbrUN_Zg=s26-h26-e365-rw</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2017-02-09T05:47:55</d:Published>
+      <d:LicenseUrl></d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>XMvPEuqIYAoIAc+1jld5YdrUIpxsUQwVeU/G118sOed3vBDYocYwcRFRKn7OapfMAXN0NeWGoJexN08sHnLnbw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">5426</d:PackageSize>
+      <d:ProjectUrl>https://chrome.google.com/webstore/detail/chromehue-for-philips-hue/ofhimkkaomaoilmnmfhmdoekoaeclkoa</d:ProjectUrl>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/bcurran3/ChocolateyPackages/tree/master/chromehue-chrome</d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl>https://chrome.google.com/webstore/detail/chromehue-for-philips-hue/ofhimkkaomaoilmnmfhmdoekoaeclkoa</d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/412b38bc7e15c5d56b0e0d0c0b345075</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Passing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2020-07-07T19:25:40</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2017-02-09T06:20:19</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2017-02-17T11:07:02</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2017-02-17T11:07:02</d:PackageApprovedDate>
+      <d:PackageReviewer>AdmiringWorm</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">false</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Checked</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2017-02-21T02:41:29</d:DownloadCacheDate>
+      <d:DownloadCache></d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2017-02-22T12:16:49</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='chrome-remote-desktop-host',Version='116.0.5845.9')</id>
+    <title type="text">chrome-remote-desktop-host</title>
+    <summary type="text">Chrome Remote Desktop Host</summary>
+    <updated>2023-09-21T17:03:08Z</updated>
+    <author>
+      <name>Google Inc.</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='chrome-remote-desktop-host',Version='116.0.5845.9')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='chrome-remote-desktop-host',Version='116.0.5845.9')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/chrome-remote-desktop-host/116.0.5845.9" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>116.0.5845.9</d:Version>
+      <d:Title>Chrome Remote Desktop Host</d:Title>
+      <d:Description>Chrome Remote Desktop allows users to remotely access another computer through Chrome browser or a Chromebook.  Computers can be made available on an short-term basis for scenarios such as ad hoc remote support, or on a more long-term basis for remote access to your applications and files.  All connections are fully secured.
+
+Chrome Remote Desktop is fully cross-platform.  Provide remote assistance to Windows, Mac and Linux users, or access your Windows (XP and above) and Mac (OS X 10.6 and above) desktops at any time, all from the Chrome browser on virtually any device, including Chromebooks.</d:Description>
+      <d:Tags xml:space="preserve"> chrome remote control freeware cross-platform admin </d:Tags>
+      <d:Copyright></d:Copyright>
+      <d:Created m:type="Edm.DateTime">2023-07-11T00:06:41</d:Created>
+      <d:Dependencies></d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">92570</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">3556</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/chrome-remote-desktop-host/116.0.5845.9</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/chrome-remote-desktop-host/116.0.5845.9</d:ReportAbuseUrl>
+      <d:IconUrl>https://cdn.jsdelivr.net/gh/jack1142/choco-auto@67a25bca73395a6c38abdc089e9098c06d3e398b/automatic/chrome-remote-desktop-host/icons/chrome-remote-desktop-host.png</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2023-07-11T00:06:41</d:Published>
+      <d:LicenseUrl></d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>E2YVRhWTBmsV/W3VGErRi/aKdwNmwgkdDTaFScsP3GM1P8+vyel8Vnvmg60zbcbHvLWqOd75nHnDduoDfNxBEw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">4427</d:PackageSize>
+      <d:ProjectUrl>https://chrome.google.com/remotedesktop</d:ProjectUrl>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/jack1142/choco-auto/tree/main/automatic/chrome-remote-desktop-host</d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Ready</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/choco-bot/1c87ae2a72b517f0e0fe1b87bace4d17</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Passing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2023-07-11T00:48:54</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2023-07-11T00:37:48</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2023-07-11T01:09:24</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2023-07-11T01:09:24</d:PackageApprovedDate>
+      <d:PackageReviewer></d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">true</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Available</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2023-07-11T02:16:38</d:DownloadCacheDate>
+      <d:DownloadCache>https://dl.google.com/dl/edgedl/chrome-remote-desktop/chromeremotedesktophost.msi^x86/chromeremotedesktophost.msi^88B867564E3D302D5C565968D62403E5043661600643290C1343B67F3980174C8ADCC917AE7D2463B8B0A4CFD6213B7895E390434F2FFEEDE491D9085C7842C1</d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2023-07-11T01:09:24</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>None</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+</feed>
