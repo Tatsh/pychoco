@@ -20,6 +20,9 @@ Auth = tuple[str, str] | HTTPBasicAuth
 
 
 class ChocolateyClient:
+    """
+    Chocolatey client. Anything that involves interactions with the server will be in this class.
+    """
     def __init__(self,
                  api_keys_path: Path | str | None = None,
                  config_path: Path | str | None = None) -> None:
