@@ -1,3 +1,4 @@
+"""Packaging-related functions."""
 from datetime import datetime
 from os import chdir
 from pathlib import Path
@@ -19,10 +20,12 @@ __all__ = ('is_valid_package_name', 'new_package')
 
 
 def is_valid_package_name(value: str) -> bool:
+    """Check if a package name is valid."""
     return bool(re.match(VALID_NAME_RE, value))
 
 
 def new_package(name: str) -> Path:
+    """Scaffolding to create a new package."""
     if not is_valid_package_name(name):
         raise ValueError(f'Invalid package name. Name must match "{VALID_NAME_RE}".')
     if Path(name).exists():
@@ -41,6 +44,7 @@ def new_package(name: str) -> Path:
 
 
 def pack(work_dir: str = '.') -> zipfile.ZipFile:
+    """Pack a package directory for distribution (create a nupkg)."""
     if not (nuspecs := glob.glob('*.nuspec', root_dir=work_dir)):
         raise FileNotFoundError('No nuspec files found.')
     if len(nuspecs) > 1:
