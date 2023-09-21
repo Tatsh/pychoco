@@ -7,7 +7,7 @@ __all__ = ('CHOCOLATEY_UNINSTALL_PS1', 'CONTENT_TYPES_XML', 'FEED_AUTHOR_TAG', '
            'FEED_ID_TAG', 'FEED_NAMESPACES', 'FEED_SUMMARY_TAG', 'FEED_TITLE_TAG',
            'FEED_UPDATED_TAG', 'METADATA_DESCRIPTION_TAG', 'METADATA_DOCS_URL_TAG',
            'METADATA_DOWNLOAD_COUNT_TAG', 'METADATA_GALLERY_DETAILS_URL_TAG',
-           'METADATA_IS_APPROVED_TAG', 'METADATA_IS_DOWNLOAD_CACHE_AVAILABLE',
+           'METADATA_IS_APPROVED_TAG', 'METADATA_IS_DOWNLOAD_CACHE_AVAILABLE_TAG',
            'METADATA_LICENSE_URL_TAG', 'METADATA_PACKAGE_APPROVED_DATE_TAG',
            'METADATA_PACKAGE_SOURCE_URL_TAG', 'METADATA_PACKAGE_STATUS_TAG',
            'METADATA_PACKAGE_TEST_RESULT_STATUS_DATE_TAG',
@@ -27,30 +27,105 @@ FEED_NAMESPACES: Final[dict[str, str]] = {
 
 :meta hide-value:"""
 FEED_AUTHOR_TAG: Final[str] = 'author'
+"""Feed ``author`` tag.
+
+:meta hide-value:"""
 FEED_ENTRY_TAG: Final[str] = 'entry'
+"""Feed ``entry`` tag.
+
+:meta hide-value:"""
 FEED_ID_TAG: Final[str] = 'id'
+"""Feed ``id`` tag.
+
+:meta hide-value:"""
 FEED_PROPERTIES_TAG: Final[str] = 'm:properties'
+"""Feed ``m:properties`` tag.
+
+:meta hide-value:"""
 FEED_SUMMARY_TAG: Final[str] = 'summary'
+"""Feed ``summary`` tag.
+
+:meta hide-value:"""
 FEED_TITLE_TAG: Final[str] = 'title'
+"""Feed ``title`` tag.
+
+:meta hide-value:"""
 FEED_UPDATED_TAG: Final[str] = 'updated'
+"""Feed ``updated`` tag.
+
+:meta hide-value:"""
 METADATA_DESCRIPTION_TAG: Final[str] = 'd:Description'
+"""Feed ``d:Description`` tag.
+
+:meta hide-value:"""
 METADATA_DOCS_URL_TAG: Final[str] = 'd:DocsUrl'
+"""Feed ``d:DocsUrl`` tag.
+
+:meta hide-value:"""
 METADATA_DOWNLOAD_COUNT_TAG: Final[str] = 'd:DownloadCount'
+"""Feed ``d:DownloadCount`` tag.
+
+:meta hide-value:"""
 METADATA_GALLERY_DETAILS_URL_TAG: Final[str] = 'd:GalleryDetailsUrl'
+"""Feed ``d:GalleryDetailsUrl`` tag.
+
+:meta hide-value:"""
 METADATA_IS_APPROVED_TAG: Final[str] = 'd:IsApproved'
-METADATA_IS_DOWNLOAD_CACHE_AVAILABLE: Final[str] = 'd:IsDownloadCacheAvailable'
+"""Feed ``d:IsApproved`` tag.
+
+:meta hide-value:"""
+METADATA_IS_DOWNLOAD_CACHE_AVAILABLE_TAG: Final[str] = 'd:IsDownloadCacheAvailable'
+"""Feed ``d:IsDownloadCacheAvailable`` tag.
+
+:meta hide-value:"""
 METADATA_LICENSE_URL_TAG: Final[str] = 'd:LicenseUrl'
+"""Feed ``d:LicenseUrl`` tag.
+
+:meta hide-value:"""
 METADATA_PACKAGE_APPROVED_DATE_TAG: Final[str] = 'd:PackageApprovedDate'
+"""Feed ``d:PackageApprovedDate`` tag.
+
+:meta hide-value:"""
 METADATA_PACKAGE_SOURCE_URL_TAG: Final[str] = 'd:PackageSourceUrl'
+"""Feed ``d:PackageSourceUrl`` tag.
+
+:meta hide-value:"""
 METADATA_PACKAGE_STATUS_TAG: Final[str] = 'd:PackageStatus'
+"""Feed ``d:PackageStatus`` tag.
+
+:meta hide-value:"""
 METADATA_PACKAGE_TEST_RESULT_STATUS_DATE_TAG = 'd:PackageTestResultStatusDate'
+"""Feed ``d:PackageTestResultStatusDate`` tag.
+
+:meta hide-value:"""
 METADATA_PACKAGE_TEST_RESULT_STATUS_TAG: Final[str] = 'd:PackageTestResultStatus'
+"""Feed ``d:PackageTestResultStatus`` tag.
+
+:meta hide-value:"""
 METADATA_PROJECT_URL_TAG: Final[str] = 'd:ProjectUrl'
+"""Feed ``d:ProjectUrl`` tag.
+
+:meta hide-value:"""
 METADATA_PUBLISHED_TAG: Final[str] = 'd:Published'
+"""Feed ``d:Published`` tag.
+
+:meta hide-value:"""
 METADATA_RELEASE_NOTES_TAG: Final[str] = 'd:ReleaseNotes'
+"""Feed ``d:ReleaseNotes`` tag.
+
+:meta hide-value:"""
 METADATA_SUMMARY_TAG: Final[str] = 'd:Summary'
+"""Feed ``d:Summary`` tag.
+
+:meta hide-value:"""
 METADATA_TAGS_TAG: Final[str] = 'd:Tags'
+"""Feed ``d:Tags`` tag.
+
+:meta hide-value:"""
 METADATA_VERSION_DOWNLOAD_COUNT_TAG: Final[str] = 'd:VersionDownloadCount'
+"""Feed ``d:VersionDownloadCount`` tag.
+
+:meta hide-value:"""
 METADATA_VERSION_TAG: Final[str] = 'd:Version'
 """Feed ``d:Version`` tag.
 
