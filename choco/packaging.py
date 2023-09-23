@@ -32,13 +32,13 @@ def new_package(name: str) -> Path:
         raise FileExistsError('Directory already exists.')
     p_name = Path(name)
     p_name.mkdir()
-    with open(p_name / f'{name}.nuspec', 'w') as f:
+    with Path(p_name / f'{name}.nuspec').open('w') as f:
         f.write(NUSPEC_TEMPLATE.safe_substitute(package_id=name))
     tools = p_name / 'tools'
     tools.mkdir()
-    with open(tools / 'chocolateyInstall.ps1', 'w') as f:
+    with Path(tools / 'chocolateyInstall.ps1').open('w') as f:
         f.write(CHOCOLATEY_INSTALL_PS1_TEMPLATE.safe_substitute(package_id=name))
-    with open(tools / 'chocolateyUninstall.ps1', 'w') as f:
+    with Path(tools / 'chocolateyUninstall.ps1').open('w') as f:
         f.write(CHOCOLATEY_UNINSTALL_PS1)
     return p_name
 
@@ -49,9 +49,7 @@ def pack(work_dir: str = '.') -> zipfile.ZipFile:
         raise FileNotFoundError('No nuspec files found.')
     if len(nuspecs) > 1:
         raise ValueError(f'Only one nuspec file should be present in {work_dir}.')
-    with (Path(work_dir) / nuspecs[0]).open() as spec:
-        root = parse_xml(spec).getroot()
-    package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
+    root = parse_xml(Path(work_dir) / nuspecs[0]).getroot()
     package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
     version = tag_text_or(root.find(NUSPEC_FIELD_VERSION))
     sha = hashlib.sha1()
