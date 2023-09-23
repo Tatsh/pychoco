@@ -9,4 +9,4 @@
 /node_modules/
 /yarn-error.log
 __pycache__
-docs/
+docs/_build/
