@@ -70,7 +70,7 @@
     "_build/**",
     "build/**",
     "dist/**",
-    "docs/**",
+    "docs/_build/**",
     "htmlcov/**",
     "tests/feeds/**"
   ],
