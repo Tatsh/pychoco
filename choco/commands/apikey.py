@@ -17,8 +17,8 @@ def list_(path: str | None) -> None:
     """Lists sources associated with API keys. Does not display the API key values."""
     try:
         keys = read_api_keys(path)
-    except FileNotFoundError:
-        return
+    except FileNotFoundError as e:
+        raise click.Abort() from e
     for key in keys.keys():
         click.echo(key)
 
