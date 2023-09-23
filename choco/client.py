@@ -60,6 +60,7 @@ class ChocolateyClient:
 
     def push(self, package: str, source: str | None = None, auth: Auth | None = None) -> None:
         """Push a package to a source."""
+        source = source or self.get_default_push_source()
         self.update_api_key_header(source)
         api_v2 = self._get_api_v2(source)
         with open(package, 'rb') as f:
