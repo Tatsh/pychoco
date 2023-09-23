@@ -3,9 +3,8 @@ from typing import cast
 
 import click
 
-from ..config import read_all
-
 from ..client import ChocolateyClient
+from ..config import read_all
 from ..templates import ALL_VERSIONS_SEARCH_RESULT_TEMPLATE, SEARCH_RESULT_TEMPLATE
 from ..utils import setup_logging
 
