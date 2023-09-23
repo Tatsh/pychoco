@@ -4,19 +4,13 @@ from typing import Literal, TypeVar, TypedDict
 
 from typing_extensions import NotRequired
 
-__all__ = ('Config', 'ConfigKey', 'SearchResult', 'TestingStatus', 'assert_not_none')
+__all__ = ('Config', 'ConfigKey', 'SearchResult', 'TestingStatus')
 
 #: Available keys for ``ChocolateyClient.config_set``.
 ConfigKey = Literal['defaultPushSource']
 T = TypeVar('T')
 #: Testing state of a package.
 TestingStatus = Literal['Passing', 'Failing']
-
-
-def assert_not_none(x: T | None) -> T:
-    """Helper to change ``T | None`` to ``T``."""
-    assert x is not None
-    return x
 
 
 class ConfigPyChocoDict(TypedDict):
