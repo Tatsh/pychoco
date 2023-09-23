@@ -1,19 +1,15 @@
 """Client."""
 from os.path import basename
-from pathlib import Path
-from typing import Iterator, cast
+from typing import Iterator
 
 from defusedxml.ElementTree import fromstring as parse_xml
 from loguru import logger
 from requests.auth import HTTPBasicAuth
-from tomlkit.container import Container
-from tomlkit.items import Item, Table
 import requests
-import tomlkit
 
-from .constants import (FEED_ENTRY_TAG, FEED_ID_TAG, FEED_NAMESPACES, NUGET_API_KEY_HTTP_HEADER,
-                        PYCHOCO_API_KEYS_TOML_PATH, PYCHOCO_TOML_PATH)
-from .typing import ConfigKey, SearchResult
+from .constants import (DEFAULT_CONFIG, DEFAULT_PUSH_SOURCE, FEED_ENTRY_TAG, FEED_ID_TAG,
+                        FEED_NAMESPACES, NUGET_API_KEY_HTTP_HEADER)
+from .typing import Config, ConfigKey, SearchResult
 from .utils import InvalidEntryError, entry_to_search_result, tag_text_or
 
 #: Authentication details.
@@ -25,56 +21,28 @@ class ChocolateyClient:
     Chocolatey client. Anything that involves interactions with the server will be in this class.
     """
     def __init__(self,
-                 api_keys_path: Path | str | None = None,
-                 config_path: Path | str | None = None) -> None:
-        self.api_keys_path = Path(api_keys_path or PYCHOCO_API_KEYS_TOML_PATH)
-        self.api_keys = (cast(dict[str, str], tomlkit.loads(self.api_keys_path.read_text()))
-                         if self.api_keys_path.exists() else {})
-        self.config_path = Path(config_path or PYCHOCO_TOML_PATH)
-        self.config = (tomlkit.loads(self.config_path.read_text())
-                       if self.config_path.exists() else {})
+                 config: Config = DEFAULT_CONFIG,
+                 api_keys: dict[str, str] | None = None) -> None:
+        self.config = config
+        self.api_keys = api_keys or {}
         self.session = requests.Session()
 
     def get_keys_available(self) -> Iterator[str]:
         """Return an iterator of the sources that have keys."""
-        if self.api_keys_path.exists():
-            with self.api_keys_path.open() as f:
-                yield from sorted(tomlkit.load(f))
+        yield from self.api_keys.keys()
 
     def add_key(self, key: str, source: str) -> None:
         """Add an API key for a source."""
-        self.api_keys_path.parent.mkdir(parents=True, exist_ok=True)
-        if self.api_keys_path.exists():
-            with self.api_keys_path.open() as f:
-                keys = tomlkit.load(f)
-        else:
-            keys = tomlkit.document()
-        keys.add(source, cast(Item, key))
-        with self.api_keys_path.open('w') as f:
-            tomlkit.dump(keys, f)
+        self.api_keys[source] = key
 
     def config_set(self, name: ConfigKey, value: str) -> None:
         """Set a configuration value."""
-        self.config_path.parent.mkdir(parents=True, exist_ok=True)
-        if self.config_path.exists():
-            with self.config_path.open() as f:
-                config_ = tomlkit.load(f)
-        else:
-            config_ = tomlkit.document()
-        if 'pychoco' not in config_:
-            config_['pychoco'] = tomlkit.table()
-        if name == 'defaultPushSource':
-            value = value.rstrip('/')
-        cast(Table, config_['pychoco']).add(name, value)
-        with self.config_path.open('w') as f:
-            tomlkit.dump(config_, f)
+        self.config['pychoco'][name] = value
 
     def get_default_push_source(self) -> str:
         """Gets the default push source URL."""
-        try:
-            return cast(str, cast(Container, self.config['pychoco'])['defaultPushSource'])
-        except (KeyError, FileNotFoundError):
-            return 'https://push.chocolatey.org'
+        return (self.config['pychoco'].get('defaultPushSource', DEFAULT_PUSH_SOURCE)
+                or DEFAULT_PUSH_SOURCE)
 
     def update_api_key_header(self, source: str | None = None) -> None:
         """

@@ -1,6 +1,7 @@
 import click
 
-from ..client import ChocolateyClient
+from ..config import read_config, write_config
+from ..constants import PYCHOCO_TOML_PATH
 from ..typing import ConfigKey
 
 __all__ = ('config',)
@@ -14,9 +15,17 @@ __all__ = ('config',)
               help='Key to set.',
               metavar='KEY')
 @click.option('-v', '--value', required=True, help='Value to set.', metavar='VALUE')
-def set_(name: ConfigKey, value: str) -> None:
+@click.option('-p',
+              '--path',
+              default=PYCHOCO_TOML_PATH,
+              help='Storage file.',
+              metavar='PATH',
+              type=click.Path(dir_okay=False, resolve_path=True))
+def set_(name: ConfigKey, value: str, path: str | None) -> None:
     """Set a configuration value."""
-    ChocolateyClient().config_set(name, value)
+    config = read_config(path)
+    config['pychoco'][name] = value
+    write_config(config, path)
 
 
 @click.group()

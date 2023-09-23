@@ -3,6 +3,8 @@ from typing import cast
 
 import click
 
+from ..config import read_all
+
 from ..client import ChocolateyClient
 from ..templates import ALL_VERSIONS_SEARCH_RESULT_TEMPLATE, SEARCH_RESULT_TEMPLATE
 from ..utils import setup_logging
@@ -69,19 +71,21 @@ def search(
 ) -> None:
     """Search a source."""
     setup_logging(debug)
-    for result in ChocolateyClient().search(terms,
-                                            auth=(user, password) if user and password else None,
-                                            all_versions=all_versions,
-                                            by_id_only=by_id_only,
-                                            by_tag_only=by_tag_only,
-                                            debug=debug,
-                                            exact=exact,
-                                            id_starts_with=id_starts_with,
-                                            include_prerelease=include_prerelease,
-                                            order_by_popularity=order_by_popularity,
-                                            page=page,
-                                            page_size=page_size,
-                                            source=source):
+    config, api_keys = read_all()
+    for result in ChocolateyClient(config, api_keys).search(
+            terms,
+            auth=(user, password) if user and password else None,
+            all_versions=all_versions,
+            by_id_only=by_id_only,
+            by_tag_only=by_tag_only,
+            debug=debug,
+            exact=exact,
+            id_starts_with=id_starts_with,
+            include_prerelease=include_prerelease,
+            order_by_popularity=order_by_popularity,
+            page=page,
+            page_size=page_size,
+            source=source):
         if id_only:
             click.echo(result['title'])
         elif all_versions:

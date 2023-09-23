@@ -13,6 +13,9 @@ Library
 .. automodule:: choco.client
    :members:
 
+.. automodule:: choco.config
+   :members:
+
 .. automodule:: choco.packaging
    :members:
 

@@ -2,7 +2,9 @@
 from datetime import datetime
 from typing import Literal, TypeVar, TypedDict
 
-__all__ = ('ConfigKey', 'SearchResult', 'TestingStatus', 'assert_not_none')
+from typing_extensions import NotRequired
+
+__all__ = ('Config', 'ConfigKey', 'SearchResult', 'TestingStatus', 'assert_not_none')
 
 #: Available keys for ``ChocolateyClient.config_set``.
 ConfigKey = Literal['defaultPushSource']
@@ -15,6 +17,16 @@ def assert_not_none(x: T | None) -> T:
     """Helper to change ``T | None`` to ``T``."""
     assert x is not None
     return x
+
+
+class ConfigPyChocoDict(TypedDict):
+    """Inner part of the configuration."""
+    defaultPushSource: NotRequired[str | None]
+
+
+class Config(TypedDict):
+    """Configuration dictionary after de-serialisation."""
+    pychoco: ConfigPyChocoDict
 
 
 class SearchResult(TypedDict):

@@ -3,6 +3,8 @@ from typing import Final
 
 from xdg.BaseDirectory import xdg_config_home
 
+from .typing import Config
+
 __all__ = ('CHOCOLATEY_UNINSTALL_PS1', 'CONTENT_TYPES_XML', 'FEED_AUTHOR_TAG', 'FEED_ENTRY_TAG',
            'FEED_ID_TAG', 'FEED_NAMESPACES', 'FEED_SUMMARY_TAG', 'FEED_TITLE_TAG',
            'FEED_UPDATED_TAG', 'METADATA_DESCRIPTION_TAG', 'METADATA_DOCS_URL_TAG',
@@ -205,3 +207,5 @@ NUGET_API_KEY_HTTP_HEADER: Final[str] = 'X-NuGet-ApiKey'
 """NuGet API key HTTP header.
 
 :meta hide-value:"""
+DEFAULT_PUSH_SOURCE: Final[str] = 'https://push.chocolatey.org'
+DEFAULT_CONFIG: Final[Config] = Config(pychoco={'defaultPushSource': DEFAULT_PUSH_SOURCE})
