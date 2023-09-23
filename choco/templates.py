@@ -1,3 +1,4 @@
+"""Template instances."""
 import string
 
 __all__ = ('CHOCOLATEY_INSTALL_PS1_TEMPLATE', 'NUSPEC_TEMPLATE', 'PSMDCP_XML_TEMPLATE',

@@ -1,3 +1,4 @@
+"""Root command."""
 import click
 
 from choco.commands import apikey, config, new, pack, push, search
