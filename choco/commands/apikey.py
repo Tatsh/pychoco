@@ -15,7 +15,11 @@ __all__ = ('apikey',)
               type=click.Path(dir_okay=False, resolve_path=True))
 def list_(path: str | None) -> None:
     """Lists sources associated with API keys. Does not display the API key values."""
-    for key in read_api_keys(path).keys():
+    try:
+        keys = read_api_keys(path)
+    except FileNotFoundError:
+        return
+    for key in keys.keys():
         click.echo(key)
 
 
@@ -30,7 +34,10 @@ def list_(path: str | None) -> None:
               type=click.Path(dir_okay=False, resolve_path=True))
 def add(key: str, source: str, path: str | None) -> None:
     """Add an API key for a source."""
-    keys = read_api_keys(path)
+    try:
+        keys = read_api_keys(path)
+    except FileNotFoundError:
+        keys = {}
     keys[source] = key
     write_api_keys(keys)
 
