@@ -3,7 +3,7 @@ from datetime import datetime
 from os import listdir
 from pathlib import Path
 from types import FrameType
-from typing import Callable, TypeVar, cast
+from typing import TypeVar, cast
 from xml.etree.ElementTree import Element
 import logging
 import re
@@ -31,6 +31,7 @@ __all__ = ('append_dir_to_zip_recursive', 'entry_to_search_result', 'generate_un
            'setup_logging', 'tag_text_or')
 
 T = TypeVar('T')
+utils_logger = logging.getLogger(__name__)
 
 
 class InterceptHandler(logging.Handler):  # pragma: no cover
@@ -74,17 +75,6 @@ def generate_unique_id() -> str:
     return f'R{str(uuid.uuid4()).replace("-", "")}'.upper()
 
 
-def try_get(fn: Callable[[], T], default: T | None = None) -> T | None:
-    """
-    Try to return a value by calling ``fn``. If an exception occurs, return the default value
-    specified.
-    """
-    try:
-        return fn()
-    except Exception:
-        return default
-
-
 def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
     """Appends a directory recursively to a zip file."""
     for item in listdir(root):
@@ -92,10 +82,10 @@ def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
             continue
         abs_item = root / item
         if abs_item.is_dir():
-            logger.debug(f'Recursing into {abs_item}')
+            utils_logger.debug(f'Recursing into {abs_item}')
             append_dir_to_zip_recursive(abs_item, z)
         else:
-            logger.debug(f'Adding {abs_item}')
+            utils_logger.debug(f'Adding {abs_item}')
             z.write(abs_item)
 
 
