@@ -208,4 +208,10 @@ NUGET_API_KEY_HTTP_HEADER: Final[str] = 'X-NuGet-ApiKey'
 
 :meta hide-value:"""
 DEFAULT_PUSH_SOURCE: Final[str] = 'https://push.chocolatey.org'
+"""Default push source URI.
+
+:meta hide-value:"""
 DEFAULT_CONFIG: Final[Config] = Config(pychoco={'defaultPushSource': DEFAULT_PUSH_SOURCE})
+"""Default configuration.
+
+:meta hide-value:"""
