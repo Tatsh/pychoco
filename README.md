@@ -7,7 +7,7 @@
 ![PyPI - Version](https://img.shields.io/pypi/v/chocolatey-choco)
 ![GitHub tag (with filter)](https://img.shields.io/github/v/tag/Tatsh/pychoco)
 ![GitHub](https://img.shields.io/github/license/Tatsh/pychoco)
-![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.0/master)
+![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.1/master)
 
 Minimal choco command for use on non-Windows platforms.
 
