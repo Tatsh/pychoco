@@ -35,3 +35,5 @@ Commands:
   push
   search
 ```
+
+`search` is not 1:1 with the official `choco` command in behaviour.
