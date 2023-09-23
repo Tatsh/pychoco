@@ -1,7 +1,7 @@
 from click.testing import CliRunner
 from pytest_mock.plugin import MockerFixture
-from choco.constants import CHOCOLATEY_UNINSTALL_PS1
 
+from choco.constants import CHOCOLATEY_UNINSTALL_PS1
 from choco.main import main as choco
 
 
@@ -19,7 +19,7 @@ def test_new(runner: CliRunner, mocker: MockerFixture) -> None:
 def test_new_file_exists(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.packaging.Path')
     path_mock.return_value.exists.return_value = True
-    run = runner.invoke(choco, ('new', 'okayname.install'))
+    run = runner.invoke(choco, ('new', 'okay-name.install'))
     assert isinstance(run.exception, SystemExit)
     assert run.exit_code != 0
 

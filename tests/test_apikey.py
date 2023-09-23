@@ -1,4 +1,5 @@
 from typing import Any
+
 from click.testing import CliRunner
 from pytest_mock.plugin import MockerFixture
 
@@ -16,7 +17,7 @@ def test_apikey_add_and_list_new_file(runner: CliRunner, mocker: MockerFixture) 
     def load_key_error() -> None:
         raise FileNotFoundError()
 
-    def load_key() -> None:
+    def load_key() -> Any:
         return saved
 
     path_mock.return_value.write_text.side_effect = save_key

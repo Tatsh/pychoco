@@ -1,4 +1,5 @@
 from typing import Any
+
 from click.testing import CliRunner
 from pytest_mock.plugin import MockerFixture
 

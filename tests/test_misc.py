@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import Any, cast
 from xml.etree.ElementTree import Element
+
 from pytest_mock.plugin import MockerFixture
 
 from choco.client import ChocolateyClient
