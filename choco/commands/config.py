@@ -1,7 +1,7 @@
 import click
 
 from ..config import read_config, write_config
-from ..constants import PYCHOCO_TOML_PATH
+from ..constants import DEFAULT_CONFIG, PYCHOCO_TOML_PATH
 from ..typing import ConfigKey
 
 __all__ = ('config',)
@@ -23,7 +23,10 @@ __all__ = ('config',)
               type=click.Path(dir_okay=False, resolve_path=True))
 def set_(name: ConfigKey, value: str, path: str | None) -> None:
     """Set a configuration value."""
-    config = read_config(path)
+    try:
+        config = read_config(path)
+    except FileNotFoundError:
+        config = DEFAULT_CONFIG
     config['pychoco'][name] = value
     write_config(config, path)
 
