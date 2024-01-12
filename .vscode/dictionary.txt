@@ -5,12 +5,15 @@ automodule
 choco
 commandline
 commitizen
+cookiecutter
 dateutil
 dcterms
 defusedxml
 direnv
 docparams
+doctrees
 docutils
+editmsg
 eeyore
 elif
 endregion
@@ -30,6 +33,7 @@ isort
 jinja
 levelname
 levelno
+linters
 loguru
 maxdepth
 modindex
@@ -41,6 +45,7 @@ openxmlformats
 paren
 parens
 pathlib
+pgpass
 pipx
 pluggy
 prerelease
@@ -54,11 +59,13 @@ pytest
 pytest's
 pytype
 pyxdg
+refs
 rels
 rstcheck
 rtfd
 secho
 skiptoken
+sphinxdoc
 subclassing
 substringof
 tatsh

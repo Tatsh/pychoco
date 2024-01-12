@@ -18,8 +18,8 @@ def list_(path: str | None) -> None:
     try:
         keys = read_api_keys(path)
     except FileNotFoundError as e:
-        raise click.Abort() from e
-    for key in keys.keys():
+        raise click.Abort from e
+    for key in keys:
         click.echo(key)
 
 

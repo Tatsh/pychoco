@@ -1,5 +1,5 @@
 """Configuration for Pytest."""
-from os.path import dirname
+from pathlib import Path
 from typing import NoReturn
 import os
 
@@ -20,7 +20,7 @@ if os.getenv('_PYTEST_RAISE', '0') != '0':  # pragma no cover
 
 @pytest.fixture()
 def conftest_dirname() -> str:
-    return dirname(__file__)
+    return str(Path(__file__).parent)
 
 
 @pytest.fixture()

@@ -1,8 +1,6 @@
 """Typing helpers."""
 from datetime import datetime
-from typing import Literal, TypeVar, TypedDict
-
-from typing_extensions import NotRequired
+from typing import Literal, NotRequired, TypeVar, TypedDict
 
 __all__ = ('Config', 'ConfigKey', 'SearchResult', 'TestingStatus')
 

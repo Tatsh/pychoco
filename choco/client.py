@@ -1,14 +1,21 @@
 """Client."""
-from os.path import basename
-from typing import Iterator
+from collections.abc import Iterator
+from pathlib import Path
+import contextlib
 
 from defusedxml.ElementTree import fromstring as parse_xml
 from loguru import logger
 from requests.auth import HTTPBasicAuth
 import requests
 
-from .constants import (DEFAULT_CONFIG, DEFAULT_PUSH_SOURCE, FEED_ENTRY_TAG, FEED_ID_TAG,
-                        FEED_NAMESPACES, NUGET_API_KEY_HTTP_HEADER)
+from .constants import (
+    DEFAULT_CONFIG,
+    DEFAULT_PUSH_SOURCE,
+    FEED_ENTRY_TAG,
+    FEED_ID_TAG,
+    FEED_NAMESPACES,
+    NUGET_API_KEY_HTTP_HEADER,
+)
 from .typing import Config, ConfigKey, SearchResult
 from .utils import InvalidEntryError, entry_to_search_result, tag_text_or
 
@@ -53,10 +60,8 @@ class ChocolateyClient:
         try:
             self.session.headers.update({NUGET_API_KEY_HTTP_HEADER: self.api_keys[source]})
         except KeyError:
-            try:
+            with contextlib.suppress(KeyError):
                 del self.session.headers[NUGET_API_KEY_HTTP_HEADER]
-            except KeyError:
-                pass
 
     def push(self, package: str, source: str | None = None, auth: Auth | None = None) -> None:
         """Push a package to a source."""
@@ -66,7 +71,7 @@ class ChocolateyClient:
         with open(package, 'rb') as f:
             r = self.session.put(f'{source}{api_v2}/package/',
                                  auth=auth,
-                                 files={basename(package): f})
+                                 files={Path(package).name: f})
             r.raise_for_status()
 
     def _get_api_v2(self, source: str | None = None) -> str:
@@ -114,7 +119,7 @@ class ChocolateyClient:
                     }))
         else:
             if all_versions:
-                # FIXME In both cases, pagination is not implemented. For non-exact, multiple
+                # TODO In both cases, pagination is not implemented. For non-exact, multiple
                 # requests to FindPackagesById() are necessary with every package found. For exact,
                 # $skiptoken must be used to paginate.
                 searches.append(
@@ -187,16 +192,13 @@ class ChocolateyClient:
                 try:
                     with open(f'result-{i:03}.xml', 'w') as f:
                         f.write(r.text)
-                except IOError:
+                except OSError:
                     pass
             root = parse_xml(r.text)
             for entry in root.findall(FEED_ENTRY_TAG, ns):
                 id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
                 if not id_url or id_url in results:
                     continue
-                try:
+                with contextlib.suppress(InvalidEntryError):
                     results[id_url] = entry_to_search_result(entry, ns)
-                except InvalidEntryError:
-                    pass
-        for result in reversed(results.values()):
-            yield result
+        yield from reversed(results.values())

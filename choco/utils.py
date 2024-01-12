@@ -2,8 +2,7 @@
 from datetime import datetime
 from os import listdir
 from pathlib import Path
-from types import FrameType
-from typing import TypeVar, cast
+from typing import TYPE_CHECKING, TypeVar, cast
 from xml.etree.ElementTree import Element
 import logging
 import re
@@ -26,6 +25,9 @@ from .constants import (
     METADATA_VERSION_DOWNLOAD_COUNT_TAG, METADATA_VERSION_TAG)
 # isort: on
 from .typing import SearchResult, TestingStatus
+
+if TYPE_CHECKING:
+    from types import FrameType
 
 __all__ = ('append_dir_to_zip_recursive', 'entry_to_search_result', 'generate_unique_id',
            'setup_logging', 'tag_text_or')
@@ -82,10 +84,10 @@ def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
             continue
         abs_item = root / item
         if abs_item.is_dir():
-            utils_logger.debug(f'Recursing into {abs_item}')
+            utils_logger.debug('Recursing into %s', abs_item)
             append_dir_to_zip_recursive(abs_item, z)
         else:
-            utils_logger.debug(f'Adding {abs_item}')
+            utils_logger.debug('Adding %s', abs_item)
             z.write(abs_item)
 
 
@@ -117,7 +119,7 @@ def entry_to_search_result(entry: Element, ns: dict[str, str] = FEED_NAMESPACES)
     """Convert an ``<entry>`` to a ``SearchResult`` dict."""
     metadata = entry.find(FEED_PROPERTIES_TAG, ns)
     if not metadata:
-        raise InvalidEntryError()
+        raise InvalidEntryError
     return SearchResult(
         approval_date=parse_iso_date_tag(metadata.find(METADATA_PACKAGE_APPROVED_DATE_TAG, ns)),
         description=tag_text_or(metadata.find(METADATA_DESCRIPTION_TAG, ns)),

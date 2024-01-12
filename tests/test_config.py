@@ -10,7 +10,7 @@ def test_config_no_file(runner: CliRunner, mocker: MockerFixture) -> None:
     saved = None
 
     def read_error() -> None:
-        raise FileNotFoundError()
+        raise FileNotFoundError
 
     def save_config(res: Any) -> None:
         nonlocal saved

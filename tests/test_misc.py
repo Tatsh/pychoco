@@ -41,7 +41,7 @@ class FakePath:
         self.path = path
 
     def is_dir(self) -> bool:
-        return True if self.path == './a' else False
+        return self.path == './a'
 
     def __truediv__(self, x: Any) -> 'FakePath':
         return FakePath(f'{self.path}/{x}')

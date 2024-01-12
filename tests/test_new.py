@@ -10,7 +10,7 @@ def test_new(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock.return_value.exists.return_value = False
     run = runner.invoke(choco, ('new', 'okay-name'))
     assert run.exit_code == 0
-    assert path_mock.call_count == 5
+    assert path_mock.call_count == 5  # noqa: PLR2004
     path_mock.assert_any_call('okay-name')
     path_mock.return_value.open.return_value.__enter__.return_value.write.assert_called_with(
         CHOCOLATEY_UNINSTALL_PS1)

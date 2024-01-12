@@ -15,7 +15,7 @@ def test_apikey_add_and_list_new_file(runner: CliRunner, mocker: MockerFixture) 
         saved = res
 
     def load_key_error() -> None:
-        raise FileNotFoundError()
+        raise FileNotFoundError
 
     def load_key() -> Any:
         return saved
@@ -35,7 +35,7 @@ def test_apikey_list_no_file(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.config.Path')
 
     def load_key_error() -> None:
-        raise FileNotFoundError()
+        raise FileNotFoundError
 
     path_mock.return_value.read_text.side_effect = load_key_error
     run = runner.invoke(choco, ('apikey', 'list'))

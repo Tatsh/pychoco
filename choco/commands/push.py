@@ -29,4 +29,4 @@ def push(package: str,
         ChocolateyClient(config, api_keys).push(package, source)
     except HTTPError as e:
         click.echo(e.response)
-        raise click.Abort() from e
+        raise click.Abort from e

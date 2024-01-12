@@ -16,4 +16,4 @@ def pack(work_dir: str = '.', debug: bool = False) -> None:
         do_pack(work_dir)
     except (FileNotFoundError, ValueError) as e:
         click.secho(str(e), err=True)
-        raise click.Abort() from e
+        raise click.Abort from e

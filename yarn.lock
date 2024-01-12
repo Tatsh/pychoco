@@ -106,9 +106,9 @@
   integrity sha512-F/8XnkqjU7jmSDAcD3LSSX+WxCVUWPssqlO4lzGMIK3MNIUt+d48eSIt3pFAIB/Z9y0ojoLHUtWX9HJ1ZtGrXQ==
 
 "@cspell/dict-cpp@^5.0.10":
-  version "5.0.10"
-  resolved "https://registry.yarnpkg.com/@cspell/dict-cpp/-/dict-cpp-5.0.10.tgz#08c3eb438b631dd3f0fc04f5a6d4b6cab87c8d9b"
-  integrity sha512-WCRuDrkFdpmeIR6uXQYKU9loMQKNFS4bUhtHdv5fu4qVyJSh3k/kgmtTm1h1BDTj8EwPRc/RGxS+9Z3b2mnabA==
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@cspell/dict-cpp/-/dict-cpp-5.1.1.tgz#f3628a10355e217dc5ba1f5a26e6d9e1f177e6ea"
+  integrity sha512-Qy9fNsR/5RcQ6G85gDKFjvzh0AdgAilLQeSXPtqY21Fx1kCjUqdVVJYMmHUREgcxH6ptAxtn5knTWU4PIhQtOw==
 
 "@cspell/dict-cryptocurrencies@^5.0.0":
   version "5.0.0"
@@ -303,9 +303,9 @@
   integrity sha512-ph0twaRoV+ylui022clEO1dZ35QbeEQaKTaV2sPOsdwIokABPIiK09oWwGK9qg7jRGQwVaRPEq0Vp+IG1GpqSQ==
 
 "@cspell/dict-software-terms@^3.3.15":
-  version "3.3.15"
-  resolved "https://registry.yarnpkg.com/@cspell/dict-software-terms/-/dict-software-terms-3.3.15.tgz#713f748a6276788db01e75e07950c867bc285fca"
-  integrity sha512-1qqMGFi1TUNq9gQj4FTLPTlqVzQLXrj80MsKoXVpysr+823kMWesQAjqHiPg+MYsQ3DlTcpGWcjq/EbYonqueQ==
+  version "3.3.16"
+  resolved "https://registry.yarnpkg.com/@cspell/dict-software-terms/-/dict-software-terms-3.3.16.tgz#c088501687e6a19625800cc612dae8aebaf0f086"
+  integrity sha512-ixorEP80LGxAU+ODVSn/CYIDjV0XAlZ2VrBu7CT+PwUFJ7h8o3JX1ywKB4qnt0hHru3JjWFtBoBThmZdrXnREQ==
 
 "@cspell/dict-sql@^2.1.3":
   version "2.1.3"
@@ -1056,7 +1056,12 @@ prettier-plugin-toml@^2.0.1:
   dependencies:
     "@taplo/lib" "^0.4.0-alpha.2"
 
-prettier@>=2.3, prettier@^3.1.1:
+prettier@>=2.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.0.3.tgz#432a51f7ba422d1469096c0fdc28e235db8f9643"
+  integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
+
+prettier@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.1.1.tgz#6ba9f23165d690b6cbdaa88cb0807278f7019848"
   integrity sha512-22UbSzg8luF4UuZtzgiUOfcGM8s4tjBv6dJRT7j275NXsy2jb4aJa4NNveul5x4eqlF1wuhuR2RElK71RvmVaw==
