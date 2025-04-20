@@ -21,7 +21,7 @@ keywords = ["command line", "windows"]
 license = "MIT"
 name = "chocolatey-choco"
 readme = "README.md"
-version = "0.1.1"
+version = "0.1.2"
 
 [[project.authors]]
 email = "audvare@gmail.com"

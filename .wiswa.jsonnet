@@ -3,7 +3,7 @@
   description: 'Minimal choco command for use on non-Windows platforms.',
   keywords: ['command line', 'windows'],
   project_name: 'chocolatey-choco',
-  version: '0.1.1',
+  version: '0.1.2',
   want_main: true,
   citation+: {
     'date-released': '2025-04-19',
