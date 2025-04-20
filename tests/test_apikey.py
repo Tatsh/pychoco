@@ -9,6 +9,14 @@ if TYPE_CHECKING:
     from pytest_mock.plugin import MockerFixture
 
 
+def test_apikey_list(runner: CliRunner, mocker: MockerFixture) -> None:
+    mocker.patch('choco.commands.apikey.read_api_keys', return_value=['key1', 'key2'])
+    run = runner.invoke(choco, ('apikey', 'list'))
+    assert run.exit_code == 0
+    assert 'key1' in run.output
+    assert 'key2' in run.output
+
+
 def test_apikey_add_and_list_new_file(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.config.Path')
     saved = None

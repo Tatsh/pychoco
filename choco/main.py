@@ -3,7 +3,12 @@ from __future__ import annotations
 
 import click
 
-from choco.commands import apikey, config, new, pack, push, search
+from choco.commands.apikey import apikey
+from choco.commands.config import config
+from choco.commands.new import new
+from choco.commands.pack import pack
+from choco.commands.push import push
+from choco.commands.search import search
 
 
 @click.group()

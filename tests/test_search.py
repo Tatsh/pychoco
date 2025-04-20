@@ -7,6 +7,7 @@ from choco.main import main as choco
 
 if TYPE_CHECKING:
     from click.testing import CliRunner
+    from pytest_mock import MockerFixture
     import requests_mock as req_mock
 
 
@@ -78,3 +79,130 @@ def test_search_no_duplicates(runner: CliRunner, requests_mock: req_mock.Mocker,
     run = runner.invoke(choco, ('search', '-a', '-e', '-s', 'https://somehost', terms))
     lines = run.stdout.splitlines()
     assert len(lines) == 1
+
+
+def test_search_id_only(runner: CliRunner, mocker: MockerFixture) -> None:
+    mocker.patch('choco.commands.search.ChocolateyClient.search',
+                 return_value=[{
+                     'title': 'chrome1'
+                 }])
+    run = runner.invoke(choco, ('search', '--idonly', "'chrome'"))
+    assert run.exit_code == 0
+    assert run.output.strip() == 'chrome1'
+
+
+def test_search_else_case(runner: CliRunner, mocker: MockerFixture) -> None:
+    mocker.patch('choco.commands.search.ChocolateyClient.search',
+                 return_value=[{
+                     'title': 'chrome1',
+                     'testing_status': 'testing',
+                     'version': '1.0.0',
+                     'is_cached': True,
+                     'is_approved': True,
+                     'testing_date': '2023-10-01T00:00:00Z',
+                     'tags': ['tag1', 'tag2']
+                 }])
+    run = runner.invoke(choco, ('search', "'chrome'"))
+    assert run.exit_code == 0
+    assert run.output.strip() == """chrome1 1.0.0 [Approved] Downloads cached for licensed users
+ Title: chrome1 | Published: ${publish_date}
+ Package approved as a trusted package on ${approval_date}.
+ Package testing status: testing on 2023-10-01T00:00:00Z.
+ Number of Downloads: ${num_downloads} | Downloads for this version: ${num_version_downloads}
+ Package url ${package_url}
+ Chocolatey Package Source: ${package_src_uri}
+ Tags:tag1 tag2
+ Software Site: ${site}
+ Software License: ${license}
+ Documentation: ${documentation_uri}
+ Summary: ${summary}
+ Description: ${description}
+ Release Notes: ${release_notes_uri}"""
+
+
+def test_search_else_case_no_title(runner: CliRunner, mocker: MockerFixture) -> None:
+    mocker.patch('choco.commands.search.ChocolateyClient.search',
+                 return_value=[{
+                     'title': None,
+                     'testing_status': 'testing',
+                     'version': '1.0.0',
+                     'is_cached': True,
+                     'is_approved': True,
+                     'testing_date': '2023-10-01T00:00:00Z',
+                     'tags': ['tag1', 'tag2']
+                 }])
+    run = runner.invoke(choco, ('search', "'chrome'"))
+    assert run.exit_code == 0
+    assert run.output.strip() == """no title? 1.0.0 [Approved] Downloads cached for licensed users
+ Title: no title? | Published: ${publish_date}
+ Package approved as a trusted package on ${approval_date}.
+ Package testing status: testing on 2023-10-01T00:00:00Z.
+ Number of Downloads: ${num_downloads} | Downloads for this version: ${num_version_downloads}
+ Package url ${package_url}
+ Chocolatey Package Source: ${package_src_uri}
+ Tags:tag1 tag2
+ Software Site: ${site}
+ Software License: ${license}
+ Documentation: ${documentation_uri}
+ Summary: ${summary}
+ Description: ${description}
+ Release Notes: ${release_notes_uri}"""
+
+
+def test_search_else_case_no_version(runner: CliRunner, mocker: MockerFixture) -> None:
+    mocker.patch('choco.commands.search.ChocolateyClient.search',
+                 return_value=[{
+                     'title': 'chrome1',
+                     'version': None,
+                     'testing_status': 'testing',
+                     'is_cached': True,
+                     'is_approved': True,
+                     'testing_date': '2023-10-01T00:00:00Z',
+                     'tags': ['tag1', 'tag2']
+                 }])
+    run = runner.invoke(choco, ('search', "'chrome'"))
+    assert run.exit_code == 0
+    assert run.output.strip(
+    ) == """chrome1 no version? [Approved] Downloads cached for licensed users
+ Title: chrome1 | Published: ${publish_date}
+ Package approved as a trusted package on ${approval_date}.
+ Package testing status: testing on 2023-10-01T00:00:00Z.
+ Number of Downloads: ${num_downloads} | Downloads for this version: ${num_version_downloads}
+ Package url ${package_url}
+ Chocolatey Package Source: ${package_src_uri}
+ Tags:tag1 tag2
+ Software Site: ${site}
+ Software License: ${license}
+ Documentation: ${documentation_uri}
+ Summary: ${summary}
+ Description: ${description}
+ Release Notes: ${release_notes_uri}"""
+
+
+def test_search_else_case_no_testing_date(runner: CliRunner, mocker: MockerFixture) -> None:
+    mocker.patch('choco.commands.search.ChocolateyClient.search',
+                 return_value=[{
+                     'title': 'chrome1',
+                     'version': '1.0.0',
+                     'testing_status': 'testing',
+                     'is_cached': True,
+                     'is_approved': True,
+                     'testing_date': None,
+                     'tags': ['tag1', 'tag2']
+                 }])
+    run = runner.invoke(choco, ('search', "'chrome'"))
+    assert run.exit_code == 0
+    assert run.output.strip() == """chrome1 1.0.0 [Approved] Downloads cached for licensed users
+ Title: chrome1 | Published: ${publish_date}
+ Package approved as a trusted package on ${approval_date}.
+ Package testing status: testing.
+ Number of Downloads: ${num_downloads} | Downloads for this version: ${num_version_downloads}
+ Package url ${package_url}
+ Chocolatey Package Source: ${package_src_uri}
+ Tags:tag1 tag2
+ Software Site: ${site}
+ Software License: ${license}
+ Documentation: ${documentation_uri}
+ Summary: ${summary}
+ Description: ${description}
+ Release Notes: ${release_notes_uri}"""
