@@ -2,7 +2,7 @@
   // Project-specific
   description: 'Minimal choco command for use on non-Windows platforms.',
   keywords: ['command line', 'windows'],
-  project_name: 'pychoco',
+  project_name: 'chocolatey-choco',
   version: '0.1.1',
   want_main: true,
   citation+: {

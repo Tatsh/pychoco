@@ -929,6 +929,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chocolatey-choco@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "chocolatey-choco@workspace:."
+  dependencies:
+    "@prettier/plugin-xml": "npm:^3.4.1"
+    cspell: "npm:^8.18.1"
+    markdownlint-cli2: "npm:^0.17.2"
+    prettier: "npm:^3.5.3"
+    prettier-plugin-ini: "npm:^1.3.0"
+    prettier-plugin-sort-json: "npm:^4.1.1"
+    prettier-plugin-toml: "npm:^2.0.4"
+    pyright: "npm:^1.1.399"
+    yarn-audit-fix: "npm:^10.1.1"
+  languageName: unknown
+  linkType: soft
+
 "chownr@npm:^3.0.0":
   version: 3.0.0
   resolution: "chownr@npm:3.0.0"
@@ -2461,22 +2477,6 @@ __metadata:
   checksum: 10c0/1d12c1c0e06127fa5db56bd7fdf698daf9a78104456a6b67326877afc21feaa821257b171539caedd2f0524027fa38e67b13dd094159c8d70b6d26d2bea4dfdb
   languageName: node
   linkType: hard
-
-"pychoco@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "pychoco@workspace:."
-  dependencies:
-    "@prettier/plugin-xml": "npm:^3.4.1"
-    cspell: "npm:^8.18.1"
-    markdownlint-cli2: "npm:^0.17.2"
-    prettier: "npm:^3.5.3"
-    prettier-plugin-ini: "npm:^1.3.0"
-    prettier-plugin-sort-json: "npm:^4.1.1"
-    prettier-plugin-toml: "npm:^2.0.4"
-    pyright: "npm:^1.1.399"
-    yarn-audit-fix: "npm:^10.1.1"
-  languageName: unknown
-  linkType: soft
 
 "pyright@npm:^1.1.399":
   version: 1.1.399

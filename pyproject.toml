@@ -19,7 +19,7 @@ description = "Minimal choco command for use on non-Windows platforms."
 dynamic = ["dependencies", "requires-python"]
 keywords = ["command line", "windows"]
 license = "MIT"
-name = "pychoco"
+name = "chocolatey-choco"
 readme = "README.md"
 version = "0.1.1"
 
@@ -31,11 +31,11 @@ name = "Andrew Udvare"
 erdantic = ["erdantic<2.0"]
 
 [project.scripts]
-pychoco = "choco.main:main"
+choco = "choco.main:main"
 
 [project.urls]
 Issues = "https://github.com/Tatsh/pychoco/issues"
-documentation = "https://pychoco.readthedocs.org"
+documentation = "https://chocolatey-choco.readthedocs.org"
 homepage = "https://tatsh.github.io/pychoco/"
 repository = "https://github.com/Tatsh/pychoco"
 

@@ -70,9 +70,9 @@ html_theme_options = {
             'name': 'Switch to system preference'
         }
     }],
-    'repo_name': 'pychoco',
+    'repo_name': 'chocolatey-choco',
     'repo_url': 'https://github.com/Tatsh/pychoco',
-    'site_url': 'https://pychoco.readthedocs.org',
+    'site_url': 'https://chocolatey-choco.readthedocs.org',
     'toc_title_is_page_title': True
 }
 intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}

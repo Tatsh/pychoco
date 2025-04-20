@@ -1,3 +1,3 @@
-# How to contribute to pychoco
+# How to contribute to chocolatey-choco
 
 To be written.

@@ -158,8 +158,6 @@ keepasshttp
 khabbr
 kiplinger's
 kledy
-levelname
-levelno
 lextudio
 libjsonnet
 libtorrent
@@ -235,7 +233,6 @@ shareaholic
 sharethis
 shoutwire
 simpy
-skiptoken
 slashdot
 sofer
 sonomy
