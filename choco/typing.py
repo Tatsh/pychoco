@@ -1,14 +1,20 @@
 """Typing helpers."""
-from datetime import datetime
-from typing import Literal, NotRequired, TypeVar, TypedDict
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Literal, TypeVar, TypedDict
+
+from typing_extensions import NotRequired
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 __all__ = ('Config', 'ConfigKey', 'SearchResult', 'TestingStatus')
 
-#: Available keys for ``ChocolateyClient.config_set``.
 ConfigKey = Literal['defaultPushSource']
+"""Available keys for ``ChocolateyClient.config_set``."""
 T = TypeVar('T')
-#: Testing state of a package.
 TestingStatus = Literal['Passing', 'Failing']
+"""Testing state of a package."""
 
 
 class ConfigPyChocoDict(TypedDict):

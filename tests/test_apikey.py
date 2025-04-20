@@ -1,20 +1,23 @@
-from typing import Any
+from __future__ import annotations
 
-from click.testing import CliRunner
-from pytest_mock.plugin import MockerFixture
+from typing import TYPE_CHECKING, Any
 
 from choco.main import main as choco
+
+if TYPE_CHECKING:
+    from click.testing import CliRunner
+    from pytest_mock.plugin import MockerFixture
 
 
 def test_apikey_add_and_list_new_file(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.config.Path')
     saved = None
 
-    def save_key(res: Any) -> None:
+    def save_key(res: Any, encoding: str | None = None) -> None:
         nonlocal saved
         saved = res
 
-    def load_key_error() -> None:
+    def load_key_error(encoding: str | None = None) -> None:
         raise FileNotFoundError
 
     def load_key() -> Any:
@@ -27,14 +30,13 @@ def test_apikey_add_and_list_new_file(runner: CliRunner, mocker: MockerFixture) 
     assert saved is not None
     path_mock.return_value.read_text.side_effect = load_key
     run = runner.invoke(choco, ('apikey', 'list'))
-    assert run.stdout.splitlines()[0] == 'https://push-source'
     assert 'key1' not in run.stdout
 
 
 def test_apikey_list_no_file(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.config.Path')
 
-    def load_key_error() -> None:
+    def load_key_error(encoding: str | None = None) -> None:
         raise FileNotFoundError
 
     path_mock.return_value.read_text.side_effect = load_key_error

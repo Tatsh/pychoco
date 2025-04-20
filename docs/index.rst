@@ -1,5 +1,5 @@
 pychoco
-=====================================
+=======
 Minimal ``choco`` command for use on non-Windows platforms.
 
 Commands
@@ -8,41 +8,42 @@ Commands
   :prog: choco
   :nested: full
 
-Library
--------
-.. automodule:: choco.client
-   :members:
+.. only:: html
 
-.. automodule:: choco.config
-   :members:
+   Library
+   -------
+   .. automodule:: choco.client
+      :members:
 
-.. automodule:: choco.packaging
-   :members:
+   .. automodule:: choco.config
+      :members:
 
-.. automodule:: choco.utils
-   :members:
+   .. automodule:: choco.packaging
+      :members:
 
-Constants
----------
-.. automodule:: choco.constants
-   :members:
+   .. automodule:: choco.utils
+      :members:
 
-Templates
----------
-.. automodule:: choco.templates
-   :members:
+   Constants
+   ---------
+   .. automodule:: choco.constants
+      :members:
 
-Typing
-------
-.. automodule:: choco.typing
-   :members:
+   Templates
+   ---------
+   .. automodule:: choco.templates
+      :members:
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   Typing
+   ------
+   .. automodule:: choco.typing
+      :members:
 
-Indices and tables
-==================
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   .. toctree::
+      :maxdepth: 2
+      :caption: Contents:
+
+   Indices and tables
+   ==================
+   * :ref:`genindex`
+   * :ref:`modindex`

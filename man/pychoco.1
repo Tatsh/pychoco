@@ -1,0 +1,348 @@
+.\" Man page generated from reStructuredText.
+.
+.
+.nr rst2man-indent-level 0
+.
+.de1 rstReportMargin
+\\$1 \\n[an-margin]
+level \\n[rst2man-indent-level]
+level margin: \\n[rst2man-indent\\n[rst2man-indent-level]]
+-
+\\n[rst2man-indent0]
+\\n[rst2man-indent1]
+\\n[rst2man-indent2]
+..
+.de1 INDENT
+.\" .rstReportMargin pre:
+. RS \\$1
+. nr rst2man-indent\\n[rst2man-indent-level] \\n[an-margin]
+. nr rst2man-indent-level +1
+.\" .rstReportMargin post:
+..
+.de UNINDENT
+. RE
+.\" indent \\n[an-margin]
+.\" old: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.nr rst2man-indent-level -1
+.\" new: \\n[rst2man-indent\\n[rst2man-indent-level]]
+.in \\n[rst2man-indent\\n[rst2man-indent-level]]u
+..
+.TH "PYCHOCO" "1" "Apr 20, 2025" "0.1.1" "pychoco"
+.SH NAME
+pychoco \- pychoco v0.1.1
+.sp
+Minimal \fBchoco\fP command for use on non\-Windows platforms.
+.SH COMMANDS
+.SS choco
+.sp
+Minimal choco command.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco [OPTIONS] COMMAND [ARGS]...
+.EE
+.UNINDENT
+.UNINDENT
+.SS apikey
+.sp
+Manage API keys.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco apikey [OPTIONS] COMMAND [ARGS]...
+.EE
+.UNINDENT
+.UNINDENT
+.SS add
+.sp
+Add an API key for a source.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco apikey add [OPTIONS]
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Options
+.INDENT 0.0
+.TP
+.B \-d, \-\-debug
+Enable debug logging.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-k, \-\-key <API_KEY>
+\fBRequired\fP API key.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-s, \-\-source <SOURCE_URL>
+\fBRequired\fP Source URI.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-p, \-\-path <PATH>
+Storage file.
+.UNINDENT
+.SS list
+.sp
+List sources associated with API keys. Does not display the API key values.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco apikey list [OPTIONS]
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Options
+.INDENT 0.0
+.TP
+.B \-d, \-\-debug
+Enable debug logging.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-p, \-\-path <PATH>
+Storage file.
+.UNINDENT
+.SS config
+.sp
+Manage configuration.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco config [OPTIONS] COMMAND [ARGS]...
+.EE
+.UNINDENT
+.UNINDENT
+.SS set
+.sp
+Set a configuration value.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco config set [OPTIONS]
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Options
+.INDENT 0.0
+.TP
+.B \-d, \-\-debug
+Enable debug logging.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-n, \-\-name <KEY>
+\fBRequired\fP Key to set.
+.INDENT 7.0
+.TP
+.B Options
+defaultPushSource
+.UNINDENT
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-v, \-\-value <VALUE>
+\fBRequired\fP Value to set.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-p, \-\-path <PATH>
+Storage file.
+.UNINDENT
+.SS new
+.sp
+Create a new package.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco new [OPTIONS] NAME
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Options
+.INDENT 0.0
+.TP
+.B \-d, \-\-debug
+Enable debug logging.
+.UNINDENT
+.sp
+Arguments
+.INDENT 0.0
+.TP
+.B NAME
+Required argument
+.UNINDENT
+.SS pack
+.sp
+Create a package file for distribution.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco pack [OPTIONS] [WORK_DIR]
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Options
+.INDENT 0.0
+.TP
+.B \-d, \-\-debug
+Enable debug logging.
+.UNINDENT
+.sp
+Arguments
+.INDENT 0.0
+.TP
+.B WORK_DIR
+Optional argument
+.UNINDENT
+.SS push
+.sp
+Push a package to a source.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco push [OPTIONS] PACKAGE
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Options
+.INDENT 0.0
+.TP
+.B \-d, \-\-debug
+Enable debug logging.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-s, \-\-source <URL>
+Source to upload to.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-config\-path <PATH>
+Configuration storage file.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-api\-keys\-path <PATH>
+API keys storage file.
+.UNINDENT
+.sp
+Arguments
+.INDENT 0.0
+.TP
+.B PACKAGE
+Required argument
+.UNINDENT
+.SS search
+.sp
+Search a source.
+.INDENT 0.0
+.INDENT 3.5
+.sp
+.EX
+choco search [OPTIONS] TERMS
+.EE
+.UNINDENT
+.UNINDENT
+.sp
+Options
+.INDENT 0.0
+.TP
+.B \-\-by\-id\-only
+Only return packages where the id contains the search filter.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-by\-tag\-only, \-\-by\-tags\-only
+Only return packages where the search filter matches on the tags.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-id\-starts\-with
+Only return packages where the id starts with the search filter.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-idonly, \-\-id\-only
+Only return Package IDs in the list results.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-order\-by\-popularity
+Sort by package results by popularity.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-page <page>
+The \(dqpage\(dq of results to return.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-page\-size <page_size>
+Amount of packages to return in each page of results.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-\-pre, \-\-prerelease
+Include prereleases.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-a, \-\-all, \-\-allversions, \-\-all\-versions
+Include results from all versions.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-d, \-\-debug
+Enable debug logging.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-e, \-\-exact
+Only return packages with this exact name.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-p, \-\-password <password>
+Password.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-s, \-\-source <URL>
+Source to search.
+.UNINDENT
+.INDENT 0.0
+.TP
+.B \-u, \-\-user <user>
+User name.
+.UNINDENT
+.sp
+Arguments
+.INDENT 0.0
+.TP
+.B TERMS
+Required argument
+.UNINDENT
+.SH AUTHOR
+Andrew Udvare <audvare@gmail.com>
+.SH COPYRIGHT
+2025
+.\" Generated by docutils manpage writer.
+.

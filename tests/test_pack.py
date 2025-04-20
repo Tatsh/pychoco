@@ -1,5 +1,7 @@
-from click.testing import CliRunner
-from pytest_mock.plugin import MockerFixture
+from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import TYPE_CHECKING
 
 from choco.constants import (
     NUSPEC_FIELD_AUTHORS,
@@ -11,6 +13,10 @@ from choco.constants import (
 from choco.main import main as choco
 from choco.packaging import TooManyNuspecFiles
 from choco.templates import NUSPEC_TEMPLATE
+
+if TYPE_CHECKING:
+    from click.testing import CliRunner
+    from pytest_mock.plugin import MockerFixture
 
 
 def test_pack_not_exist(runner: CliRunner, mocker: MockerFixture) -> None:
@@ -30,9 +36,9 @@ def test_pack_too_many_nuspec(runner: CliRunner, mocker: MockerFixture) -> None:
 
 
 class FakeRoot:
+    @dataclass
     class FakeTag:
-        def __init__(self, text: str):
-            self.text = text
+        text: str
 
     def find(self, tag_name: str) -> FakeTag:
         if tag_name == NUSPEC_FIELD_ID:
@@ -45,7 +51,8 @@ class FakeRoot:
             return FakeRoot.FakeTag('Description')
         if tag_name == NUSPEC_FIELD_TAGS:
             return FakeRoot.FakeTag(' tag1 ')
-        raise ValueError(f'Unknown tag name: {tag_name}')  # noqa: TRY003
+        msg = f'Unknown tag name: {tag_name}'
+        raise ValueError(msg)
 
 
 def test_pack_normal(runner: CliRunner, mocker: MockerFixture) -> None:
@@ -60,5 +67,5 @@ def test_pack_normal(runner: CliRunner, mocker: MockerFixture) -> None:
     run = runner.invoke(choco, ('pack', 'okay-name'))
     assert run.exit_code == 0
     assert chdir_mock.call_count == 1
-    assert zip_mock.return_value.__enter__.return_value.writestr.call_count == 3  # noqa: PLR2004
+    assert zip_mock.return_value.__enter__.return_value.writestr.call_count == 3
     assert append_mock.call_count == 1

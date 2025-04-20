@@ -1,4 +1,6 @@
 """Root command."""
+from __future__ import annotations
+
 import click
 
 from choco.commands import apikey, config, new, pack, push, search

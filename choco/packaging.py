@@ -1,5 +1,7 @@
 """Packaging-related functions."""
-from datetime import UTC, datetime
+from __future__ import annotations
+
+from datetime import datetime, timezone
 from os import chdir
 from pathlib import Path
 import hashlib
@@ -52,13 +54,13 @@ def new_package(name: str) -> Path:
         raise DirectoryExistsError
     p_name = Path(name)
     p_name.mkdir()
-    with Path(p_name / f'{name}.nuspec').open('w') as f:
+    with Path(p_name / f'{name}.nuspec').open('w', encoding='utf-8') as f:
         f.write(NUSPEC_TEMPLATE.safe_substitute(package_id=name))
     tools = p_name / 'tools'
     tools.mkdir()
-    with Path(tools / 'chocolateyInstall.ps1').open('w') as f:
+    with Path(tools / 'chocolateyInstall.ps1').open('w', encoding='utf-8') as f:
         f.write(CHOCOLATEY_INSTALL_PS1_TEMPLATE.safe_substitute(package_id=name))
-    with Path(tools / 'chocolateyUninstall.ps1').open('w') as f:
+    with Path(tools / 'chocolateyUninstall.ps1').open('w', encoding='utf-8') as f:
         f.write(CHOCOLATEY_UNINSTALL_PS1)
     return p_name
 
@@ -82,8 +84,8 @@ def pack(work_dir: str = '.') -> zipfile.ZipFile:
     root = parse_xml(Path(work_dir) / nuspecs[0]).getroot()
     package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
     version = tag_text_or(root.find(NUSPEC_FIELD_VERSION))
-    sha = hashlib.sha1()
-    sha.update(f'{package_id}{version}{datetime.now(tz=UTC)}'.encode())
+    sha = hashlib.sha1()  # noqa: S324
+    sha.update(f'{package_id}{version}{datetime.now(tz=timezone.utc)}'.encode())
     psmdcp_filename = f'{sha.hexdigest()}.psmdcp'
     with zipfile.ZipFile(f'test-{package_id}.{version}.nupkg', 'w') as z:
         chdir(work_dir)

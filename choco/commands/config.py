@@ -1,13 +1,21 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+import logging
+
 import click
 
-from ..config import read_config, write_config
-from ..constants import DEFAULT_CONFIG, PYCHOCO_TOML_PATH
-from ..typing import ConfigKey
+from choco.config import read_config, write_config
+from choco.constants import DEFAULT_CONFIG, PYCHOCO_TOML_PATH
+
+if TYPE_CHECKING:
+    from choco.typing import ConfigKey
 
 __all__ = ('config',)
 
 
 @click.command('set')
+@click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 @click.option('-n',
               '--name',
               required=True,
@@ -21,8 +29,9 @@ __all__ = ('config',)
               help='Storage file.',
               metavar='PATH',
               type=click.Path(dir_okay=False, resolve_path=True))
-def set_(name: ConfigKey, value: str, path: str | None) -> None:
+def set_(name: ConfigKey, value: str, path: str | None, *, debug: bool = False) -> None:
     """Set a configuration value."""
+    logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
     try:
         config = read_config(path)
     except FileNotFoundError:

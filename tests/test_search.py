@@ -1,9 +1,13 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 from urllib.parse import quote, urlencode
 
-from click.testing import CliRunner
-import requests_mock as req_mock
-
 from choco.main import main as choco
+
+if TYPE_CHECKING:
+    from click.testing import CliRunner
+    import requests_mock as req_mock
 
 
 def test_search_no_options_bad_entry(runner: CliRunner, requests_mock: req_mock.Mocker,
@@ -22,7 +26,7 @@ def test_search_no_options_bad_entry(runner: CliRunner, requests_mock: req_mock.
         quote_via=quote)
     requests_mock.get(f'https://somehost/Packages()?{qs}', text=bad_feed)
     run = runner.invoke(choco, ('search', '-s', 'https://somehost', terms))
-    assert run.stdout == ''
+    assert not run.stdout
     assert run.exit_code == 0
 
 
@@ -43,7 +47,7 @@ def test_search_no_options_bad_entry_id_only(runner: CliRunner, requests_mock: r
     requests_mock.get(f'https://somehost/Packages()?{qs}', text=bad_feed)
     for run in (runner.invoke(choco, ('search', '--id-only', '-s', 'https://somehost', terms)),
                 runner.invoke(choco, ('search', '--idonly', '-s', 'https://somehost', terms))):
-        assert run.stdout == ''
+        assert not run.stdout
         assert run.exit_code == 0
 
 

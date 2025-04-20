@@ -1,10 +1,12 @@
 """Client."""
-from collections.abc import Iterator
+from __future__ import annotations
+
 from pathlib import Path
+from typing import TYPE_CHECKING
 import contextlib
+import logging
 
 from defusedxml.ElementTree import fromstring as parse_xml
-from loguru import logger
 from requests.auth import HTTPBasicAuth
 import requests
 
@@ -16,16 +18,23 @@ from .constants import (
     FEED_NAMESPACES,
     NUGET_API_KEY_HTTP_HEADER,
 )
-from .typing import Config, ConfigKey, SearchResult
 from .utils import InvalidEntryError, entry_to_search_result, tag_text_or
 
-#: Authentication details.
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+
+    from .typing import Config, ConfigKey, SearchResult
+
 Auth = tuple[str, str] | HTTPBasicAuth
+"""Authentication details."""
+log = logging.getLogger(__name__)
 
 
 class ChocolateyClient:
     """
-    Chocolatey client. Anything that involves interactions with the server will be in this class.
+    Chocolatey client.
+
+    Anything that involves interactions with the server will be in this class.
     """
     def __init__(self,
                  config: Config = DEFAULT_CONFIG,
@@ -47,14 +56,15 @@ class ChocolateyClient:
         self.config['pychoco'][name] = value
 
     def get_default_push_source(self) -> str:
-        """Gets the default push source URL."""
+        """Get the default push source URL."""
         return (self.config['pychoco'].get('defaultPushSource', DEFAULT_PUSH_SOURCE)
                 or DEFAULT_PUSH_SOURCE)
 
     def update_api_key_header(self, source: str | None = None) -> None:
         """
-        Updates the shared session API key header. If one does not exist, the existing header is
-        removed if it is present.
+        Update the shared session API key header.
+
+        If one does not exist, the existing header is removed if it is present.
         """
         source = source or self.get_default_push_source()
         try:
@@ -63,15 +73,13 @@ class ChocolateyClient:
             with contextlib.suppress(KeyError):
                 del self.session.headers[NUGET_API_KEY_HTTP_HEADER]
 
-    def push(self, package: str, source: str | None = None, auth: Auth | None = None) -> None:
+    def push(self, package: Path, source: str | None = None, auth: Auth | None = None) -> None:
         """Push a package to a source."""
         source = source or self.get_default_push_source()
         self.update_api_key_header(source)
         api_v2 = self._get_api_v2(source)
-        with open(package, 'rb') as f:
-            r = self.session.put(f'{source}{api_v2}/package/',
-                                 auth=auth,
-                                 files={Path(package).name: f})
+        with package.open('rb') as f:
+            r = self.session.put(f'{source}{api_v2}/package/', auth=auth, files={package.name: f})
             r.raise_for_status()
 
     def _get_api_v2(self, source: str | None = None) -> str:
@@ -119,9 +127,6 @@ class ChocolateyClient:
                     }))
         else:
             if all_versions:
-                # TODO In both cases, pagination is not implemented. For non-exact, multiple
-                # requests to FindPackagesById() are necessary with every package found. For exact,
-                # $skiptoken must be used to paginate.
                 searches.append(
                     requests.
                     Request('GET',
@@ -188,9 +193,9 @@ class ChocolateyClient:
             r = self.session.send(req.prepare())
             r.raise_for_status()
             if debug:  # pragma no cover
-                logger.debug(r.text)
+                log.debug(r.text)
                 try:
-                    with open(f'result-{i:03}.xml', 'w') as f:
+                    with Path(f'result-{i:03}.xml').open('w', encoding='utf-8') as f:
                         f.write(r.text)
                 except OSError:
                     pass

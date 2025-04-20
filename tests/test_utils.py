@@ -1,13 +1,18 @@
-from pathlib import Path
-from typing import Any, cast
-from xml.etree.ElementTree import Element
+from __future__ import annotations
 
-from pytest_mock.plugin import MockerFixture
+from pathlib import Path
+from typing import TYPE_CHECKING, Any, cast
 
 from choco.client import ChocolateyClient
 from choco.config import read_all
 from choco.constants import DEFAULT_CONFIG
 from choco.utils import append_dir_to_zip_recursive, parse_int_tag
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
+    from xml.etree.ElementTree import Element  # noqa: S405
+
+    from pytest_mock.plugin import MockerFixture
 
 
 def test_client_keys_available() -> None:
@@ -39,24 +44,28 @@ def test_config_read_all_defaults(mocker: MockerFixture) -> None:
 class FakePath:
     def __init__(self, path: str | None = None) -> None:
         self.path = path
+        self.iterdir_called = False
 
     def is_dir(self) -> bool:
         return self.path == './a'
 
-    def __truediv__(self, x: Any) -> 'FakePath':
+    def __truediv__(self, x: Any) -> FakePath:
         return FakePath(f'{self.path}/{x}')
+
+    def iterdir(self) -> Iterator[Path]:
+        self.iterdir_called = True
+        yield from (Path(x) for x in ('a', 'b', 'c', 'xx.nupkg'))
 
 
 def test_append_dir_to_zip_recursive(mocker: MockerFixture) -> None:
-    listdir_mock = mocker.patch('choco.utils.listdir')
-    listdir_mock.return_value = ['a', 'b', 'c', 'xx.nupkg']
     fake_zip = mocker.Mock()
-    append_dir_to_zip_recursive(cast(Path, FakePath('.')), fake_zip)
-    assert listdir_mock.called
+    fake_path = FakePath('.')
+    append_dir_to_zip_recursive(cast('Path', fake_path), fake_zip)
+    assert fake_path.iterdir_called
 
 
 def test_parse_int_tag_bad_value() -> None:
     class FakeTag:
         text = '0zei3023jf'
 
-    assert parse_int_tag(cast(Element, FakeTag())) == 0
+    assert parse_int_tag(cast('Element', FakeTag())) == 0

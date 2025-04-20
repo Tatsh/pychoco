@@ -1,12 +1,18 @@
+from __future__ import annotations
+
+import logging
+
 import click
 
-from ..packaging import new_package
+from choco.packaging import new_package
 
 
 @click.command()
 @click.argument('name')
-def new(name: str) -> None:
+@click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
+def new(name: str, *, debug: bool = False) -> None:
     """Create a new package."""
+    logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
     try:
         new_package(name)
     except (FileExistsError, ValueError) as e:

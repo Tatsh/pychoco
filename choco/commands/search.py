@@ -1,12 +1,16 @@
-from datetime import datetime
-from typing import cast
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, cast
+import logging
 
 import click
 
-from ..client import ChocolateyClient
-from ..config import read_all
-from ..templates import ALL_VERSIONS_SEARCH_RESULT_TEMPLATE, SEARCH_RESULT_TEMPLATE
-from ..utils import setup_logging
+from choco.client import ChocolateyClient
+from choco.config import read_all
+from choco.templates import ALL_VERSIONS_SEARCH_RESULT_TEMPLATE, SEARCH_RESULT_TEMPLATE
+
+if TYPE_CHECKING:
+    from datetime import datetime
 
 __all__ = ('search',)
 
@@ -51,25 +55,12 @@ __all__ = ('search',)
 @click.option('-s', '--source', help='Source to search.', metavar='URL')
 @click.option('-u', '--user', help='User name.')
 @click.argument('terms')
-def search(
-    all_versions: bool,
-    by_id_only: bool,
-    by_tag_only: bool,
-    debug: bool,
-    exact: bool,
-    id_only: bool,
-    id_starts_with: bool,
-    include_prerelease: bool,
-    order_by_popularity: bool,
-    page: int | None,
-    page_size: bool,
-    password: str,
-    source: str,
-    terms: str,
-    user: str,
-) -> None:
+def search(page: int | None, password: str, source: str, terms: str, user: str, *,
+           all_versions: bool, by_id_only: bool, by_tag_only: bool, debug: bool, exact: bool,
+           id_only: bool, id_starts_with: bool, include_prerelease: bool, order_by_popularity: bool,
+           page_size: bool) -> None:
     """Search a source."""
-    setup_logging(debug)
+    logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
     config, api_keys = read_all()
     for result in ChocolateyClient(config, api_keys).search(
             terms,
@@ -88,21 +79,21 @@ def search(
         if id_only:
             click.echo(result['title'])
         elif all_versions:
-            substitutes = cast(dict[str, str | bool | None | datetime], result)
+            substitutes = cast('dict[str, str | bool | datetime | None]', result)
             substitutes.update(
                 cached_state='Downloads cached for licensed users' if result['is_cached'] else '',
                 state='[Approved]' if result['is_approved'] else '')
             click.echo(ALL_VERSIONS_SEARCH_RESULT_TEMPLATE.safe_substitute(**substitutes))
         else:
-            substitutes = cast(dict[str, str | bool | None | datetime], result)
+            substitutes = cast('dict[str, str | bool | datetime | None]', result)
             substitutes.update(
                 cached_state='Downloads cached for licensed users' if result['is_cached'] else '',
                 state='[Approved]' if result['is_approved'] else '',
                 tags=' '.join(result['tags']))
             substitutes['testing_status'] = f"{result['testing_status']}"
-            if result['testing_date']:
+            if result['testing_date'] and substitutes['testing_status']:
                 substitutes[
-                    'testing_status'] += f" on {result['testing_date']}"  # type: ignore[assignment,operator]  # noqa: E501
+                    'testing_status'] += f" on {result['testing_date']}"  # type: ignore[assignment,operator]
             for key, val in substitutes.items():
                 if val is None:
                     match key:

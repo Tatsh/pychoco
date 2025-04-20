@@ -1,8 +1,9 @@
 """Constants."""
-from pathlib import Path
+from __future__ import annotations
+
 from typing import Final
 
-from xdg.BaseDirectory import xdg_config_home
+import platformdirs
 
 from .typing import Config
 
@@ -29,71 +30,71 @@ FEED_NAMESPACES: Final[dict[str, str]] = {
 """Namespaces used in parsing package feeds.
 
 :meta hide-value:"""
-FEED_AUTHOR_TAG: Final[str] = 'author'
+FEED_AUTHOR_TAG = 'author'
 """Feed ``author`` tag.
 
 :meta hide-value:"""
-FEED_ENTRY_TAG: Final[str] = 'entry'
+FEED_ENTRY_TAG = 'entry'
 """Feed ``entry`` tag.
 
 :meta hide-value:"""
-FEED_ID_TAG: Final[str] = 'id'
+FEED_ID_TAG = 'id'
 """Feed ``id`` tag.
 
 :meta hide-value:"""
-FEED_PROPERTIES_TAG: Final[str] = 'm:properties'
+FEED_PROPERTIES_TAG = 'm:properties'
 """Feed ``m:properties`` tag.
 
 :meta hide-value:"""
-FEED_SUMMARY_TAG: Final[str] = 'summary'
+FEED_SUMMARY_TAG = 'summary'
 """Feed ``summary`` tag.
 
 :meta hide-value:"""
-FEED_TITLE_TAG: Final[str] = 'title'
+FEED_TITLE_TAG = 'title'
 """Feed ``title`` tag.
 
 :meta hide-value:"""
-FEED_UPDATED_TAG: Final[str] = 'updated'
+FEED_UPDATED_TAG = 'updated'
 """Feed ``updated`` tag.
 
 :meta hide-value:"""
-METADATA_DESCRIPTION_TAG: Final[str] = 'd:Description'
+METADATA_DESCRIPTION_TAG = 'd:Description'
 """Feed ``d:Description`` tag.
 
 :meta hide-value:"""
-METADATA_DOCS_URL_TAG: Final[str] = 'd:DocsUrl'
+METADATA_DOCS_URL_TAG = 'd:DocsUrl'
 """Feed ``d:DocsUrl`` tag.
 
 :meta hide-value:"""
-METADATA_DOWNLOAD_COUNT_TAG: Final[str] = 'd:DownloadCount'
+METADATA_DOWNLOAD_COUNT_TAG = 'd:DownloadCount'
 """Feed ``d:DownloadCount`` tag.
 
 :meta hide-value:"""
-METADATA_GALLERY_DETAILS_URL_TAG: Final[str] = 'd:GalleryDetailsUrl'
+METADATA_GALLERY_DETAILS_URL_TAG = 'd:GalleryDetailsUrl'
 """Feed ``d:GalleryDetailsUrl`` tag.
 
 :meta hide-value:"""
-METADATA_IS_APPROVED_TAG: Final[str] = 'd:IsApproved'
+METADATA_IS_APPROVED_TAG = 'd:IsApproved'
 """Feed ``d:IsApproved`` tag.
 
 :meta hide-value:"""
-METADATA_IS_DOWNLOAD_CACHE_AVAILABLE_TAG: Final[str] = 'd:IsDownloadCacheAvailable'
+METADATA_IS_DOWNLOAD_CACHE_AVAILABLE_TAG = 'd:IsDownloadCacheAvailable'
 """Feed ``d:IsDownloadCacheAvailable`` tag.
 
 :meta hide-value:"""
-METADATA_LICENSE_URL_TAG: Final[str] = 'd:LicenseUrl'
+METADATA_LICENSE_URL_TAG = 'd:LicenseUrl'
 """Feed ``d:LicenseUrl`` tag.
 
 :meta hide-value:"""
-METADATA_PACKAGE_APPROVED_DATE_TAG: Final[str] = 'd:PackageApprovedDate'
+METADATA_PACKAGE_APPROVED_DATE_TAG = 'd:PackageApprovedDate'
 """Feed ``d:PackageApprovedDate`` tag.
 
 :meta hide-value:"""
-METADATA_PACKAGE_SOURCE_URL_TAG: Final[str] = 'd:PackageSourceUrl'
+METADATA_PACKAGE_SOURCE_URL_TAG = 'd:PackageSourceUrl'
 """Feed ``d:PackageSourceUrl`` tag.
 
 :meta hide-value:"""
-METADATA_PACKAGE_STATUS_TAG: Final[str] = 'd:PackageStatus'
+METADATA_PACKAGE_STATUS_TAG = 'd:PackageStatus'
 """Feed ``d:PackageStatus`` tag.
 
 :meta hide-value:"""
@@ -101,61 +102,61 @@ METADATA_PACKAGE_TEST_RESULT_STATUS_DATE_TAG = 'd:PackageTestResultStatusDate'
 """Feed ``d:PackageTestResultStatusDate`` tag.
 
 :meta hide-value:"""
-METADATA_PACKAGE_TEST_RESULT_STATUS_TAG: Final[str] = 'd:PackageTestResultStatus'
+METADATA_PACKAGE_TEST_RESULT_STATUS_TAG = 'd:PackageTestResultStatus'
 """Feed ``d:PackageTestResultStatus`` tag.
 
 :meta hide-value:"""
-METADATA_PROJECT_URL_TAG: Final[str] = 'd:ProjectUrl'
+METADATA_PROJECT_URL_TAG = 'd:ProjectUrl'
 """Feed ``d:ProjectUrl`` tag.
 
 :meta hide-value:"""
-METADATA_PUBLISHED_TAG: Final[str] = 'd:Published'
+METADATA_PUBLISHED_TAG = 'd:Published'
 """Feed ``d:Published`` tag.
 
 :meta hide-value:"""
-METADATA_RELEASE_NOTES_TAG: Final[str] = 'd:ReleaseNotes'
+METADATA_RELEASE_NOTES_TAG = 'd:ReleaseNotes'
 """Feed ``d:ReleaseNotes`` tag.
 
 :meta hide-value:"""
-METADATA_SUMMARY_TAG: Final[str] = 'd:Summary'
+METADATA_SUMMARY_TAG = 'd:Summary'
 """Feed ``d:Summary`` tag.
 
 :meta hide-value:"""
-METADATA_TAGS_TAG: Final[str] = 'd:Tags'
+METADATA_TAGS_TAG = 'd:Tags'
 """Feed ``d:Tags`` tag.
 
 :meta hide-value:"""
-METADATA_VERSION_DOWNLOAD_COUNT_TAG: Final[str] = 'd:VersionDownloadCount'
+METADATA_VERSION_DOWNLOAD_COUNT_TAG = 'd:VersionDownloadCount'
 """Feed ``d:VersionDownloadCount`` tag.
 
 :meta hide-value:"""
-METADATA_VERSION_TAG: Final[str] = 'd:Version'
+METADATA_VERSION_TAG = 'd:Version'
 """Feed ``d:Version`` tag.
 
 :meta hide-value:"""
 
-NUSPEC_XSD_URI_PREFIX: Final[str] = '{http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd}'
-NUSPEC_FIELD_AUTHORS: Final[str] = f'{NUSPEC_XSD_URI_PREFIX}authors'
+NUSPEC_XSD_URI_PREFIX = '{http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd}'
+NUSPEC_FIELD_AUTHORS = f'{NUSPEC_XSD_URI_PREFIX}authors'
 """Nuspec authors tag.
 
 :meta hide-value:"""
-NUSPEC_FIELD_DESCRIPTION: Final[str] = f'{NUSPEC_XSD_URI_PREFIX}description'
+NUSPEC_FIELD_DESCRIPTION = f'{NUSPEC_XSD_URI_PREFIX}description'
 """Nuspec description tag.
 
 :meta hide-value:"""
-NUSPEC_FIELD_ID: Final[str] = f'{NUSPEC_XSD_URI_PREFIX}id'
+NUSPEC_FIELD_ID = f'{NUSPEC_XSD_URI_PREFIX}id'
 """Nuspec id tag.
 
 :meta hide-value:"""
-NUSPEC_FIELD_TAGS: Final[str] = f'{NUSPEC_XSD_URI_PREFIX}tags'
+NUSPEC_FIELD_TAGS = f'{NUSPEC_XSD_URI_PREFIX}tags'
 """Nuspec tags tag.
 
 :meta hide-value:"""
-NUSPEC_FIELD_VERSION: Final[str] = f'{NUSPEC_XSD_URI_PREFIX}version'
+NUSPEC_FIELD_VERSION = f'{NUSPEC_XSD_URI_PREFIX}version'
 """Nuspec version tag.
 
 :meta hide-value:"""
-CHOCOLATEY_UNINSTALL_PS1: Final[str] = '''$$ErrorActionPreference = 'Stop'
+CHOCOLATEY_UNINSTALL_PS1 = """$$ErrorActionPreference = 'Stop'
 [array]$$key = Get-UninstallRegistryKey -SoftwareName "PACKAGE_NAME"
 if ($$key.Count -eq 1) {
   $$key | ForEach-Object {
@@ -176,11 +177,11 @@ elseif ($$key.Count -gt 1) {
   Write-Warning "To prevent accidental data loss, no programs will be uninstalled."
   Write-Warning "Please alert package maintainer the following keys were matched:"
   $$key | ForEach-Object { Write-Warning "- $$($$_.DisplayName)" }
-}\n'''
+}\n"""
 """Uninstall PowerShell template.
 
 :meta hide-value:"""
-CONTENT_TYPES_XML: Final[str] = '''<?xml version="1.0" encoding="utf-8"?>
+CONTENT_TYPES_XML = """<?xml version="1.0" encoding="utf-8"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels"
     ContentType="application/vnd.openxmlformats-package.relationships+xml" />
@@ -188,31 +189,31 @@ CONTENT_TYPES_XML: Final[str] = '''<?xml version="1.0" encoding="utf-8"?>
     ContentType="application/vnd.openxmlformats-package.core-properties+xml" />
   <Default Extension="ps1" ContentType="application/octet" />
   <Default Extension="nuspec" ContentType="application/octet" />
-</Types>\n'''
+</Types>\n"""
 """Used in creating the ``[Content_Types].xml`` file.
 
 :meta hide-value:"""
-PYCHOCO_TOML_PATH: Final[Path] = Path(xdg_config_home) / 'pychoco/config.toml'
+PYCHOCO_TOML_PATH = platformdirs.user_config_path('pychoco') / 'config.toml'
 """Where pychoco's main configuration file is by default.
 
 :meta hide-value:"""
-PYCHOCO_API_KEYS_TOML_PATH: Final[Path] = Path(xdg_config_home) / 'pychoco/api.toml'
+PYCHOCO_API_KEYS_TOML_PATH = platformdirs.user_config_path('pychoco') / 'api.toml'
 """Where pychoco's API key list is stored.
 
 :meta hide-value:"""
-VALID_NAME_RE: Final[str] = r'^[0-9a-z-]+(\.(commandline|install|portable))?$'
+VALID_NAME_RE = r'^[0-9a-z-]+(\.(commandline|install|portable))?$'
 """Valid name for a package regular expression.
 
 :meta hide-value:"""
-NUGET_API_KEY_HTTP_HEADER: Final[str] = 'X-NuGet-ApiKey'
+NUGET_API_KEY_HTTP_HEADER = 'X-NuGet-ApiKey'
 """NuGet API key HTTP header.
 
 :meta hide-value:"""
-DEFAULT_PUSH_SOURCE: Final[str] = 'https://push.chocolatey.org'
+DEFAULT_PUSH_SOURCE = 'https://push.chocolatey.org'
 """Default push source URI.
 
 :meta hide-value:"""
-DEFAULT_CONFIG: Final[Config] = Config(pychoco={'defaultPushSource': DEFAULT_PUSH_SOURCE})
+DEFAULT_CONFIG = Config(pychoco={'defaultPushSource': DEFAULT_PUSH_SOURCE})
 """Default configuration.
 
 :meta hide-value:"""
