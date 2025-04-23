@@ -4,7 +4,7 @@
   keywords: ['command line', 'windows'],
   project_name: 'chocolatey-choco',
   github_project_name: 'pychoco',
-  version: '0.1.2',
+  version: '0.1.3',
   want_main: true,
   citation+: {
     'date-released': '2025-04-19',

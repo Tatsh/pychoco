@@ -7,7 +7,7 @@
 [![PyPI - Version](https://img.shields.io/pypi/v/chocolatey-choco)](https://pypi.org/project/chocolatey-choco/)
 [![GitHub tag (with filter)](https://img.shields.io/github/v/tag/Tatsh/pychoco)](https://github.com/Tatsh/pychoco/tags)
 [![License](https://img.shields.io/github/license/Tatsh/pychoco)](https://github.com/Tatsh/pychoco/blob/master/LICENSE.txt)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.2/master)](https://github.com/Tatsh/pychoco/compare/v0.1.2...master)
+[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.3/master)](https://github.com/Tatsh/pychoco/compare/v0.1.3...master)
 
 Minimal choco command for use on non-Windows platforms.
 
