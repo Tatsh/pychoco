@@ -3,6 +3,7 @@
   description: 'Minimal choco command for use on non-Windows platforms.',
   keywords: ['command line', 'windows'],
   project_name: 'chocolatey-choco',
+  github_project_name: 'pychoco',
   version: '0.1.2',
   want_main: true,
   citation+: {
@@ -11,7 +12,9 @@
   primary_module: 'choco',
   pyproject+: {
     project+: {
-      choco: 'choco.main:main',
+      scripts: {
+        choco: 'choco.main:main',
+      },
     },
     tool+: {
       poetry+: {

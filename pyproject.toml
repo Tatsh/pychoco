@@ -3,7 +3,6 @@ build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
 [project]
-choco = "choco.main:main"
 classifiers = [
   "Development Status :: 2 - Pre-Alpha",
   "Intended Audience :: Developers",
@@ -35,7 +34,7 @@ choco = "choco.main:main"
 
 [project.urls]
 Issues = "https://github.com/Tatsh/pychoco/issues"
-documentation = "https://chocolatey-choco.readthedocs.org"
+documentation = "https://pychoco.readthedocs.org"
 homepage = "https://tatsh.github.io/pychoco/"
 repository = "https://github.com/Tatsh/pychoco"
 
@@ -100,7 +99,7 @@ optional = true
 commitizen = "^4.5.0"
 djlint = "^1.36.4"
 mypy = ">=1.12,<1.16"
-ruff = "^0.11.5"
+ruff = "^0.11.6"
 types-defusedxml = "^0.7.0.20240218"
 types-python-dateutil = "^2.8.19.14"
 types-requests = "^2.31.0.20240106"

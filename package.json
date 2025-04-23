@@ -103,7 +103,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Tatsh/pychoco.git"
+    "url": "git@github.com:Tatsh/chocolatey-choco.git"
   },
   "scripts": {
     "check-formatting": "yarn prettier -c . && poetry run yapf -prd . && yarn markdownlint-cli2 '**/*.md' '#node_modules'",
