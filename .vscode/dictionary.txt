@@ -32,6 +32,7 @@ bluegriffon
 boomeranggmail
 browseraddonsview
 browsinghistoryview
+bsky
 burneremails
 burnermail
 centbrowser
