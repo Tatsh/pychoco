@@ -2651,14 +2651,14 @@ typing-extensions = ">=3.7.4.3"
 
 [[package]]
 name = "types-defusedxml"
-version = "0.7.0.20240218"
+version = "0.7.0.20250516"
 description = "Typing stubs for defusedxml"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 groups = ["dev"]
 files = [
-    {file = "types-defusedxml-0.7.0.20240218.tar.gz", hash = "sha256:05688a7724dc66ea74c4af5ca0efc554a150c329cb28c13a64902cab878d06ed"},
-    {file = "types_defusedxml-0.7.0.20240218-py3-none-any.whl", hash = "sha256:2b7f3c5ca14fdbe728fab0b846f5f7eb98c4bd4fd2b83d25f79e923caa790ced"},
+    {file = "types_defusedxml-0.7.0.20250516-py3-none-any.whl", hash = "sha256:00e793e5c385c3e142d7c2acc3b4ccea2fe0828cee11e35501f0ba40386630a0"},
+    {file = "types_defusedxml-0.7.0.20250516.tar.gz", hash = "sha256:164c2945077fa450f24ed09633f8b3a80694687fefbbc1cba5f24e4ba570666b"},
 ]
 
 [[package]]
@@ -2780,4 +2780,4 @@ erdantic = ["erdantic"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.14"
-content-hash = "7af1a7e726d461904a5e50a8a3beecb6f11c69b66af0887ccb18b06f5778ea72"
+content-hash = "be57bce9be1378f10b7401fa1c06b7adcd52ef4850ec965410ae88809d49d370"
