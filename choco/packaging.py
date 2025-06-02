@@ -82,6 +82,7 @@ def pack(work_dir: str = '.') -> zipfile.ZipFile:
     if len(nuspecs) > 1:
         raise TooManyNuspecFiles(work_dir)
     root = parse_xml(Path(work_dir) / nuspecs[0]).getroot()
+    assert root is not None
     package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
     version = tag_text_or(root.find(NUSPEC_FIELD_VERSION))
     sha = hashlib.sha1()  # noqa: S324
