@@ -44,7 +44,13 @@ class ChocolateyClient:
         self.session = requests.Session()
 
     def get_keys_available(self) -> Iterator[str]:
-        """Return an iterator of the sources that have keys."""
+        """
+        Return an iterator of the sources that have keys.
+
+        Yields
+        ------
+        str
+        """
         yield from self.api_keys.keys()
 
     def add_key(self, key: str, source: str) -> None:
@@ -101,7 +107,13 @@ class ChocolateyClient:
                page: int | None = None,
                page_size: bool = False,
                source: str | None = None) -> Iterator[SearchResult]:
-        """Search packages. Returns a deduplicated iterator of results."""
+        """
+        Search packages. Returns a deduplicated iterator of results.
+
+        Yields
+        ------
+        SearchResult
+        """
         self.update_api_key_header(source)
         ns = FEED_NAMESPACES
         api_v2 = self._get_api_v2(source)

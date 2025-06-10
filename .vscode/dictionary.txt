@@ -58,6 +58,7 @@ cinst
 cleanup
 codeowners
 color
+colorlog
 commitizen
 commondatastorage
 conftest
@@ -95,7 +96,6 @@ edgedeflector
 eeyore
 eloston
 engadget
-erdantic
 esbenp
 esbonio
 evernote
@@ -125,7 +125,6 @@ gizmodo
 glazman
 globaltoc
 goanna
-golem
 googlecast
 googlechrome
 gost
@@ -165,6 +164,7 @@ libtorrent
 lifehacker
 linka
 linkatopia
+linters
 localappdata
 ltsr
 lync
@@ -224,9 +224,11 @@ renren
 respondable
 resposibility
 ronnel
+rstcheck
 savard
 savely
 schemafile
+sdist
 secho
 segnalo
 setvisible
@@ -234,7 +236,6 @@ shareaholic
 sharethis
 shoutwire
 simpy
-slashdot
 sofer
 sonomy
 sphinxcontrib
@@ -255,7 +256,6 @@ tipd
 toctree
 tolower
 tomlkit
-trey
 tryfirst
 tunisiano
 twiddla
@@ -274,7 +274,6 @@ vkontakte
 wanelo
 webapps
 webbrowser
-webby
 webstore
 winapp
 winconfig

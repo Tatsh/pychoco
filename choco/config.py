@@ -38,6 +38,7 @@ def write_config(config: Config, path: Path | str | None = None) -> None:
 
 def read_all(config_path: Path | str | None = None,
              api_keys_path: Path | str | None = None) -> tuple[Config, dict[str, str] | None]:
+    """Read both configuration and API keys from the specified paths or defaults."""
     try:
         config = read_config(config_path)
     except FileNotFoundError:

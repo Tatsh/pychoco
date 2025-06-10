@@ -1,11 +1,11 @@
+"""Manage API keys for sources."""
 from __future__ import annotations
 
 import logging
 
-import click
-
 from choco.config import read_api_keys, write_api_keys
 from choco.constants import PYCHOCO_API_KEYS_TOML_PATH
+import click
 
 __all__ = ('apikey',)
 
@@ -19,7 +19,7 @@ __all__ = ('apikey',)
               metavar='PATH',
               type=click.Path(dir_okay=False, resolve_path=True))
 def list_(path: str | None, *, debug: bool = False) -> None:
-    """List sources associated with API keys. Does not display the API key values."""
+    """List sources associated with API keys. Does not display the API key values."""  # noqa: DOC501
     logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
     try:
         keys = read_api_keys(path)

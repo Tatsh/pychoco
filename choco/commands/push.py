@@ -1,14 +1,14 @@
+"""Push command."""
 from __future__ import annotations
 
 from pathlib import Path
 import logging
 
-from requests import HTTPError
-import click
-
 from choco.client import ChocolateyClient
 from choco.config import read_all
 from choco.constants import PYCHOCO_API_KEYS_TOML_PATH, PYCHOCO_TOML_PATH
+from requests import HTTPError
+import click
 
 
 @click.command()
@@ -31,7 +31,7 @@ def push(package: Path,
          api_keys_path: Path | None = None,
          *,
          debug: bool = False) -> None:
-    """Push a package to a source."""
+    """Push a package to a source."""  # noqa: DOC501
     logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
     config, api_keys = read_all(config_path, api_keys_path)
     try:

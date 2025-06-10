@@ -90,7 +90,14 @@ def tag_text_or(tag: Element | None, default: str | None = None) -> str | None:
 
 
 def entry_to_search_result(entry: Element, ns: dict[str, str] = FEED_NAMESPACES) -> SearchResult:
-    """Convert an ``<entry>`` to a ``SearchResult`` dict."""
+    """
+    Convert an ``<entry>`` to a ``SearchResult`` dict.
+
+    Raises
+    ------
+    InvalidEntryError
+        If the entry is invalid or does not contain the required metadata.
+    """
     metadata = entry.find(FEED_PROPERTIES_TAG, ns)
     if metadata is None:
         raise InvalidEntryError

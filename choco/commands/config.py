@@ -1,12 +1,12 @@
+"""Manage configuration."""
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
 import logging
 
-import click
-
 from choco.config import read_config, write_config
 from choco.constants import DEFAULT_CONFIG, PYCHOCO_TOML_PATH
+import click
 
 if TYPE_CHECKING:
     from choco.typing import ConfigKey

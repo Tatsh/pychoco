@@ -47,7 +47,16 @@ class InvalidPackageName(ValueError):
 
 
 def new_package(name: str) -> Path:
-    """Scaffolding to create a new package."""
+    """
+    Scaffolding to create a new package.
+
+    Raises
+    ------
+    InvalidPackageName
+        If the package name is invalid.
+    DirectoryExistsError
+        If a directory with the specified name already exists.
+    """
     if not is_valid_package_name(name):
         raise InvalidPackageName
     if Path(name).exists():
@@ -76,7 +85,16 @@ class TooManyNuspecFiles(RuntimeError):
 
 
 def pack(work_dir: str = '.') -> zipfile.ZipFile:
-    """Pack a package directory for distribution (create a nupkg)."""
+    """
+    Pack a package directory for distribution (create a nupkg).
+
+    Raises
+    ------
+    NoNuspecFilesFound
+        If nuspec files are not found in the specified directory.
+    TooManyNuspecFiles
+        If more than one nuspec file is found in the specified directory.
+    """
     if not (nuspecs := list(Path(work_dir).glob('*.nuspec'))):
         raise NoNuspecFilesFound
     if len(nuspecs) > 1:

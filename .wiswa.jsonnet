@@ -23,7 +23,7 @@
           defusedxml: '^0.7.1',
           platformdirs: '^4.3.7',
           'python-dateutil': '^2.9.0.post0',
-          requests: '2.32.3',
+          requests: '2.32.4',
           tomlkit: '^0.13.2',
         },
         group+: {
