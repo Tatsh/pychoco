@@ -89,7 +89,7 @@ python = ">=3.10,<3.14"
 python-dateutil = "^2.9.0.post0"
 requests = "2.32.4"
 tomlkit = "^0.13.3"
-typing-extensions = "^4.14.0"
+typing-extensions = "^4.14.1"
 
 [tool.poetry.group.dev]
 optional = true
@@ -97,11 +97,11 @@ optional = true
 [tool.poetry.group.dev.dependencies]
 commitizen = "^4.8.3"
 djlint = "^1.36.4"
-mypy = "^1.16.0"
-ruff = "^0.11.13"
-types-defusedxml = "^0.7.0.20250516"
-types-python-dateutil = "^2.9.0.20250516"
-types-requests = "^2.32.0.20250602"
+mypy = "^1.17.0"
+ruff = "^0.12.4"
+types-defusedxml = "^0.7.0.20250708"
+types-python-dateutil = "^2.9.0.20250708"
+types-requests = "^2.32.4.20250611"
 yapf = "^0.43.0"
 
 [tool.poetry.group.docs]
@@ -109,13 +109,13 @@ optional = true
 
 [tool.poetry.group.docs.dependencies]
 autodoc-pydantic = "^2.2.0"
-doc8 = "^1.1.2"
+doc8 = "^2.0.0"
 docutils = "^0.21.2"
 esbonio = "^0.16.5"
-numpydoc = "^1.8.0"
+numpydoc = "^1.9.0"
 restructuredtext-lint = "^1.4.0"
 sphinx-click = "^6.0.0"
-sphinx-datatables = "^0.2.1"
+sphinx-datatables = "^0.3.0"
 sphinx-hoverxref = "^1.4.2"
 sphinx-immaterial = "^0.13.5"
 
@@ -136,8 +136,8 @@ optional = true
 
 [tool.poetry.group.tests.dependencies]
 mock = "^5.2.0"
-pytest = "^8.4.0"
-pytest-cov = "^6.1.1"
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
 pytest-mock = "^3.14.1"
 requests-mock = "^1.12.1"
 
