@@ -40,7 +40,7 @@ class FakeRoot:
     class FakeTag:
         text: str
 
-    def find(self, tag_name: str) -> FakeTag:
+    def find(self, tag_name: str) -> FakeTag:  # noqa: PLR6301
         if tag_name == NUSPEC_FIELD_ID:
             return FakeRoot.FakeTag('okay-name')
         if tag_name == NUSPEC_FIELD_VERSION:

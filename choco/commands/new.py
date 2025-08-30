@@ -1,8 +1,7 @@
 """Create a new package."""
 from __future__ import annotations
 
-import logging
-
+from bascom import setup_logging
 from choco.packaging import new_package
 import click
 
@@ -12,7 +11,7 @@ import click
 @click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 def new(name: str, *, debug: bool = False) -> None:
     """Create a new package."""  # noqa: DOC501
-    logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
+    setup_logging(debug=debug, loggers={'choco': {'handlers': ('console',), 'propagate': False}})
     try:
         new_package(name)
     except (FileExistsError, ValueError) as e:

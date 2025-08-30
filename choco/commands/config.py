@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-import logging
 
+from bascom import setup_logging
 from choco.config import read_config, write_config
 from choco.constants import DEFAULT_CONFIG, PYCHOCO_TOML_PATH
 import click
@@ -31,7 +31,7 @@ __all__ = ('config',)
               type=click.Path(dir_okay=False, resolve_path=True))
 def set_(name: ConfigKey, value: str, path: str | None, *, debug: bool = False) -> None:
     """Set a configuration value."""
-    logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
+    setup_logging(debug=debug, loggers={'choco': {'handlers': ('console',), 'propagate': False}})
     try:
         config = read_config(path)
     except FileNotFoundError:

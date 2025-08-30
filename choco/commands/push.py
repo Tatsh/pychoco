@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 from pathlib import Path
-import logging
 
+from bascom import setup_logging
 from choco.client import ChocolateyClient
 from choco.config import read_all
 from choco.constants import PYCHOCO_API_KEYS_TOML_PATH, PYCHOCO_TOML_PATH
@@ -32,7 +32,17 @@ def push(package: Path,
          *,
          debug: bool = False) -> None:
     """Push a package to a source."""  # noqa: DOC501
-    logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
+    setup_logging(debug=debug,
+                  loggers={
+                      'choco': {
+                          'handlers': ('console',),
+                          'propagate': False
+                      },
+                      'urllib3': {
+                          'handlers': ('console',),
+                          'propagate': False
+                      }
+                  })
     config, api_keys = read_all(config_path, api_keys_path)
     try:
         ChocolateyClient(config, api_keys).push(package, source)

@@ -10,6 +10,9 @@
     'date-released': '2025-04-19',
   },
   primary_module: 'choco',
+  copilot: {
+    intro: 'Choco is a minimal command line interface for Chocolatey, the Windows package manager, designed to work on non-Windows platforms.',
+  },
   pyproject+: {
     project+: {
       scripts: {
@@ -19,7 +22,6 @@
     tool+: {
       poetry+: {
         dependencies+: {
-          click: '^8.1.8',
           defusedxml: '^0.7.1',
           platformdirs: '^4.3.7',
           'python-dateutil': '^2.9.0.post0',

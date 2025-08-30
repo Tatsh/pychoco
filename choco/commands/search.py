@@ -2,8 +2,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, cast
-import logging
 
+from bascom import setup_logging
 from choco.client import ChocolateyClient
 from choco.config import read_all
 from choco.templates import ALL_VERSIONS_SEARCH_RESULT_TEMPLATE, SEARCH_RESULT_TEMPLATE
@@ -60,7 +60,17 @@ def search(page: int | None, password: str, source: str, terms: str, user: str, 
            id_only: bool, id_starts_with: bool, include_prerelease: bool, order_by_popularity: bool,
            page_size: bool) -> None:
     """Search a source."""
-    logging.basicConfig(level=logging.DEBUG if debug else logging.ERROR)
+    setup_logging(debug=debug,
+                  loggers={
+                      'choco': {
+                          'handlers': ('console',),
+                          'propagate': False
+                      },
+                      'urllib3': {
+                          'handlers': ('console',),
+                          'propagate': False
+                      }
+                  })
     config, api_keys = read_all()
     for result in ChocolateyClient(config, api_keys).search(
             terms,
