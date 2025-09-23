@@ -56,7 +56,6 @@ chrometana
 chrono
 chronodownloader
 cinst
-cleanup
 codeowners
 color
 commitizen
@@ -217,6 +216,7 @@ pydantic
 pydocstyle
 pylance
 pylint
+pypi
 pyproject
 pyright
 pytest

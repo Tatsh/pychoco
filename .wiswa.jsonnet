@@ -1,16 +1,15 @@
-(import 'defaults.libjsonnet') + {
-  // Project-specific
+local utils = import 'utils.libjsonnet';
+
+{
   description: 'Minimal choco command for use on non-Windows platforms.',
   keywords: ['command line', 'windows'],
   project_name: 'chocolatey-choco',
   github_project_name: 'pychoco',
   version: '0.1.3',
   want_main: true,
-  citation+: {
-    'date-released': '2025-04-19',
-  },
   primary_module: 'choco',
-  copilot: {
+  security_policy_supported_versions: { '0.1.x': ':white_check_mark:' },
+  copilot+: {
     intro: 'Choco is a minimal command line interface for Chocolatey, the Windows package manager, designed to work on non-Windows platforms.',
   },
   pyproject+: {
@@ -22,45 +21,27 @@
     tool+: {
       poetry+: {
         dependencies+: {
-          defusedxml: '^0.7.1',
-          platformdirs: '^4.3.7',
-          'python-dateutil': '^2.9.0.post0',
-          requests: '2.32.4',
-          tomlkit: '^0.13.2',
+          defusedxml: utils.latestPypiPackageVersionCaret('defusedxml'),
+          platformdirs: utils.latestPypiPackageVersionCaret('platformdirs'),
+          'python-dateutil': utils.latestPypiPackageVersionCaret('python-dateutil'),
+          requests: utils.latestPypiPackageVersionCaret('requests'),
+          tomlkit: utils.latestPypiPackageVersionCaret('tomlkit'),
         },
         group+: {
           dev+: {
             dependencies+: {
-              'types-defusedxml': '^0.7.0.20240218',
-              'types-python-dateutil': '^2.8.19.14',
-              'types-requests': '^2.31.0.20240106',
+              'types-defusedxml': utils.latestPypiPackageVersionCaret('types-defusedxml'),
+              'types-python-dateutil': utils.latestPypiPackageVersionCaret('types-python-dateutil'),
+              'types-requests': utils.latestPypiPackageVersionCaret('types-requests'),
             },
           },
           tests+: {
             dependencies+: {
-              'requests-mock': '^1.11.0',
+              'requests-mock': utils.latestPypiPackageVersionCaret('requests-mock'),
             },
           },
         },
       },
-    },
-  },
-  // Common
-  authors: [
-    {
-      'family-names': 'Udvare',
-      'given-names': 'Andrew',
-      email: 'audvare@gmail.com',
-      name: '%s %s' % [self['given-names'], self['family-names']],
-    },
-  ],
-  local funding_name = '%s2' % std.asciiLower(self.github_username),
-  github_username: 'Tatsh',
-  github+: {
-    funding+: {
-      ko_fi: funding_name,
-      liberapay: funding_name,
-      patreon: funding_name,
     },
   },
 }
