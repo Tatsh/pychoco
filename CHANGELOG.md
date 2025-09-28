@@ -11,8 +11,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-- Windows: Store preferences in Roaming directory.
 - Do not prepend the application name directory for the configuration directory.
+- Windows: Store preferences in Roaming directory.
 
 ### Fixed
 

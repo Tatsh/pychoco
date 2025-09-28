@@ -16,6 +16,9 @@ anymore
 anyvideoconverter
 apikey
 appauthor
+appdir
+appimage
+appinfo
 appletv
 appstore
 arto
@@ -117,11 +120,7 @@ feedly
 feednotifier
 ferventcoder
 ffsclient
-fileflags
-fileos
-filesubtype
 filevers
-fileversion
 flcdrg
 fogleman
 folkd
@@ -139,7 +138,6 @@ gost
 gowdy
 gsudo
 hatena
-haximus
 hemidemi
 henrypp
 hoverxref
@@ -168,6 +166,7 @@ keepasshttp
 khabbr
 kiplinger's
 kledy
+launchable
 lextudio
 libjsonnet
 libtorrent
@@ -209,7 +208,6 @@ oneview
 openxmlformats
 packagename
 palant
-pathlib
 pauby
 pecxstudios
 philps
@@ -218,7 +216,6 @@ platformdirs
 pogue
 popups
 preinstaller
-productversion
 prodvers
 psmdcp
 pycache
@@ -290,7 +287,6 @@ vaultwarden
 vcredist
 vers
 versionhistory
-versioninfo
 viadeo
 virtualenv
 vkontakte
@@ -301,10 +297,8 @@ webstore
 winapp
 winconfig
 windos
-winget
 wiswa
 wladimir
-wyri
 yapf
 yapfignore
 yummly
