@@ -3,10 +3,6 @@ jobs:
     runs-on: 'windows-latest'
     steps:
       - uses: 'actions/checkout@v5'
-      # - name: 'Set up Python'
-      #   run: |
-      #     winget install --accept-package-agreements --accept-source-agreements --disable-interactivity --id Python.Python.3.13 --exact --silent --source winget
-      #     pipx install yq
       - name: 'Install Poetry'
         run: 'pipx install poetry yq'
       - name: 'Set up Python'
@@ -14,9 +10,6 @@ jobs:
         with:
           cache: 'poetry'
           python-version: '3.13'
-      # - name: 'Install Poetry'
-      #   run: curl -sSL https://install.python-poetry.org | python -
-      #   shell: bash
       - name: 'Install dependencies (Poetry)'
         run: |
           poetry install
