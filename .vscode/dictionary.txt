@@ -15,6 +15,7 @@ antp
 anymore
 anyvideoconverter
 apikey
+appauthor
 appletv
 appstore
 arto

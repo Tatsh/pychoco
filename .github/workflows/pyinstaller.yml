@@ -3,17 +3,24 @@ jobs:
     runs-on: 'windows-latest'
     steps:
       - uses: 'actions/checkout@v5'
-      - name: 'Set up Python'
-        run: |
-          winget install --accept-package-agreements --accept-source-agreements --disable-interactivity --id Python.Python.3.13 --exact --silent --source winget
-          pipx install yq
+      # - name: 'Set up Python'
+      #   run: |
+      #     winget install --accept-package-agreements --accept-source-agreements --disable-interactivity --id Python.Python.3.13 --exact --silent --source winget
+      #     pipx install yq
       - name: 'Install Poetry'
-        run: curl -sSL https://install.python-poetry.org | python -
-        shell: bash
+        run: 'pipx install poetry yq'
+      - name: 'Set up Python'
+        uses: 'actions/setup-python@v6'
+        with:
+          cache: 'poetry'
+          python-version: '3.13'
+      # - name: 'Install Poetry'
+      #   run: curl -sSL https://install.python-poetry.org | python -
+      #   shell: bash
       - name: 'Install dependencies (Poetry)'
         run: |
-          "${APPDATA}/Python/Scripts/poetry" install
-          "${APPDATA}/Python/Scripts/poetry" run pip install pyinstaller yq
+          poetry install
+          poetry run -- pip install pyinstaller
         shell: 'bash'
       - name: 'Build with PyInstaller'
         run: |
@@ -31,14 +38,14 @@ jobs:
             cat temp_script.py
             cat > version-info.txt <<EOF
           VSVersionInfo(
-              ffi=FixedFileInfo(filevers=(${vers}),
-                                prodvers=(${vers}),
-                                mask=0x3f,
-                                flags=0x0,
+              ffi=FixedFileInfo(date=(0, 0),
+                                filevers=(${vers}),
                                 OS=0x4,
                                 fileType=0x1,
-                                subtype=0x0,
-                                date=(0, 0)),
+                                flags=0x0,
+                                mask=0x3f,
+                                prodvers=(${vers}),
+                                subtype=0x0),
               kids=[
                   StringFileInfo([
                       StringTable(u'040904B0', [
@@ -59,7 +66,7 @@ jobs:
               ])
           EOF
             cat version-info.txt
-            "${APPDATA}/Python/Scripts/poetry" run pyinstaller --onefile -n "${script_name}" \
+            poetry run -- pyinstaller --onefile -n "${script_name}" \
               --hidden-import colorlog -y --version-file version-info.txt temp_script.py
             cat "${script_name}.spec"
           done < <(tomlq -r '.project.scripts|to_entries[]|"\(.key) \(.value|split(":")|join(" "))"' pyproject.toml)
