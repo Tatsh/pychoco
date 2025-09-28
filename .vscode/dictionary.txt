@@ -58,6 +58,7 @@ chronodownloader
 cinst
 codeowners
 color
+colorlog
 commitizen
 commondatastorage
 conftest
@@ -115,6 +116,11 @@ feedly
 feednotifier
 ferventcoder
 ffsclient
+fileflags
+fileos
+filesubtype
+filevers
+fileversion
 flcdrg
 fogleman
 folkd
@@ -132,6 +138,7 @@ gost
 gowdy
 gsudo
 hatena
+haximus
 hemidemi
 henrypp
 hoverxref
@@ -196,10 +203,12 @@ numpy
 numpydoc
 nuspecs
 oknotizie
+onefile
 oneview
 openxmlformats
 packagename
 palant
+pathlib
 pauby
 pecxstudios
 philps
@@ -208,12 +217,15 @@ platformdirs
 pogue
 popups
 preinstaller
+productversion
+prodvers
 psmdcp
 pycache
 pychoco
 pychoco's
 pydantic
 pydocstyle
+pyinstaller
 pylance
 pylint
 pypi
@@ -242,6 +254,7 @@ sharethis
 shoutwire
 simpy
 sofer
+softprops
 sonomy
 sphinxcontrib
 squidoo
@@ -261,6 +274,8 @@ tipd
 toctree
 tolower
 tomlkit
+tomlq
+tonumber
 tryfirst
 tunisiano
 twiddla
@@ -272,7 +287,9 @@ upadated
 varrot
 vaultwarden
 vcredist
+vers
 versionhistory
+versioninfo
 viadeo
 virtualenv
 vkontakte
@@ -283,8 +300,10 @@ webstore
 winapp
 winconfig
 windos
+winget
 wiswa
 wladimir
+wyri
 yapf
 yapfignore
 yummly
