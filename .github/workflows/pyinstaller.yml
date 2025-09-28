@@ -1,6 +1,6 @@
 jobs:
-  build:
-    runs-on: 'windows-latest'
+  build-windows:
+    runs-on: ${{matrix.os}}
     steps:
       - uses: 'actions/checkout@v5'
       - name: 'Install Poetry'
@@ -28,7 +28,9 @@ jobs:
           if __name__ == '__main__':
               ${func_name}()
           EOF
+          if [[ "${ACTIONS_RUNNER_DEBUG}" == 'true' ]]; then
             cat temp_script.py
+          fi
             cat > version-info.txt <<EOF
           VSVersionInfo(
               ffi=FixedFileInfo(date=(0, 0),
@@ -58,18 +60,55 @@ jobs:
                   VarFileInfo([VarStruct(u'Translation', [0x409, 1200, 0x809, 1252])])
               ])
           EOF
-            cat version-info.txt
-            poetry run -- pyinstaller --onefile -n "${script_name}" \
+            if [[ "${ACTIONS_RUNNER_DEBUG}" == 'true' ]]; then
+              cat version-info.txt
+            fi
+            poetry run -- pyinstaller --onefile -n "${script_name}" --optimize 1 \
               --hidden-import colorlog -y --version-file version-info.txt temp_script.py
-            cat "${script_name}.spec"
+            if [[ "${ACTIONS_RUNNER_DEBUG}" == 'true' ]]; then
+              cat "${script_name}.spec"
+            fi
           done < <(tomlq -r '.project.scripts|to_entries[]|"\(.key) \(.value|split(":")|join(" "))"' pyproject.toml)
         shell: 'bash'
-      - name: 'Upload Artifacts'
+      - if: matrix.os == 'windows-latest'
+        name: 'Test binary'
+        run: |
+          $distFiles = Get-ChildItem -Path dist\*.exe
+          Write-Host "Found $($distFiles.Count) files in dist/: $(( $distFiles | ForEach-Object { $_.Name } ) -join ', ')"
+          foreach ($file in $distFiles) {
+            Write-Host "Testing $($file.FullName)"
+            & $file.FullName --help
+          }
+      - if: matrix.os == 'macos-latest'
+        name: 'Test binary'
+        run: |
+          distFiles=(dist/*)
+          echo "Found ${#distFiles[@]} files in dist/: ${distFiles[*]##*/}"
+          for file in "${distFiles[@]}"; do
+            echo "Testing $file"
+            "$file" --help
+          done
+      - if: matrix.os == 'windows-latest'
+        name: 'Upload Artifacts'
         uses: 'actions/upload-artifact@v4'
         with:
-          name: 'pyinstaller-binaries'
+          if-no-files-found: error
+          name: 'pyinstaller-binaries-win'
           path: |
             dist/*.exe
+      - if: matrix.os == 'macos-latest'
+        name: 'Upload Artifacts'
+        uses: 'actions/upload-artifact@v4'
+        with:
+          if-no-files-found: error
+          name: 'pyinstaller-binaries-mac'
+          path: |
+            dist/*
+    strategy:
+      matrix:
+        include:
+          - os: 'macos-latest'
+          - os: 'windows-latest'
 name: 'PyInstaller'
 'on':
   pull_request:
