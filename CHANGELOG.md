@@ -9,6 +9,21 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [unreleased]
 
+### Changed
+
+- Windows: Store preferences in Roaming directory.
+- Do not prepend the application name directory for the configuration directory.
+
+### Fixed
+
+- Ensure the configuration directory is created as necessary.
+
+## [0.1.3]
+
+### Fixed
+
+- URIs in metadata.
+
 ## [0.1.2]
 
 ### Changed
@@ -22,12 +37,13 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Implement `search` subcommand
+- `search` subcommand.
 
 ### Changed
 
-- Upgrade dependencies
+- Upgraded dependencies.
 
 [unreleased]: https://github.com/Tatsh/pychoco/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/Tatsh/pychoco/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Tatsh/pychoco/compare/v0.1.1...v0.1.2
 [0.1.0]: https://github.com/Tatsh/pychoco/compare/v0.0.3...v0.1.0
