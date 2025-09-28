@@ -193,13 +193,13 @@ CONTENT_TYPES_XML = """<?xml version="1.0" encoding="utf-8"?>
 """Used in creating the ``[Content_Types].xml`` file.
 
 :meta hide-value:"""
-PYCHOCO_TOML_PATH = platformdirs.user_config_path('pychoco', appauthor=False,
-                                                  ensure_exists=True) / 'config.toml'
+PYCHOCO_TOML_PATH = platformdirs.user_config_path(
+    'pychoco', appauthor=False, ensure_exists=True, roaming=True) / 'config.toml'
 """Where pychoco's main configuration file is by default.
 
 :meta hide-value:"""
 PYCHOCO_API_KEYS_TOML_PATH = platformdirs.user_config_path(
-    'pychoco', appauthor=False, ensure_exists=True) / 'api.toml'
+    'pychoco', appauthor=False, ensure_exists=True, roaming=True) / 'api.toml'
 """Where pychoco's API key list is stored.
 
 :meta hide-value:"""
