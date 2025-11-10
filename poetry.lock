@@ -194,7 +194,7 @@ version = "0.0.3"
 description = "Core library that my tools use."
 optional = false
 python-versions = "<4.0,>=3.10"
-groups = ["main", "dev"]
+groups = ["main"]
 files = [
     {file = "bascom-0.0.3-py3-none-any.whl", hash = "sha256:b458f8bb1c2af8f723e521c94f7683061ab71bd59c4c30b4dc3cb3d6f6410760"},
     {file = "bascom-0.0.3.tar.gz", hash = "sha256:5d5965ee57bdb06b8b6cd5e2b4d71cf69b37db20eb4fe13f9e2d510d048cffc2"},
@@ -445,7 +445,7 @@ version = "6.10.1"
 description = "Add colours to the output of Python's logging module."
 optional = false
 python-versions = ">=3.6"
-groups = ["main", "dev"]
+groups = ["main"]
 files = [
     {file = "colorlog-6.10.1-py3-none-any.whl", hash = "sha256:2d7e8348291948af66122cff006c9f8da6255d224e7cf8e37d8de2df3bad8c9c"},
     {file = "colorlog-6.10.1.tar.gz", hash = "sha256:eb4ae5cb65fe7fec7773c2306061a8e63e02efc2c72eba9d27b0fa23c94f1321"},
@@ -651,19 +651,18 @@ test = ["cssselect", "importlib-resources ; python_version < \"3.9\"", "jaraco.t
 
 [[package]]
 name = "cz-path"
-version = "0.0.2"
+version = "0.0.4"
 description = "Commitizen plugin that prefixes commit messages with the common path or prefix of staged files."
 optional = false
 python-versions = "<4.0,>=3.10"
 groups = ["dev"]
 files = [
-    {file = "cz_path-0.0.2-py3-none-any.whl", hash = "sha256:eeabf8514f546dddf5aeb3799c53e60352ee0ae822ba0fb973bfdf43efec82d7"},
-    {file = "cz_path-0.0.2.tar.gz", hash = "sha256:d23c8c197f99f4b6ae19febcdb759815e6093669318bc10424a1d3b89190599e"},
+    {file = "cz_path-0.0.4-py3-none-any.whl", hash = "sha256:804cead9f91c6983e05340b3a4661f8a3f6fea591d015455483492e7b90f7b5a"},
+    {file = "cz_path-0.0.4.tar.gz", hash = "sha256:d40c1d571def8c03324776212bb274022b3ee42cbfe0a804d6a5bbaaae340414"},
 ]
 
 [package.dependencies]
-bascom = ">=0.0.3,<0.0.4"
-commitizen = ">=4.9.1,<5.0.0"
+commitizen = ">=4.10.0,<5.0.0"
 gitpython = ">=3.1.45,<4.0.0"
 typing-extensions = ">=4.15.0,<5.0.0"
 
@@ -3133,4 +3132,4 @@ tomli = {version = ">=2.0.1", markers = "python_version < \"3.11\""}
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4.0"
-content-hash = "f380aa1fec11084eeb607995520e5bcd5fea9b5a86ba668f0fb45689896f63ee"
+content-hash = "6572a0a3ce83a609da8a955caf264519dc10098955a698a10c28171cb3600f71"
