@@ -44,4 +44,10 @@ local utils = import 'utils.libjsonnet';
       },
     },
   },
+  package_json+: {
+    cspell+: {
+      ignorePaths+: ['tests/feeds/*.xml'],
+    },
+  },
+  prettierignore+: ['tests/feeds/logparser-search-error.xml'],
 }
