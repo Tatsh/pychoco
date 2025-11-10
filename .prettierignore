@@ -28,3 +28,4 @@ cobertura.xml
 htmlcov/
 mypy-report.xml
 node_modules/
+tests/feeds/logparser-search-error.xml

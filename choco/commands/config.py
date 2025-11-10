@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 __all__ = ('config',)
 
 
-@click.command('set')
+@click.command('set', context_settings={'help_option_names': ('-h', '--help')})
 @click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 @click.option('-n',
               '--name',

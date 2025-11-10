@@ -23,7 +23,8 @@
       ".yarn/**/*.cjs",
       ".vscode/extensions.json",
       "dist/**",
-      "man/**"
+      "man/**",
+      "tests/feeds/*.xml"
     ],
     "language": "en-GB",
     "languageSettings": [

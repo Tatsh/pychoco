@@ -174,7 +174,9 @@ lifehacker
 linka
 linkatopia
 linters
+lizardgui
 localappdata
+logparser
 ltsr
 lync
 mashable
@@ -250,6 +252,7 @@ sharethis
 shellformat
 shoutwire
 simpy
+skiptoken
 sofer
 softprops
 sonomy
@@ -265,6 +268,7 @@ techlicious
 technorati
 technotizie
 testpaths
+testpkg
 timesheet
 timesheets
 tipd

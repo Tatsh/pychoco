@@ -1,8 +1,6 @@
 """Constants."""
 from __future__ import annotations
 
-from typing import Final
-
 import platformdirs
 
 from .typing import Config
@@ -19,10 +17,10 @@ __all__ = ('CHOCOLATEY_UNINSTALL_PS1', 'CONTENT_TYPES_XML', 'FEED_AUTHOR_TAG', '
            'METADATA_PUBLISHED_TAG', 'METADATA_RELEASE_NOTES_TAG', 'METADATA_SUMMARY_TAG',
            'METADATA_TAGS_TAG', 'METADATA_VERSION_DOWNLOAD_COUNT_TAG', 'METADATA_VERSION_TAG',
            'NUSPEC_FIELD_AUTHORS', 'NUSPEC_FIELD_DESCRIPTION', 'NUSPEC_FIELD_ID',
-           'NUSPEC_FIELD_TAGS', 'NUSPEC_FIELD_VERSION', 'PYCHOCO_API_KEYS_TOML_PATH',
-           'PYCHOCO_TOML_PATH', 'VALID_NAME_RE')
+           'NUSPEC_FIELD_TAGS', 'NUSPEC_FIELD_VERSION', 'OBJECT_REF_NOT_SET_ERROR_MESSAGE',
+           'PYCHOCO_API_KEYS_TOML_PATH', 'PYCHOCO_TOML_PATH', 'VALID_NAME_RE')
 
-FEED_NAMESPACES: Final[dict[str, str]] = {
+FEED_NAMESPACES = {
     '': 'http://www.w3.org/2005/Atom',
     'd': 'http://schemas.microsoft.com/ado/2007/08/dataservices',
     'm': 'http://schemas.microsoft.com/ado/2007/08/dataservices/metadata'
@@ -219,3 +217,10 @@ DEFAULT_CONFIG = Config(pychoco={'defaultPushSource': DEFAULT_PUSH_SOURCE})
 """Default configuration.
 
 :meta hide-value:"""
+OBJECT_REF_NOT_SET_ERROR_MESSAGE = ('xml:lang="en-US">Object reference not set to an instance of '
+                                    'an object')
+"""
+Error message for object reference not set as seen from chocolatey.org when using the search API.
+
+:meta hide-value:
+"""

@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<feed xml:base="http://community.chocolatey.org/api/v2/"
+  xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+  xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+  xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">Search</title>
+  <id>http://community.chocolatey.org/api/v2/Search</id>
+  <updated>2025-11-10T18:51:39Z</updated>
+  <link rel="self" title="Search" href="Search" />
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='logparser.lizardgui',Version='6.8')</id>
+    <title type="text">logparser.lizardgui</title>
+    <summary type="text">View and analyze your Log Files</summary>
+    <updated>2025-10-22T03:49:55Z</updated>
+    <author>
+      <name>Lizard Labs</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='logparser.lizardgui',Version='6.8')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='logparser.lizardgui',Version='6.8')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/logparser.lizardgui/6.8" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>6.8</d:Version>
+      <d:Title>LogParser.LizardGui</d:Title>
+      <d:Description>Log Parser Lizard is the best GUI for MS Logparser. Log Parser is a very powerful and versatile query software tool that provides universal query access (using SQL) to text-based data, such as log files, XML files, and CSV files, as well as key data sources on the Microsoft Windows operating system, such as the event log, IIS log, the registry, the file system and the Active Directory services.
+ Because the command-line interface is not very intuitive, we have created Log Parser Lizard, a FREE GUI tool for managing queries and exporting results to Excel and charts. In addition, we have added input filters for RegEx and log4net input log formats (with support for regular expressions) and SQL server T-SQL queries. There are some helpful examples included in the installation package to help you start using Log Parser Lizard  as your query software,web log analyzer and system log analyzer.</d:Description>
+      <d:Tags>logparser gui log parser eventlog registry ad wmi syslog logparser.lizardgui</d:Tags>
+      <d:Copyright></d:Copyright>
+      <d:Created m:type="Edm.DateTime">2018-12-23T10:33:29.843</d:Created>
+      <d:Dependencies>logparser::</d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">12892</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">2315</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/logparser.lizardgui/6.8</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/logparser.lizardgui/6.8</d:ReportAbuseUrl>
+      <d:IconUrl>https://raw.github.com/jivkok/Chocolatey-Packages/master/LogParser.LizardGui/logparser.lizardgui.png</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2018-12-23T10:33:29.843</d:Published>
+      <d:LicenseUrl>http://www.lizard-labs.net/log_parser_lizard.aspx</d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>Db7TWwXxOBcBLvOfS9xy9UKLaI5JZUwSoJmHy05XygHnODSW+5DnylP32ny8DCVyLOSa1K1ZSXeylB49vmepxA==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">67339</d:PackageSize>
+      <d:ProjectUrl>http://www.lizard-labs.net/log_parser_lizard.aspx</d:ProjectUrl>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl></d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Ready</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/choco-bot/fa554675cd37999b29e704f0e9d73efa</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Failing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2025-10-22T03:58:25.397</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2018-12-23T11:07:08.443</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2020-05-18T13:14:28.737</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2020-05-18T13:14:28.737</d:PackageApprovedDate>
+      <d:PackageReviewer></d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">true</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Available</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2018-12-23T12:35:24.507</d:DownloadCacheDate>
+      <d:DownloadCache>http://www.lizard-labs.net/Download.aspx?fname=LogParserLizardSetup.msi^x86/LogParserLizardSetup.msi^434DF27553DDF7EFC7358846B2A4B7711F1E06E7EC282093A5A3E77C86F40D08F7666DAC136D4B51205F4AA798367CB5B945D20F65C1509CD5BA8B223D96F48D</d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2018-12-23T11:17:06.123</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='exceptionless',Version='3.2.2128.2')</id>
+    <title type="text">exceptionless</title>
+    <summary type="text">Self hosted installer for exceptionless.</summary>
+    <updated>2025-09-23T11:35:03Z</updated>
+    <author>
+      <name>Exceptionless</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='exceptionless',Version='3.2.2128.2')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='exceptionless',Version='3.2.2128.2')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/exceptionless/3.2.2128.2" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>3.2.2128.2</d:Version>
+      <d:Title>Exceptionless self-host</d:Title>
+      <d:Description>Installs Exceptionless, including ElasticSearch, JDK8 and .NET 4.6. You will need to install IIS first and restart once the package install is complete.
+
+### Parameters
+
+Note: **All argument values should be wrapped in a single quote if they contain anything except numbers/letters.**
+
+- websitePort - The website port to use, default is 80.
+- websiteDomain - The domain that the site binds to, default is "localhost". Do not include "http://".
+
+Example:
+
+    choco install Exceptionless -packageParameters "/websitePort:82 /websiteDomain:'www.example.com'"</d:Description>
+      <d:Tags>exceptionless admin nlog log4net</d:Tags>
+      <d:Copyright></d:Copyright>
+      <d:Created m:type="Edm.DateTime">2016-03-07T14:41:48.337</d:Created>
+      <d:Dependencies>powershell::|dotnet4.6::|jdk8::|exceptionless-elasticsearch:[1.7.5]:</d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">2908</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">996</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/exceptionless/3.2.2128.2</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/exceptionless/3.2.2128.2</d:ReportAbuseUrl>
+      <d:IconUrl>https://cdn.rawgit.com/exceptionless/MediaKit/master/icon75x75.png</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2016-03-07T14:41:48.337</d:Published>
+      <d:LicenseUrl>https://cdn.rawgit.com/exceptionless/Exceptionless/master/LICENSE.txt</d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>OBLWrDTCiivH/x56KVaqegMKLjdK92HkkAnotkUBntgmbKAPagnIzAL4ADDyA6bU9aYpg0YuDuq9k4m3n9JzoQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">6883</d:PackageSize>
+      <d:ProjectUrl>https://github.com/exceptionless/Exceptionless/wiki/Self-Hosting</d:ProjectUrl>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/yetanotherchris/choco-exceptionless</d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl></d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Exempted</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime" m:null="true"></d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2016-03-07T15:16:52.37</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2016-03-07T23:16:08.637</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2016-03-07T23:16:08.637</d:PackageApprovedDate>
+      <d:PackageReviewer>ferventcoder</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">false</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Investigate</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime" m:null="true"></d:DownloadCacheDate>
+      <d:DownloadCache></d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2016-03-10T01:17:57.467</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='log2console',Version='1.6.0.220190214')</id>
+    <title type="text">log2console</title>
+    <summary type="text">Log2Console - A Generic Log Viewer for Log4Net, NLog etc</summary>
+    <updated>2025-10-20T10:04:57Z</updated>
+    <author>
+      <name>Statyk7 calhuskerfan DarrelMiller leetbmc LexLavnikov michalsteyn Rudy_Wahl vertigo00oo Yakoo</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='log2console',Version='1.6.0.220190214')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='log2console',Version='1.6.0.220190214')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/log2console/1.6.0.220190214" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>1.6.0.220190214</d:Version>
+      <d:Title>log2console</d:Title>
+      <d:Description>Log2Console is a development tool offering a nice UI to display, filter and search log messages from different logging services: Log4Net, Log4j and NLog. It can directly receive log events locally or remotely, or read them from a log file... It is written with C#.</d:Description>
+      <d:Tags>log2console Log4Net NLog admin</d:Tags>
+      <d:Copyright></d:Copyright>
+      <d:Created m:type="Edm.DateTime">2019-02-15T10:09:50.377</d:Created>
+      <d:Dependencies>dotnet3.5::</d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">2620</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">1419</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/log2console/1.6.0.220190214</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/log2console/1.6.0.220190214</d:ReportAbuseUrl>
+      <d:IconUrl>https://github.com/derwasp/choco/raw/master/log2console/Log2Console.png</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2019-02-15T10:09:50.377</d:Published>
+      <d:LicenseUrl></d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>lrJ7aOMHZuA7MSiAk1NGnimaa/H0Zs0mcwBWqMb6rXXgo6+WMZ+YkEYpA5aKgNqv0ZJ71mpXuuOzliCwyDNDqA==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">4253</d:PackageSize>
+      <d:ProjectUrl>https://log2console.codeplex.com/</d:ProjectUrl>
+      <d:ReleaseNotes></d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/derwasp/choco/raw/master/log2console</d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/choco-bot/69b51fe61236a720c1e212f02947ae35</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Passing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2025-10-22T14:58:02.68</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2019-02-15T10:44:26.943</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2019-02-18T07:31:58.927</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2019-02-18T07:31:58.927</d:PackageApprovedDate>
+      <d:PackageReviewer>gep13</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">true</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Available</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2019-02-18T08:41:11.917</d:DownloadCacheDate>
+      <d:DownloadCache>https://raw.githubusercontent.com/Statyk7/log2console/2d81188a3799ae9de0f469dc9260075d8d17d2fb/output/Log2Console-1.6.0.2.msi^x86/Log2Console-1.6.0.2.msi^E54340E15216879A1C87DF9F307187855198F0BC5CC1F32413713C86B439F4B2E0F2B353AF4DD4367D4F323BF2756705A34BBAC92E05D51BC8825A637CA03536</d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2019-02-15T11:17:33.15</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='PoshRunner',Version='0.9.20130105.1')</id>
+    <title type="text">PoshRunner</title>
+    <summary type="text"></summary>
+    <updated>2025-09-23T09:49:49Z</updated>
+    <author>
+      <name>zippy1981</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='PoshRunner',Version='0.9.20130105.1')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='PoshRunner',Version='0.9.20130105.1')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/PoshRunner/0.9.20130105.1" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>0.9.20130105.1</d:Version>
+      <d:Title></d:Title>
+      <d:Description>poshrunner.exe is an alternative to "PowerShell.exe -file". It's main improvements are as follows. First, foo.ps1 uses foo.ps1.config as its config file as opposed to powershell.exe.config. Secondly, you have the option of logging the output of Write-* to the console, poshrunner.log, or a custom log4net configuration.</d:Description>
+      <d:Tags>powershell poshrunner appdomain log4net</d:Tags>
+      <d:Copyright>Copyright 2011-2013</d:Copyright>
+      <d:Created m:type="Edm.DateTime">2013-01-06T02:11:02.337</d:Created>
+      <d:Dependencies></d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">2322</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">1722</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/PoshRunner/0.9.20130105.1</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/PoshRunner/0.9.20130105.1</d:ReportAbuseUrl>
+      <d:IconUrl>http://www.justaprogrammer.net/wp-content/uploads/2013/01/PoshRunner.Logo-128x128.png</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2013-01-06T02:11:02.697</d:Published>
+      <d:LicenseUrl>https://github.com/zippy1981/AppDomainPoshRunner/blob/master/LICENSE.txt</d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>y67sKw2PR5n8RCdUu2j22sWvTf9w20wcfUCly4tMPWl++xpeN7WjLJg5mw59+XsgKvB4+ooAG9Ajt3uEsdZ8gQ==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">3470</d:PackageSize>
+      <d:ProjectUrl>https://sourceforge.net/projects/poshrunner/</d:ProjectUrl>
+      <d:ReleaseNotes>Fixed the icon.</d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl></d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">false</d:IsApproved>
+      <d:PackageStatus>Unknown</d:PackageStatus>
+      <d:PackageSubmittedStatus>Ready</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/27f918d3ec13c3688e8f77ce702af862</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Failing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2020-10-09T07:51:01.14</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Unknown</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime" m:null="true"></d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime" m:null="true"></d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime" m:null="true"></d:PackageApprovedDate>
+      <d:PackageReviewer></d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">false</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Unknown</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime" m:null="true"></d:DownloadCacheDate>
+      <d:DownloadCache></d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2016-02-29T23:54:39.09</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='log4view',Version='1.5.3.1583')</id>
+    <title type="text">log4view</title>
+    <summary type="text">LOG4VIEW is the powerful log viewer for log4net, NLog and log4j</summary>
+    <updated>2025-09-24T13:04:52Z</updated>
+    <author>
+      <name>PROSA GmbH</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='log4view',Version='1.5.3.1583')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='log4view',Version='1.5.3.1583')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/log4view/1.5.3.1583" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>1.5.3.1583</d:Version>
+      <d:Title>Log4View (Install)</d:Title>
+      <d:Description>## LOG4VIEW is the powerful log viewer for log4net, NLog and log4j
+
+It can help you to locate critical sequences, find bugs and identify performance issues. Powerful filtering techniques allow you to quickly strip down millions of log messages to the extract you are currently interested in. Support engineers can find user-reported issues within seconds while developers still have access to the full scope of log messages.
+
+### Use the standard logging frameworks log4net and log4j in your .NET and Java based applications
+
+LOG4VIEW is designed to work with log4net and log4j, the common logging frameworks for managed applications. Using these open source frameworks keeps your development team flexible and independent.
+
+### Monitor your distributed and multi-threaded applications in real-time
+
+LOG4VIEW visualizes log4net and log4j output from local applications and also connects to distributed and remote applications. Log messages of separate applications can be shown in different windows or be consolidated in a single view to understand the complex interactions of interconnected applications.
+
+### Quickly inspect log files from customers and locate user-reported issues
+
+LOG4VIEW is able to read a group of consecutive log files all at once and can process several hundred thousand log messages very quickly. Simple and powerful filter techniques facilitate the selection of the relevant log messages. Predefined and configurable colors turn your attention to the relevant items.</d:Description>
+      <d:Tags>log4view logging</d:Tags>
+      <d:Copyright>2019 PROSA GmbH</d:Copyright>
+      <d:Created m:type="Edm.DateTime">2019-10-08T12:24:27.077</d:Created>
+      <d:Dependencies>dotnetfx:4.7.1:</d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">2066</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">1357</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/log4view/1.5.3.1583</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/log4view/1.5.3.1583</d:ReportAbuseUrl>
+      <d:IconUrl>https://cdn.jsdelivr.net/gh/belidzs/chocolatey-log4view/icons/Log4View.png</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2019-10-08T12:24:27.077</d:Published>
+      <d:LicenseUrl>http://www.log4view.com/pricing/license-content/</d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">true</d:RequireLicenseAcceptance>
+      <d:PackageHash>S9++JjO992mCI/vlBj1nFMDd7L3yQdfYRnRiZeaqNC9NjPdtJMs8WimWGeUrWee6PUrFA4tLrPhJzef1NKWe5Q==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">34651883</d:PackageSize>
+      <d:ProjectUrl>http://www.log4view.com/</d:ProjectUrl>
+      <d:ReleaseNotes>http://www.log4view.com/features-usage/whats-new/</d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/belidzs/chocolatey-log4view/</d:PackageSourceUrl>
+      <d:DocsUrl>http://www.log4view.com/fileadmin/user_upload/Log4ViewHelp/webframe.html</d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl></d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Exempted</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime" m:null="true"></d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2019-10-08T12:58:12.873</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2019-10-19T09:30:27.743</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2019-10-19T09:30:27.743</d:PackageApprovedDate>
+      <d:PackageReviewer>flcdrg</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">false</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Checked</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2019-10-19T10:33:22.92</d:DownloadCacheDate>
+      <d:DownloadCache></d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2019-10-08T13:23:37.227</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='sentinel',Version='0.14.1')</id>
+    <title type="text">sentinel</title>
+    <summary type="text">Log-file viewer for nLog and log4net</summary>
+    <updated>2025-10-26T05:49:54Z</updated>
+    <author>
+      <name>Ray Hayes</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='sentinel',Version='0.14.1')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='sentinel',Version='0.14.1')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/sentinel/0.14.1" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>0.14.1</d:Version>
+      <d:Title>sentinel log-viewer</d:Title>
+      <d:Description>Sentinel is a viewer for log-files - specifically designed to act as a network end-point for the likes of nLog and log4net, additionally it then works really well for capturing log entries from multiple sources.</d:Description>
+      <d:Tags>sentinel nlog log4net</d:Tags>
+      <d:Copyright>Ray Hayes, 2009-2017</d:Copyright>
+      <d:Created m:type="Edm.DateTime">2020-06-23T07:45:44.233</d:Created>
+      <d:Dependencies></d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">1422</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">898</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/sentinel/0.14.1</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/sentinel/0.14.1</d:ReportAbuseUrl>
+      <d:IconUrl>https://rawcdn.githack.com/nils-a/au-packages/main/sentinel/Logo.png</d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2020-06-23T07:45:44.233</d:Published>
+      <d:LicenseUrl>https://raw.githubusercontent.com/yarseyah/sentinel/master/LICENSE.md</d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>dJCTT1owBa6NJ4XC5YrQWwaI5ETCn3ceQx10vP2XtGG5EmgYHRZiORtbpSjLzbB+3wpZxtTavT+E8BCgNjf9xw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">3929</d:PackageSize>
+      <d:ProjectUrl>https://github.com/yarseyah/sentinel/releases</d:ProjectUrl>
+      <d:ReleaseNotes>https://github.com/yarseyah/sentinel/releases/tag/0.14.1</d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/nils-a/au-packages</d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/choco-bot/8b21acee16206fb39afbb08216d413be</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Passing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2025-10-27T16:22:23.587</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2020-06-23T08:16:53.83</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2020-07-11T16:56:43.563</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2020-07-11T16:56:43.563</d:PackageApprovedDate>
+      <d:PackageReviewer>mwallner</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">true</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Available</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2020-07-11T17:59:17.717</d:DownloadCacheDate>
+      <d:DownloadCache>https://github.com/yarseyah/sentinel/releases/download/0.14.1/Sentinel-Setup-0.14.1.exe^x86/Sentinel-Setup-0.14.1.exe^BE93E23973376A3352BEEBDE1441071E0C03193FBDC9B3E16B01FEF5627E862276EE223B137A74A7A30DDD51416DC511D733FF5AE5022FD1C70C4609048A6BA1</d:DownloadCache>
+      <d:PackageScanStatus>Flagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2020-06-23T08:39:06.037</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>Unknown</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>http://community.chocolatey.org/api/v2/Packages(Id='chainsaw',Version='2.1.0')</id>
+    <title type="text">chainsaw</title>
+    <summary type="text">GUI-based Log viewer.</summary>
+    <updated>2025-11-06T15:05:13Z</updated>
+    <author>
+      <name>Apache Software Foundation</name>
+    </author>
+    <link rel="edit-media" title="V2FeedPackage" href="Packages(Id='chainsaw',Version='2.1.0')/$value" />
+    <link rel="edit" title="V2FeedPackage" href="Packages(Id='chainsaw',Version='2.1.0')" />
+    <category term="CCR.Website.V2FeedPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+    <content type="application/zip" src="https://community.chocolatey.org/api/v2/package/chainsaw/2.1.0" />
+    <m:properties xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices">
+      <d:Version>2.1.0</d:Version>
+      <d:Title>Apache Chainsaw</d:Title>
+      <d:Description>Chainsaw v2 is a companion application to Log4j written by members of the Log4j development community. Like a number of Open Source projects, this new version was built upon inspirations, ideas and creations of others. Chainsaw v2 has it's roots from the original Chainsaw utility written by Oliver Burn, and with inspiration from the Log Factor 5 utility contributed by ThoughtWorks Inc.</d:Description>
+      <d:Tags>log logging log4j log4net</d:Tags>
+      <d:Copyright>2002-2018</d:Copyright>
+      <d:Created m:type="Edm.DateTime">2021-06-16T13:46:58.47</d:Created>
+      <d:Dependencies></d:Dependencies>
+      <d:DownloadCount m:type="Edm.Int32">1299</d:DownloadCount>
+      <d:VersionDownloadCount m:type="Edm.Int32">667</d:VersionDownloadCount>
+      <d:GalleryDetailsUrl>https://community.chocolatey.org/packages/chainsaw/2.1.0</d:GalleryDetailsUrl>
+      <d:ReportAbuseUrl>https://community.chocolatey.org/package/ReportAbuse/chainsaw/2.1.0</d:ReportAbuseUrl>
+      <d:IconUrl></d:IconUrl>
+      <d:IsLatestVersion m:type="Edm.Boolean">true</d:IsLatestVersion>
+      <d:IsAbsoluteLatestVersion m:type="Edm.Boolean">true</d:IsAbsoluteLatestVersion>
+      <d:IsPrerelease m:type="Edm.Boolean">false</d:IsPrerelease>
+      <d:Language></d:Language>
+      <d:Published m:type="Edm.DateTime">2021-06-16T13:46:58.47</d:Published>
+      <d:LicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</d:LicenseUrl>
+      <d:RequireLicenseAcceptance m:type="Edm.Boolean">false</d:RequireLicenseAcceptance>
+      <d:PackageHash>4CVeV5AiYIq9utjCkg7LgRQvrG/rV0DYqZWmfpZRGeMqS77dW0CEBco8/Q3jGG7AwPTAbsWSsbiY05zEsGXbEw==</d:PackageHash>
+      <d:PackageHashAlgorithm>SHA512</d:PackageHashAlgorithm>
+      <d:PackageSize m:type="Edm.Int64">4321</d:PackageSize>
+      <d:ProjectUrl>http://logging.apache.org/chainsaw/2.x/</d:ProjectUrl>
+      <d:ReleaseNotes>https://logging.apache.org/chainsaw/2.x/changes-report.html#a2.1.0</d:ReleaseNotes>
+      <d:ProjectSourceUrl></d:ProjectSourceUrl>
+      <d:PackageSourceUrl>https://github.com/nils-a/au-packages</d:PackageSourceUrl>
+      <d:DocsUrl></d:DocsUrl>
+      <d:MailingListUrl></d:MailingListUrl>
+      <d:BugTrackerUrl></d:BugTrackerUrl>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+      <d:PackageStatus>Approved</d:PackageStatus>
+      <d:PackageSubmittedStatus>Waiting</d:PackageSubmittedStatus>
+      <d:PackageTestResultUrl>https://gist.github.com/choco-bot/a053115a5f2c348541967214b8708a06</d:PackageTestResultUrl>
+      <d:PackageTestResultStatus>Passing</d:PackageTestResultStatus>
+      <d:PackageTestResultStatusDate m:type="Edm.DateTime">2025-11-07T15:39:28.043</d:PackageTestResultStatusDate>
+      <d:PackageValidationResultStatus>Passing</d:PackageValidationResultStatus>
+      <d:PackageValidationResultDate m:type="Edm.DateTime">2021-06-16T14:23:24.647</d:PackageValidationResultDate>
+      <d:PackageCleanupResultDate m:type="Edm.DateTime" m:null="true"></d:PackageCleanupResultDate>
+      <d:PackageReviewedDate m:type="Edm.DateTime">2021-07-25T01:50:56.593</d:PackageReviewedDate>
+      <d:PackageApprovedDate m:type="Edm.DateTime">2021-07-25T01:50:56.593</d:PackageApprovedDate>
+      <d:PackageReviewer>TheCakeIsNaOH</d:PackageReviewer>
+      <d:IsDownloadCacheAvailable m:type="Edm.Boolean">true</d:IsDownloadCacheAvailable>
+      <d:DownloadCacheStatus>Available</d:DownloadCacheStatus>
+      <d:DownloadCacheDate m:type="Edm.DateTime">2021-07-25T02:54:09.583</d:DownloadCacheDate>
+      <d:DownloadCache>https://downloads.apache.org/logging/chainsaw/2.1.0/apache-chainsaw-2.1.0-standalone.zip^x86/apache-chainsaw-2.1.0-standalone.zip^E6974968BAF05D7A455D085D08C83EF707BFB4A73860A1FBA50C8354921531DB3D7C39D6592773EA1D176DD8E5E296A5E83D2A342E18E6EE52A73E7575BFA6C0</d:DownloadCache>
+      <d:PackageScanStatus>NotFlagged</d:PackageScanStatus>
+      <d:PackageScanResultDate m:type="Edm.DateTime">2021-06-16T20:25:51.833</d:PackageScanResultDate>
+      <d:PackageScanFlagResult>None</d:PackageScanFlagResult>
+    </m:properties>
+  </entry>
+  <link rel="next">
+    <m:error>
+      <m:code></m:code>
+      <m:message xml:lang="en-US">Object reference not set to an instance of an object.</m:message>
+    </m:error>
+    <!-- intentionally left incomplete-->

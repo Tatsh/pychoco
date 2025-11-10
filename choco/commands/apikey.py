@@ -9,7 +9,7 @@ import click
 __all__ = ('apikey',)
 
 
-@click.command('list')
+@click.command('list', context_settings={'help_option_names': ('-h', '--help')})
 @click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 @click.option('-p',
               '--path',
