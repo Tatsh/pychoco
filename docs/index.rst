@@ -19,8 +19,8 @@ pychoco
       :target: https://github.com/Tatsh/pychoco/blob/master/LICENSE.txt
       :alt: License
 
-   .. image:: https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.3/master
-      :target: https://github.com/Tatsh/pychoco/compare/v0.1.3...master
+   .. image:: https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.4/master
+      :target: https://github.com/Tatsh/pychoco/compare/v0.1.4...master
       :alt: GitHub commits since latest release (by SemVer including pre-releases)
 
    .. image:: https://github.com/Tatsh/pychoco/actions/workflows/codeql.yml/badge.svg
