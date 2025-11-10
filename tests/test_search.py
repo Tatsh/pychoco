@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 from urllib.parse import quote, urlencode
 
 from choco.main import main as choco
+import pytest
 
 if TYPE_CHECKING:
     from click.testing import CliRunner
@@ -25,7 +26,7 @@ def test_search_no_options_bad_entry(runner: CliRunner, requests_mock: req_mock.
             '$top': '30'
         },
         quote_via=quote)
-    requests_mock.get(f'https://somehost/Packages()?{qs}', text=bad_feed)
+    requests_mock.get(f'https://somehost/api/v2/Packages?{qs}', text=bad_feed)
     run = runner.invoke(choco, ('search', '-s', 'https://somehost', terms))
     assert not run.stdout
     assert run.exit_code == 0
@@ -45,47 +46,46 @@ def test_search_no_options_bad_entry_id_only(runner: CliRunner, requests_mock: r
             '$top': '30'
         },
         quote_via=quote)
-    requests_mock.get(f'https://somehost/Packages()?{qs}', text=bad_feed)
+    requests_mock.get(f'https://somehost/api/v2/Packages?{qs}', text=bad_feed)
     for run in (runner.invoke(choco, ('search', '--id-only', '-s', 'https://somehost', terms)),
                 runner.invoke(choco, ('search', '--idonly', '-s', 'https://somehost', terms))):
         assert not run.stdout
         assert run.exit_code == 0
 
 
+@pytest.mark.parametrize('args',
+                         [('search', '-a', '-e', '-s', 'https://somehost', 'chrome'),
+                          ('search', '--all', '--exact', '-s', 'https://somehost', 'chrome'),
+                          ('search', '--allversions', '-e', '-s', 'https://somehost', 'chrome'),
+                          ('search', '--all-versions', '-e', '-s', 'https://somehost', 'chrome')])
 def test_search_all_versions_exact(runner: CliRunner, requests_mock: req_mock.Mocker,
-                                   chrome_all_versions_exact_feed: str) -> None:
+                                   chrome_all_versions_exact_feed: str, args: tuple[str,
+                                                                                    ...]) -> None:
     terms = 'chrome'
-    qs = urlencode({'id': f"'{terms}'"}, quote_via=quote)
-    requests_mock.get(f'https://somehost/FindPackagesById()?{qs}',
+    qs = urlencode({'id': f"'{terms}'"})
+    requests_mock.get(f'https://somehost/api/v2/FindPackagesById()?{qs}',
                       text=chrome_all_versions_exact_feed)
-    # Mock the pagination URL to return an empty feed
-    empty_feed = """<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+    requests_mock.get(
+        ("http://community.chocolatey.org/api/v2/FindPackagesById()?id='googlechrome'&"
+         "$skiptoken='GoogleChrome','111.0.5563.111'"),
+        text="""<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">FindPackagesById</title>
-  <id>http://community.chocolatey.org/api/v2/FindPackagesById</id>
+  <id>http://somehost/api/v2/FindPackagesById</id>
   <updated>2023-09-21T18:48:55Z</updated>
-</feed>"""
-    requests_mock.get(
-        "http://community.chocolatey.org/api/v2/FindPackagesById?id='googlechrome'&$skiptoken='GoogleChrome','111.0.5563.111'",
-        text=empty_feed)
-    for run in (runner.invoke(choco, ('search', '-a', '-e', '-s', 'https://somehost', terms)),
-                runner.invoke(choco,
-                              ('search', '--all', '--exact', '-s', 'https://somehost', terms)),
-                runner.invoke(choco,
-                              ('search', '--allversions', '-e', '-s', 'https://somehost', terms)),
-                runner.invoke(choco,
-                              ('search', '--all-versions', '-e', '-s', 'https://somehost', terms))):
-        lines = run.stdout.splitlines()
-        assert lines[0].strip() == 'GoogleChrome 111.0.5563.111 [Approved]'
-        assert lines[-1].strip() == 'GoogleChrome 10.0.0 [Approved]'
-        assert run.exit_code == 0
+</feed>""")
+    run = runner.invoke(choco, args)
+    assert run.exit_code == 0
+    lines = run.stdout.splitlines()
+    assert lines[0].strip() == 'GoogleChrome 111.0.5563.111 [Approved]'
+    assert lines[-1].strip() == 'GoogleChrome 10.0.0 [Approved]'
 
 
 def test_search_no_duplicates(runner: CliRunner, requests_mock: req_mock.Mocker,
                               dupe_feed: str) -> None:
     terms = 'chrome'
     qs = urlencode({'id': f"'{terms}'"}, quote_via=quote)
-    requests_mock.get(f'https://somehost/FindPackagesById()?{qs}', text=dupe_feed)
+    requests_mock.get(f'https://somehost/api/v2/FindPackagesById()?{qs}', text=dupe_feed)
     run = runner.invoke(choco, ('search', '-a', '-e', '-s', 'https://somehost', terms))
     lines = run.stdout.splitlines()
     assert len(lines) == 1
@@ -268,9 +268,8 @@ def test_search_pagination_exact(runner: CliRunner, requests_mock: req_mock.Mock
     </m:properties>
   </entry>
 </feed>"""
-    qs = urlencode({'$filter': f"(tolower(Id) eq '{terms}') and IsLatestVersion"},
-                   quote_via=quote)
-    requests_mock.get(f'https://somehost/Packages()?{qs}', text=page1_feed)
+    qs = urlencode({'$filter': f"(tolower(Id) eq '{terms}') and IsLatestVersion"}, quote_via=quote)
+    requests_mock.get(f'https://somehost/api/v2/Packages?{qs}', text=page1_feed)
     requests_mock.get('https://somehost/P?f=test&skip=2', text=page2_feed)
 
     run = runner.invoke(choco, ('search', '-e', '-s', 'https://somehost', terms))
@@ -280,3 +279,22 @@ def test_search_pagination_exact(runner: CliRunner, requests_mock: req_mock.Mock
     assert 'TestPkg 3.0.0' in output
     assert 'TestPkg 2.0.0' in output
     assert 'TestPkg 1.0.0' in output
+
+
+def test_search_handles_error_at_end_of_xml(logparser_search_error_feed: str, runner: CliRunner,
+                                            requests_mock: req_mock.Mocker) -> None:
+    params = urlencode({
+        '$filter': "(startswith(tolower(Id),'logparser')) and IsLatestVersion",
+        '$orderby': 'Id',
+        '$skip': '0',
+        '$top': '30',
+        'includePrerelease': 'false',
+        'searchTerm': "'logparser'"
+    })
+    requests_mock.get(f'https://somehost/api/v2/Search()?{params}',
+                      text=logparser_search_error_feed)
+    run = runner.invoke(choco,
+                        ('search', '-s', 'https://somehost', '--id-starts-with', 'logparser'))
+    assert run.exit_code == 0
+    output = run.stdout
+    assert 'logparser.lizardgui' in output

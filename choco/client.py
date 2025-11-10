@@ -1,7 +1,6 @@
 """Client."""
 from __future__ import annotations
 
-from pathlib import Path
 from typing import TYPE_CHECKING
 import contextlib
 import logging
@@ -17,11 +16,13 @@ from .constants import (
     FEED_ID_TAG,
     FEED_NAMESPACES,
     NUGET_API_KEY_HTTP_HEADER,
+    OBJECT_REF_NOT_SET_ERROR_MESSAGE,
 )
 from .utils import InvalidEntryError, entry_to_search_result, tag_text_or
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
+    from pathlib import Path
 
     from .typing import Config, ConfigKey, SearchResult
 
@@ -99,13 +100,12 @@ class ChocolateyClient:
                all_versions: bool = False,
                by_id_only: bool = False,
                by_tag_only: bool = False,
-               debug: bool = False,
                exact: bool = False,
                id_starts_with: bool = False,
                include_prerelease: bool = False,
                order_by_popularity: bool = False,
                page: int | None = None,
-               page_size: bool = False,
+               page_size: int = 30,
                source: str | None = None) -> Iterator[SearchResult]:
         """
         Search packages. Returns a deduplicated iterator of results.
@@ -115,6 +115,7 @@ class ChocolateyClient:
         SearchResult
         """
         self.update_api_key_header(source)
+        terms = terms.lower()
         ns = FEED_NAMESPACES
         api_v2 = self._get_api_v2(source)
         source = source or self.get_default_push_source()
@@ -125,7 +126,7 @@ class ChocolateyClient:
             searches.append(
                 requests.Request(
                     'GET',
-                    f'{source}/Packages()',
+                    f'{source}{api_v2}/Packages',
                     params={
                         '$filter':
                             f"((((Id ne null) and substringof('{terms}',tolower(Id))) or "
@@ -150,18 +151,19 @@ class ChocolateyClient:
                                 'searchTerm': f"'{terms}'",
                                 'targetFramework': "''"
                             }) if not exact else requests.
-                    Request('GET', f'{source}/FindPackagesById()', params={'id': f"'{terms}'"}))
+                    Request(
+                        'GET', f'{source}{api_v2}/FindPackagesById()', params={'id': f"'{terms}'"}))
             elif exact:
                 searches.append(
                     requests.Request(
                         'GET',
-                        f'{source}/Packages()',
+                        f'{source}{api_v2}/Packages',
                         params={'$filter': f"(tolower(Id) eq '{terms}') and IsLatestVersion"}))
             if by_id_only:
                 searches.append(
                     requests.Request(
                         'GET',
-                        f'{source}/Packages()',
+                        f'{source}{api_v2}/Packages',
                         params={
                             '$filter': f"(substringof('{terms}',tolower(Id))) and IsLatestVersion",
                             '$orderby': order_by,
@@ -175,7 +177,7 @@ class ChocolateyClient:
                 searches.append(
                     requests.Request(
                         'GET',
-                        f'{source}/Packages()',
+                        f'{source}{api_v2}/Packages',
                         params={
                             '$filter': f"(substringof('{terms}',Tags)) and IsLatestVersion",
                             '$orderby': order_by,
@@ -192,35 +194,36 @@ class ChocolateyClient:
                         f'{source}{api_v2}/Search()',
                         params={
                             '$filter': f"(startswith(tolower(Id),'{terms}')) and IsLatestVersion",
-                            '$orderby': 'Id',
+                            '$orderby': order_by,
                             '$skip': str(0 if page is None else page * page_size),
                             '$top': str(page_size),
                             'includePrerelease': 'true' if include_prerelease else 'false',
                             'searchTerm': f"'{terms}'"
                         }))
         results: dict[str, SearchResult] = {}
-        for i, req in enumerate(searches):
+        for req in searches:
             req.auth = auth
             req.params['semVerLevel'] = '2.0.0'
             next_url: str | None = 'initial'  # Use a sentinel value for first iteration
-            page_num = 0
             while next_url:
-                if page_num > 0:
+                if next_url and next_url != 'initial':
                     # For pagination, use the full URL from the next link
+                    log.debug('Using next_url: %s', next_url)
                     prepared_req = requests.Request('GET', next_url, auth=auth).prepare()
                 else:
                     prepared_req = req.prepare()
+                assert prepared_req.url is not None
+                # chocolatey.org requires ()'+ to be unescaped.
+                prepared_req.url = prepared_req.url.replace('%28', '(').replace('%29', ')').replace(
+                    "'", '%27').replace('+', '%20')
                 r = self.session.send(prepared_req)
                 r.raise_for_status()
-                if debug:  # pragma no cover
-                    log.debug(r.text)
-                    try:
-                        fname = f'result-{i:03}-page-{page_num:03}.xml'
-                        with Path(fname).open('w', encoding='utf-8') as f:
-                            f.write(r.text)
-                    except OSError:
-                        pass
-                root = parse_xml(r.text)
+                content = r.text
+                # There appears to be a bug on chocolatey.org where their pagination throws an
+                # exception.
+                if OBJECT_REF_NOT_SET_ERROR_MESSAGE in content:
+                    content += '\n  </link>\n</feed>'
+                root = parse_xml(content)
                 for entry in root.findall(FEED_ENTRY_TAG, ns):
                     id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
                     if not id_url or id_url in results:
@@ -229,10 +232,9 @@ class ChocolateyClient:
                         results[id_url] = entry_to_search_result(entry, ns)
                 # Check for pagination link
                 next_link = root.find("link[@rel='next']", ns)
-                if next_link is not None:
+                if results and next_link is not None:
                     href = next_link.get('href')
                     next_url = href if isinstance(href, str) and href else None
                 else:
                     next_url = None
-                page_num += 1
         yield from reversed(results.values())

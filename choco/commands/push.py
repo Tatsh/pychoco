@@ -11,7 +11,7 @@ from requests import HTTPError
 import click
 
 
-@click.command()
+@click.command(context_settings={'help_option_names': ('-h', '--help')})
 @click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 @click.option('-s', '--source', help='Source to upload to.', metavar='URL')
 @click.option('--config-path',

@@ -8,7 +8,7 @@ import click
 __all__ = ('pack',)
 
 
-@click.command()
+@click.command(context_settings={'help_option_names': ('-h', '--help')})
 @click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 @click.argument('work_dir', type=click.Path(file_okay=False, resolve_path=True), default='.')
 def pack(work_dir: str = '.', *, debug: bool = False) -> None:

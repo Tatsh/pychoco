@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 __all__ = ('search',)
 
 
-@click.command()
+@click.command(context_settings={'help_option_names': ('-h', '--help')})
 @click.option('--by-id-only',
               is_flag=True,
               help='Only return packages where the id contains the search filter.')
@@ -78,7 +78,6 @@ def search(page: int | None, password: str, source: str, terms: str, user: str, 
             all_versions=all_versions,
             by_id_only=by_id_only,
             by_tag_only=by_tag_only,
-            debug=debug,
             exact=exact,
             id_starts_with=id_starts_with,
             include_prerelease=include_prerelease,

@@ -65,3 +65,9 @@ def chrome_all_versions_exact_feed(conftest_dirname: str) -> str:
 def dupe_feed(conftest_dirname: str) -> str:
     with Path(f'{conftest_dirname}/feeds/dupe.xml').open(encoding='utf-8') as f:
         return f.read()
+
+
+@pytest.fixture
+def logparser_search_error_feed(conftest_dirname: str) -> str:
+    with Path(f'{conftest_dirname}/feeds/logparser-search-error.xml').open(encoding='utf-8') as f:
+        return f.read()

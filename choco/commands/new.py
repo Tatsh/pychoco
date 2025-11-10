@@ -6,7 +6,7 @@ from choco.packaging import new_package
 import click
 
 
-@click.command()
+@click.command(context_settings={'help_option_names': ('-h', '--help')})
 @click.argument('name')
 @click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 def new(name: str, *, debug: bool = False) -> None:

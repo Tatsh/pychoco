@@ -37,7 +37,7 @@
     >
       <d:Version>10.0.0</d:Version>
       <d:Title>Google Chrome</d:Title>
-      <d:Description>Chrome Browser 
+      <d:Description>Chrome Browser
 
 A modern web browser with an MSI and admin tools designed for organizations that need standardized, easy and secure deployment and management.</d:Description>
       <d:Tags m:null="true" />
@@ -4031,6 +4031,6 @@ A modern web browser with an MSI and admin tools designed for organizations that
   </entry>
   <link
     rel="next"
-    href="http://community.chocolatey.org/api/v2/FindPackagesById?id='googlechrome'&amp;$skiptoken='GoogleChrome','111.0.5563.111'"
+    href="http://community.chocolatey.org/api/v2/FindPackagesById()?id='googlechrome'&amp;$skiptoken='GoogleChrome','111.0.5563.111'"
   />
 </feed>
