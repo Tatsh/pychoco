@@ -9,6 +9,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [unreleased]
 
+## [0.1.4]
+
 ### Added
 
 - Added `-h` option to all commands to show help.
@@ -54,7 +56,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Upgraded dependencies.
 
-[unreleased]: https://github.com/Tatsh/pychoco/compare/v0.1.3...HEAD
+[unreleased]: https://github.com/Tatsh/pychoco/compare/v0.1.4...HEAD
+[0.1.4]: https://github.com/Tatsh/pychoco/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/Tatsh/pychoco/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/Tatsh/pychoco/compare/v0.1.1...v0.1.2
 [0.1.0]: https://github.com/Tatsh/pychoco/compare/v0.0.3...v0.1.0
