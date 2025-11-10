@@ -202,20 +202,37 @@ class ChocolateyClient:
         for i, req in enumerate(searches):
             req.auth = auth
             req.params['semVerLevel'] = '2.0.0'
-            r = self.session.send(req.prepare())
-            r.raise_for_status()
-            if debug:  # pragma no cover
-                log.debug(r.text)
-                try:
-                    with Path(f'result-{i:03}.xml').open('w', encoding='utf-8') as f:
-                        f.write(r.text)
-                except OSError:
-                    pass
-            root = parse_xml(r.text)
-            for entry in root.findall(FEED_ENTRY_TAG, ns):
-                id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
-                if not id_url or id_url in results:
-                    continue
-                with contextlib.suppress(InvalidEntryError):
-                    results[id_url] = entry_to_search_result(entry, ns)
+            next_url: str | None = 'initial'  # Use a sentinel value for first iteration
+            page_num = 0
+            while next_url:
+                if page_num > 0:
+                    # For pagination, use the full URL from the next link
+                    prepared_req = requests.Request('GET', next_url, auth=auth).prepare()
+                else:
+                    prepared_req = req.prepare()
+                r = self.session.send(prepared_req)
+                r.raise_for_status()
+                if debug:  # pragma no cover
+                    log.debug(r.text)
+                    try:
+                        fname = f'result-{i:03}-page-{page_num:03}.xml'
+                        with Path(fname).open('w', encoding='utf-8') as f:
+                            f.write(r.text)
+                    except OSError:
+                        pass
+                root = parse_xml(r.text)
+                for entry in root.findall(FEED_ENTRY_TAG, ns):
+                    id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
+                    if not id_url or id_url in results:
+                        continue
+                    with contextlib.suppress(InvalidEntryError):
+                        results[id_url] = entry_to_search_result(entry, ns)
+                # Check for pagination link
+                next_link = root.find("link[@rel='next']", ns)
+                if next_link is not None:
+                    href = next_link.get('href')
+                    next_url = href if isinstance(href, str) and href else None
+                else:
+                    next_url = None
+                page_num += 1
         yield from reversed(results.values())
