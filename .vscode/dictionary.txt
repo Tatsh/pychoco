@@ -11,12 +11,14 @@ algoritms
 allbrowsers
 allversions
 allvoices
+analyzer
 antp
 anymore
 anyvideoconverter
 apikey
 appauthor
 appdir
+appdomain
 appimage
 appinfo
 appletv
@@ -40,6 +42,7 @@ browsinghistoryview
 bsky
 burneremails
 burnermail
+calhuskerfan
 centbrowser
 changingly
 checkerplusforgmail
@@ -63,6 +66,7 @@ cinst
 codeowners
 color
 colorlog
+colors
 commitizen
 commondatastorage
 conftest
@@ -74,6 +78,7 @@ cryptopro
 cubepdf
 cubesoft
 cyberfox
+darrel
 dashlane
 dashlane's
 dashlane’s
@@ -105,6 +110,7 @@ engadget
 esbenp
 esbonio
 evernote
+exceptionless
 excinfo
 extention
 eyeo
@@ -167,6 +173,8 @@ khabbr
 kiplinger's
 kledy
 launchable
+lavnikov
+leetbmc
 lextudio
 libjsonnet
 libtorrent
@@ -181,6 +189,7 @@ ltsr
 lync
 mashable
 meneame
+michalsteyn
 mikescher
 mikle
 miracast
@@ -188,6 +197,7 @@ mixx
 mkevenaar
 modindex
 mozillaca
+mwallner
 mypy
 nabil
 namedtuples
@@ -197,6 +207,7 @@ netlog
 netvibes
 netvouz
 nirsoft
+nlog
 norecursedirs
 nosync
 notifer
@@ -217,8 +228,10 @@ pipx
 platformdirs
 pogue
 popups
+poshrunner
 preinstaller
 prodvers
+prosa
 psmdcp
 pycache
 pychoco
@@ -227,6 +240,7 @@ pydantic
 pydocstyle
 pyinstaller
 pylint
+pypa
 pypi
 pyproject
 pytest
@@ -258,6 +272,7 @@ softprops
 sonomy
 sphinxcontrib
 squidoo
+statyk
 straver
 stumpedia
 substringof
@@ -294,6 +309,7 @@ versionhistory
 viadeo
 virtualenv
 vkontakte
+wahl
 wanelo
 webapps
 webbrowser
@@ -303,6 +319,7 @@ winconfig
 windos
 wiswa
 wladimir
+yakoo
 yapf
 yapfignore
 yummly
