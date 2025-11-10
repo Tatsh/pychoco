@@ -58,6 +58,16 @@ def test_search_all_versions_exact(runner: CliRunner, requests_mock: req_mock.Mo
     qs = urlencode({'id': f"'{terms}'"}, quote_via=quote)
     requests_mock.get(f'https://somehost/FindPackagesById()?{qs}',
                       text=chrome_all_versions_exact_feed)
+    # Mock the pagination URL to return an empty feed
+    empty_feed = """<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="text">FindPackagesById</title>
+  <id>http://community.chocolatey.org/api/v2/FindPackagesById</id>
+  <updated>2023-09-21T18:48:55Z</updated>
+</feed>"""
+    requests_mock.get(
+        "http://community.chocolatey.org/api/v2/FindPackagesById?id='googlechrome'&$skiptoken='GoogleChrome','111.0.5563.111'",
+        text=empty_feed)
     for run in (runner.invoke(choco, ('search', '-a', '-e', '-s', 'https://somehost', terms)),
                 runner.invoke(choco,
                               ('search', '--all', '--exact', '-s', 'https://somehost', terms)),
@@ -206,3 +216,67 @@ def test_search_else_case_no_testing_date(runner: CliRunner, mocker: MockerFixtu
  Summary: ${summary}
  Description: ${description}
  Release Notes: ${release_notes_uri}"""
+
+
+def test_search_pagination_exact(runner: CliRunner, requests_mock: req_mock.Mocker) -> None:
+    """Test that pagination works correctly for exact searches."""
+    terms = 'testpkg'
+    # First page with 2 entries and a next link
+    page1_feed = """<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+      xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+  <title type="text">Packages</title>
+  <id>https://somehost/Packages</id>
+  <updated>2023-09-21T18:48:55Z</updated>
+  <entry>
+    <id>https://somehost/Packages(Id='TestPkg',Version='1.0.0')</id>
+    <title type="text">TestPkg</title>
+    <content type="application/zip" src="https://somehost/package/TestPkg/1.0.0" />
+    <m:properties>
+      <d:Version>1.0.0</d:Version>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+    </m:properties>
+  </entry>
+  <entry>
+    <id>https://somehost/Packages(Id='TestPkg',Version='2.0.0')</id>
+    <title type="text">TestPkg</title>
+    <content type="application/zip" src="https://somehost/package/TestPkg/2.0.0" />
+    <m:properties>
+      <d:Version>2.0.0</d:Version>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+    </m:properties>
+  </entry>
+  <link rel="next"
+        href="https://somehost/P?f=test&amp;skip=2" />
+</feed>"""
+    # Second page with 1 entry and no next link
+    page2_feed = """<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
+      xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata">
+  <title type="text">Packages</title>
+  <id>https://somehost/Packages</id>
+  <updated>2023-09-21T18:48:55Z</updated>
+  <entry>
+    <id>https://somehost/Packages(Id='TestPkg',Version='3.0.0')</id>
+    <title type="text">TestPkg</title>
+    <content type="application/zip" src="https://somehost/package/TestPkg/3.0.0" />
+    <m:properties>
+      <d:Version>3.0.0</d:Version>
+      <d:IsApproved m:type="Edm.Boolean">true</d:IsApproved>
+    </m:properties>
+  </entry>
+</feed>"""
+    qs = urlencode({'$filter': f"(tolower(Id) eq '{terms}') and IsLatestVersion"},
+                   quote_via=quote)
+    requests_mock.get(f'https://somehost/Packages()?{qs}', text=page1_feed)
+    requests_mock.get('https://somehost/P?f=test&skip=2', text=page2_feed)
+
+    run = runner.invoke(choco, ('search', '-e', '-s', 'https://somehost', terms))
+    assert run.exit_code == 0
+    output = run.stdout
+    # Should have all 3 entries from both pages
+    assert 'TestPkg 3.0.0' in output
+    assert 'TestPkg 2.0.0' in output
+    assert 'TestPkg 1.0.0' in output
