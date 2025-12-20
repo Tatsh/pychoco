@@ -4,7 +4,7 @@
 [![PyPI - Version](https://img.shields.io/pypi/v/chocolatey-choco)](https://pypi.org/project/chocolatey-choco/)
 [![GitHub tag (with filter)](https://img.shields.io/github/v/tag/Tatsh/pychoco)](https://github.com/Tatsh/pychoco/tags)
 [![License](https://img.shields.io/github/license/Tatsh/pychoco)](https://github.com/Tatsh/pychoco/blob/master/LICENSE.txt)
-[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.4/master)](https://github.com/Tatsh/pychoco/compare/v0.1.4...master)
+[![GitHub commits since latest release (by SemVer including pre-releases)](https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.5/master)](https://github.com/Tatsh/pychoco/compare/v0.1.5...master)
 [![CodeQL](https://github.com/Tatsh/pychoco/actions/workflows/codeql.yml/badge.svg)](https://github.com/Tatsh/pychoco/actions/workflows/codeql.yml)
 [![QA](https://github.com/Tatsh/pychoco/actions/workflows/qa.yml/badge.svg)](https://github.com/Tatsh/pychoco/actions/workflows/qa.yml)
 [![Tests](https://github.com/Tatsh/pychoco/actions/workflows/tests.yml/badge.svg)](https://github.com/Tatsh/pychoco/actions/workflows/tests.yml)

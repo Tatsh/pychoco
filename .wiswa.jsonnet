@@ -5,7 +5,7 @@ local utils = import 'utils.libjsonnet';
   keywords: ['command line', 'windows'],
   project_name: 'chocolatey-choco',
   github_project_name: 'pychoco',
-  version: '0.1.4',
+  version: '0.1.5',
   want_main: true,
   primary_module: 'choco',
   security_policy_supported_versions: { '0.1.x': ':white_check_mark:' },
