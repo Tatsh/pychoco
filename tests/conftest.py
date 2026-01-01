@@ -32,42 +32,35 @@ def runner() -> CliRunner:
 
 @pytest.fixture
 def bad_feed(conftest_dirname: str) -> str:
-    with Path(f'{conftest_dirname}/feeds/bad.xml').open(encoding='utf-8') as f:
-        return f.read()
+    return Path(f'{conftest_dirname}/feeds/bad.xml').read_text(encoding='utf-8')
 
 
 @pytest.fixture
 def firefox_feed(conftest_dirname: str) -> str:
-    with Path(f'{conftest_dirname}/feeds/firefox.xml').open(encoding='utf-8') as f:
-        return f.read()
+    return Path(f'{conftest_dirname}/feeds/firefox.xml').read_text(encoding='utf-8')
 
 
 @pytest.fixture
 def firefox_feed_exact(conftest_dirname: str) -> str:
-    with Path(f'{conftest_dirname}/feeds/firefox-exact.xml').open(encoding='utf-8') as f:
-        return f.read()
+    return Path(f'{conftest_dirname}/feeds/firefox-exact.xml').read_text(encoding='utf-8')
 
 
 @pytest.fixture
 def chrome_all_versions_feed(conftest_dirname: str) -> str:
-    with Path(f'{conftest_dirname}/feeds/chrome-all-versions.xml').open(encoding='utf-8') as f:
-        return f.read()
+    return Path(f'{conftest_dirname}/feeds/chrome-all-versions.xml').read_text(encoding='utf-8')
 
 
 @pytest.fixture
 def chrome_all_versions_exact_feed(conftest_dirname: str) -> str:
-    with Path(f'{conftest_dirname}/feeds/chrome-all-versions-exact.xml').open(
-            encoding='utf-8') as f:
-        return f.read()
+    return Path(f'{conftest_dirname}/feeds/chrome-all-versions-exact.xml').read_text(
+        encoding='utf-8')
 
 
 @pytest.fixture
 def dupe_feed(conftest_dirname: str) -> str:
-    with Path(f'{conftest_dirname}/feeds/dupe.xml').open(encoding='utf-8') as f:
-        return f.read()
+    return Path(f'{conftest_dirname}/feeds/dupe.xml').read_text(encoding='utf-8')
 
 
 @pytest.fixture
 def logparser_search_error_feed(conftest_dirname: str) -> str:
-    with Path(f'{conftest_dirname}/feeds/logparser-search-error.xml').open(encoding='utf-8') as f:
-        return f.read()
+    return Path(f'{conftest_dirname}/feeds/logparser-search-error.xml').read_text(encoding='utf-8')
