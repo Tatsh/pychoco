@@ -63,14 +63,13 @@ def new_package(name: str) -> Path:
         raise DirectoryExistsError
     p_name = Path(name)
     p_name.mkdir()
-    with Path(p_name / f'{name}.nuspec').open('w', encoding='utf-8') as f:
-        f.write(NUSPEC_TEMPLATE.safe_substitute(package_id=name))
+    Path(p_name / f'{name}.nuspec').write_text(NUSPEC_TEMPLATE.safe_substitute(package_id=name),
+                                               encoding='utf-8')
     tools = p_name / 'tools'
     tools.mkdir()
-    with Path(tools / 'chocolateyInstall.ps1').open('w', encoding='utf-8') as f:
-        f.write(CHOCOLATEY_INSTALL_PS1_TEMPLATE.safe_substitute(package_id=name))
-    with Path(tools / 'chocolateyUninstall.ps1').open('w', encoding='utf-8') as f:
-        f.write(CHOCOLATEY_UNINSTALL_PS1)
+    Path(tools / 'chocolateyInstall.ps1').write_text(
+        CHOCOLATEY_INSTALL_PS1_TEMPLATE.safe_substitute(package_id=name), encoding='utf-8')
+    Path(tools / 'chocolateyUninstall.ps1').write_text(CHOCOLATEY_UNINSTALL_PS1, encoding='utf-8')
     return p_name
 
 

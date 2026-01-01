@@ -35,7 +35,6 @@ fontawesome
 foxundermoon
 genindex
 globaltoc
-hoverxref
 htmlcov
 idonly
 intersphinx
@@ -52,6 +51,7 @@ libjsonnet
 linters
 lizardgui
 logparser
+manylinux
 modindex
 mypy
 namedtuples

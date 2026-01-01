@@ -26,8 +26,7 @@ def test_push_error(
     path_mock.return_value.read_text.side_effect = read_config
     requests_mock.put('http://old-value/api/v2/package/', status_code=400)
     with runner.isolated_filesystem():
-        with Path('okay-name-1.0.0.nuget').open('w', encoding='utf-8') as f:
-            f.write('')
+        Path('okay-name-1.0.0.nuget').write_text('', encoding='utf-8')
         run = runner.invoke(choco, ('push', 'okay-name-1.0.0.nuget'))
     assert isinstance(run.exception, SystemExit)
     assert run.exit_code != 0
@@ -48,7 +47,6 @@ def test_push_normal(
     path_mock.return_value.read_text.side_effect = read_config
     requests_mock.put('http://old-value/api/v2/package/', status_code=201)
     with runner.isolated_filesystem():
-        with Path('okay-name-1.0.0.nuget').open('w', encoding='utf-8') as f:
-            f.write('')
+        Path('okay-name-1.0.0.nuget').write_text('', encoding='utf-8')
         run = runner.invoke(choco, ('push', 'okay-name-1.0.0.nuget'))
     assert run.exit_code == 0

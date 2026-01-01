@@ -17,8 +17,7 @@ def test_new(runner: CliRunner, mocker: MockerFixture) -> None:
     assert run.exit_code == 0
     assert path_mock.call_count == 5
     path_mock.assert_any_call('okay-name')
-    path_mock.return_value.open.return_value.__enter__.return_value.write.assert_called_with(
-        CHOCOLATEY_UNINSTALL_PS1)
+    path_mock.return_value.write_text.assert_called_with(CHOCOLATEY_UNINSTALL_PS1, encoding='utf-8')
 
 
 def test_new_file_exists(runner: CliRunner, mocker: MockerFixture) -> None:
