@@ -10,7 +10,6 @@ automodule
 bascom
 bsky
 choco
-codeowners
 colorlog
 commitizen
 conftest
@@ -34,6 +33,7 @@ filevers
 fontawesome
 foxundermoon
 genindex
+getline
 globaltoc
 htmlcov
 idonly
@@ -85,6 +85,8 @@ sdist
 secho
 shellformat
 skiptoken
+snapcore
+snapcraft
 softprops
 sphinxcontrib
 substringof

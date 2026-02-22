@@ -1,0 +1,24 @@
+apps:
+  chocolatey-choco:
+    command: 'bin/choco'
+    plugs:
+      - 'home'
+      - 'network'
+      - 'network-bind'
+base: 'core24'
+confinement: 'strict'
+description: 'Minimal choco command for use on non-Windows platforms.'
+grade: 'stable'
+name: 'chocolatey-choco'
+parts:
+  chocolatey-choco:
+    plugin: 'poetry'
+    source: '.'
+    stage-packages: []
+platforms:
+  amd64:
+    build-on: 'amd64'
+  arm64:
+    build-on: 'arm64'
+summary: 'Minimal choco command for use on non-Windows platforms.'
+version: '0.1.5'
