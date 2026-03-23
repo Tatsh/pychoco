@@ -1,18 +1,25 @@
 apps:
   chocolatey-choco:
-    command: 'bin/choco'
+    command: 'bin/chocolatey-choco'
     plugs:
       - 'home'
       - 'network'
       - 'network-bind'
 base: 'core24'
 confinement: 'strict'
+contact: 'https://github.com/Tatsh/pychoco/issues'
 description: 'Minimal choco command for use on non-Windows platforms.'
+donation: 'https://buymeacoffee.com/Tatsh'
 grade: 'stable'
+issues: 'https://github.com/Tatsh/pychoco/issues'
+license: 'MIT'
 name: 'chocolatey-choco'
 parts:
   chocolatey-choco:
-    plugin: 'poetry'
+    build-packages: []
+    plugin: 'python'
+    python-packages:
+      - '.'
     source: '.'
     stage-packages: []
 platforms:
@@ -20,5 +27,8 @@ platforms:
     build-on: 'amd64'
   arm64:
     build-on: 'arm64'
+source-code: 'https://github.com/Tatsh/pychoco'
 summary: 'Minimal choco command for use on non-Windows platforms.'
+title: 'chocolatey-choco'
 version: '0.1.5'
+website: 'https://tatsh.github.io/pychoco/'

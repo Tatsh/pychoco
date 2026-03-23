@@ -10,7 +10,7 @@ from choco.utils import append_dir_to_zip_recursive, parse_int_tag
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
-    from xml.etree.ElementTree import Element  # noqa: S405
+    from xml.etree.ElementTree import Element
 
     from pytest_mock.plugin import MockerFixture
 

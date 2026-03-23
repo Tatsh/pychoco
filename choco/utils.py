@@ -36,7 +36,7 @@ from .typing import SearchResult, TestingStatus
 if TYPE_CHECKING:
     from datetime import datetime
     from pathlib import Path
-    from xml.etree.ElementTree import Element  # noqa: S405
+    from xml.etree.ElementTree import Element
     import zipfile
 
 __all__ = ('append_dir_to_zip_recursive', 'entry_to_search_result', 'generate_unique_id',
