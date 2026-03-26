@@ -79,8 +79,8 @@ no hand-written code changed, this is a **cruft update**. Indicators:
 
 - Only Wiswa-managed files changed (workflows,
   `package.json`, `pyproject.toml`, `.pre-commit-config.yaml`, `.claude/agents/`,
-  `.cursor/rules/`, `.github/instructions/`,
-  `CITATION.cff`, `.vscode/dictionary.txt`, `uv.lock`, `.wiswa.jsonnet`, etc.).
+  `.cursor/rules/`, `.github/instructions/`, `CITATION.cff`, `.vscode/dictionary.txt`, `uv.lock`,
+  `.wiswa.jsonnet`, etc.).
 - No files under the primary module or `tests/` changed.
 
 Commit everything in a single commit with the subject `cruft: update`. Include a body summarising
@@ -134,7 +134,7 @@ For Python files, strip the `choco/` prefix and replace `/` with `.` (like modul
 
 ### Trailers
 
-- `Closes: #N` - when a commit closes a GitHub issue. If it is another project, use the full URI.
+- `Closes: #N` - when a commit closes an issue. If it is another project, use the full URI.
 - `Fixes: #N` - when a commit fixes a bug reported in an issue. If it is another project, use the
   full URI.
 - `Related: #N` - when a commit is related to an issue but does not fully close or fix it. If it is

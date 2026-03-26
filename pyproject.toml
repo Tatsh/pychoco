@@ -10,7 +10,7 @@ dev = [
   "ruff>=0.15.7",
   "types-defusedxml>=0.7.0.20250822",
   "types-python-dateutil>=2.9.0.20260323",
-  "types-requests>=2.32.4.20260107",
+  "types-requests>=2.32.4.20260324",
   "yapf>=0.43.0",
 ]
 docs = [
@@ -54,7 +54,7 @@ dependencies = [
   "defusedxml>=0.7.1",
   "platformdirs>=4.9.4",
   "python-dateutil>=2.9.0.post0",
-  "requests>=2.32.5",
+  "requests>=2.33.0",
   "tomlkit>=0.14.0",
   "typing-extensions>=4.15.0",
 ]
