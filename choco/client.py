@@ -63,7 +63,13 @@ class ChocolateyClient:
         self.config['pychoco'][name] = value
 
     def get_default_push_source(self) -> str:
-        """Get the default push source URL."""
+        """
+        Get the default push source URL.
+
+        Returns
+        -------
+        str
+        """
         return (self.config['pychoco'].get('defaultPushSource', DEFAULT_PUSH_SOURCE)
                 or DEFAULT_PUSH_SOURCE)
 
@@ -204,15 +210,16 @@ class ChocolateyClient:
         for req in searches:
             req.auth = auth
             req.params['semVerLevel'] = '2.0.0'
-            next_url: str | None = 'initial'  # Use a sentinel value for first iteration
+            next_url: str | None = 'initial'  # Use a sentinel value for first iteration.
             while next_url:
                 if next_url and next_url != 'initial':
-                    # For pagination, use the full URL from the next link
+                    # For pagination, use the full URL from the next link.
                     log.debug('Using next_url: %s', next_url)
                     prepared_req = requests.Request('GET', next_url, auth=auth).prepare()
                 else:
                     prepared_req = req.prepare()
-                assert prepared_req.url is not None
+                if prepared_req.url is None:  # pragma: no cover
+                    continue
                 # chocolatey.org requires ()'+ to be unescaped.
                 prepared_req.url = prepared_req.url.replace('%28', '(').replace('%29', ')').replace(
                     "'", '%27').replace('+', '%20')

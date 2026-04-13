@@ -1,17 +1,17 @@
 local utils = import 'utils.libjsonnet';
 
 {
+  uses_user_defaults: true,
   description: 'Minimal choco command for use on non-Windows platforms.',
   keywords: ['command line', 'windows'],
   project_name: 'chocolatey-choco',
   github_project_name: 'pychoco',
   version: '0.1.5',
   want_main: true,
+  want_flatpak: true,
+  publishing+: { flathub: 'sh.tat.chocolatey-choco' },
   primary_module: 'choco',
   security_policy_supported_versions: { '0.1.x': ':white_check_mark:' },
-  copilot+: {
-    intro: 'Choco is a minimal command line interface for Chocolatey, the Windows package manager, designed to work on non-Windows platforms.',
-  },
   pyproject+: {
     project+: {
       scripts: {

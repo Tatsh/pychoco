@@ -6,11 +6,12 @@ requires = ["hatchling"]
 dev = [
   "commitizen>=4.13.9",
   "cz-path>=0.0.6",
-  "mypy>=1.19.1",
-  "ruff>=0.15.7",
-  "types-defusedxml>=0.7.0.20250822",
-  "types-python-dateutil>=2.9.0.20260323",
-  "types-requests>=2.32.4.20260324",
+  "mypy>=1.20.0",
+  "ruff>=0.15.9",
+  "ty>=0.0.29",
+  "types-defusedxml>=0.7.0.20260402",
+  "types-python-dateutil>=2.9.0.20260402",
+  "types-requests>=2.33.0.20260402",
   "yapf>=0.43.0",
 ]
 docs = [
@@ -50,11 +51,11 @@ classifiers = [
 ]
 dependencies = [
   "bascom>=0.1.2",
-  "click>=8.3.1",
+  "click>=8.3.2",
   "defusedxml>=0.7.1",
   "platformdirs>=4.9.4",
   "python-dateutil>=2.9.0.post0",
-  "requests>=2.33.0",
+  "requests>=2.33.1",
   "tomlkit>=0.14.0",
   "typing-extensions>=4.15.0",
 ]
@@ -92,21 +93,25 @@ version_files = [
   "docs/index.rst",
   "man/pychoco.1",
   "package.json",
+  "sh.tat.chocolatey-choco.yml",
   "snapcraft.yaml",
 ]
 version_provider = "pep621"
 
 [tool.coverage.report]
 exclude_also = ["if TYPE_CHECKING:"]
-omit = ["__main__.py", "conftest.py", "tests.py", "tests/*/test_*.py", "tests/test_*.py"]
+omit = ["choco/__main__.py", "conftest.py", "tests.py", "tests/*/test_*.py", "tests/test_*.py"]
 show_missing = true
 
 [tool.coverage.run]
 branch = true
-omit = ["__main__.py", "conftest.py", "tests.py", "tests/*/test_*.py", "tests/test_*.py"]
+omit = ["choco/__main__.py", "conftest.py", "tests.py", "tests/*/test_*.py", "tests/test_*.py"]
 
 [tool.doc8]
 max-line-length = 100
+
+[tool.hatch.build.targets.sdist]
+include = ["choco", "tests"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["choco"]
@@ -135,7 +140,8 @@ reportMissingModuleSource = "error"
 reportPropertyTypeMismatch = "error"
 reportUnnecessaryTypeIgnoreComment = "none"
 typeCheckingMode = "off"
-useLibraryCodeForTypes = false
+venv = ".venv"
+venvPath = "."
 
 [tool.pytest.ini_options]
 mock_use_standalone_module = true
@@ -159,23 +165,7 @@ quote-style = "single"
 
 [tool.ruff.lint]
 extend-select = ["ALL"]
-ignore = [
-  "ANN401",
-  "COM812",
-  "CPY001",
-  "D201",
-  "D203",
-  "D204",
-  "D212",
-  "DOC201",
-  "N818",
-  "S101",
-  "S404",
-  "S603",
-  "TD002",
-  "UP046",
-  "UP047",
-]
+ignore = ["ANN401", "COM812", "CPY001", "D203", "D204", "D212", "N818", "S404", "S603", "TD002"]
 preview = true
 
 [tool.ruff.lint.flake8-builtins]
@@ -199,7 +189,7 @@ max-complexity = 20
 extend-ignore-names = ["test_*"]
 
 [tool.ruff.lint.per-file-ignores]
-"main.py" = ["PLR0913"]
+"choco/main.py" = ["PLR0913"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
@@ -214,7 +204,8 @@ max-returns = 10
 max-statements = 100
 
 [tool.uv]
-default-groups = ["dev"]
+default-groups = "all"
+exclude-newer = "1 week"
 
 [tool.yapf]
 align_closing_bracket_with_visual_indent = true

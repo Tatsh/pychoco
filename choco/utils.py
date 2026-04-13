@@ -47,12 +47,27 @@ utils_logger = logging.getLogger(__name__)
 
 
 def generate_unique_id() -> str:
-    """Generate a unique ID for elements in ``_rels/.rels``."""
+    """
+    Generate a unique ID for elements in ``_rels/.rels``.
+
+    Returns
+    -------
+    str
+    """
     return f'R{str(uuid.uuid4()).replace("-", "")}'.upper()
 
 
 def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
-    """Append a directory recursively to a zip file."""
+    """
+    Append a directory recursively to a zip file.
+
+    Parameters
+    ----------
+    root : Path
+        The root directory to append.
+    z : zipfile.ZipFile
+        The zip file to append to.
+    """
     for item in root.iterdir():
         if item.name.endswith('.nupkg'):
             continue
@@ -66,7 +81,7 @@ def append_dir_to_zip_recursive(root: Path, z: zipfile.ZipFile) -> None:
 
 
 class InvalidEntryError(ValueError):
-    """Thrown when an ``<entry>`` is invalid."""
+    """Raised when an ``<entry>`` is invalid."""
 
 
 def parse_boolean_tag(tag: Element | None) -> bool:
@@ -85,13 +100,37 @@ def parse_int_tag(tag: Element | None, default: int = 0) -> int:
 
 
 def tag_text_or(tag: Element | None, default: str | None = None) -> str | None:
-    """Return text from a tag or the default value specified."""
+    """
+    Return text from a tag or the default value specified.
+
+    Parameters
+    ----------
+    tag : Element | None
+        The XML element to extract text from.
+    default : str | None
+        The default value to return if the tag has no text.
+
+    Returns
+    -------
+    str | None
+    """
     return tag.text if tag is not None and tag.text else default
 
 
 def entry_to_search_result(entry: Element, ns: dict[str, str] = FEED_NAMESPACES) -> SearchResult:
     """
-    Convert an ``<entry>`` to a ``SearchResult`` dict.
+    Convert an ``<entry>`` to a :py:class:`~choco.typing.SearchResult` dict.
+
+    Parameters
+    ----------
+    entry : Element
+        The XML entry element to convert.
+    ns : dict[str, str]
+        XML namespace mapping.
+
+    Returns
+    -------
+    SearchResult
 
     Raises
     ------

@@ -32,7 +32,18 @@ __all__ = ('is_valid_package_name', 'new_package')
 
 
 def is_valid_package_name(value: str) -> bool:
-    """Check if a package name is valid."""
+    """
+    Check if a package name is valid.
+
+    Parameters
+    ----------
+    value : str
+        The package name to validate.
+
+    Returns
+    -------
+    bool
+    """
     return bool(re.match(VALID_NAME_RE, value))
 
 
@@ -49,6 +60,15 @@ class InvalidPackageName(ValueError):
 def new_package(name: str) -> Path:
     """
     Scaffolding to create a new package.
+
+    Parameters
+    ----------
+    name : str
+        The name of the package to create.
+
+    Returns
+    -------
+    Path
 
     Raises
     ------
@@ -87,19 +107,27 @@ def pack(work_dir: str = '.') -> zipfile.ZipFile:
     """
     Pack a package directory for distribution (create a nupkg).
 
+    Returns
+    -------
+    zipfile.ZipFile
+
     Raises
     ------
     NoNuspecFilesFound
         If nuspec files are not found in the specified directory.
     TooManyNuspecFiles
         If more than one nuspec file is found in the specified directory.
+    RuntimeError
+        If the nuspec file cannot be parsed.
     """
     if not (nuspecs := list(Path(work_dir).glob('*.nuspec'))):
         raise NoNuspecFilesFound
     if len(nuspecs) > 1:
         raise TooManyNuspecFiles(work_dir)
     root = parse_xml(Path(work_dir) / nuspecs[0]).getroot()
-    assert root is not None
+    if root is None:  # pragma: no cover
+        msg = 'Failed to parse nuspec file.'
+        raise RuntimeError(msg)
     package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
     version = tag_text_or(root.find(NUSPEC_FIELD_VERSION))
     sha = hashlib.sha1()  # noqa: S324

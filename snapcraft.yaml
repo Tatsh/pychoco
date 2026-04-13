@@ -1,6 +1,6 @@
 apps:
   chocolatey-choco:
-    command: 'bin/choco'
+    command: 'bin/chocolatey-choco'
     plugs:
       - 'home'
       - 'network'
