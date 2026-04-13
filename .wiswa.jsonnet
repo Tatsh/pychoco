@@ -12,6 +12,14 @@ local utils = import 'utils.libjsonnet';
   publishing+: { flathub: 'sh.tat.chocolatey-choco' },
   primary_module: 'choco',
   security_policy_supported_versions: { '0.1.x': ':white_check_mark:' },
+  flatpak+: { command: 'choco' },
+  snapcraft+: {
+    apps+: {
+      'chocolatey-choco'+: {
+        command: 'bin/choco',
+      },
+    },
+  },
   pyproject+: {
     project+: {
       scripts: {

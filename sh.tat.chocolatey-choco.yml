@@ -1,5 +1,5 @@
 app-id: 'sh.tat.chocolatey-choco'
-command: 'chocolatey-choco'
+command: 'choco'
 finish-args:
   - '--share=ipc'
   - '--share=network'
