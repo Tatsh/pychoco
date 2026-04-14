@@ -8,40 +8,40 @@
       :target: https://pypi.org/project/chocolatey-choco/
       :alt: PyPI - Version
 
-   .. image:: https://img.shields.io/github/v/tag/Tatsh/chocolatey-choco
-      :target: https://github.com/Tatsh/chocolatey-choco/tags
+   .. image:: https://img.shields.io/github/v/tag/Tatsh/pychoco
+      :target: https://github.com/Tatsh/pychoco/tags
       :alt: GitHub tag (with filter)
 
-   .. image:: https://img.shields.io/github/license/Tatsh/chocolatey-choco
-      :target: https://github.com/Tatsh/chocolatey-choco/blob/master/LICENSE.txt
+   .. image:: https://img.shields.io/github/license/Tatsh/pychoco
+      :target: https://github.com/Tatsh/pychoco/blob/master/LICENSE.txt
       :alt: License
 
-   .. image:: https://img.shields.io/github/commits-since/Tatsh/chocolatey-choco/v0.1.5/master
-      :target: https://github.com/Tatsh/chocolatey-choco/compare/v0.1.5...master
+   .. image:: https://img.shields.io/github/commits-since/Tatsh/pychoco/v0.1.5/master
+      :target: https://github.com/Tatsh/pychoco/compare/v0.1.5...master
       :alt: GitHub commits since latest release (by SemVer including pre-releases)
 
-   .. image:: https://github.com/Tatsh/chocolatey-choco/actions/workflows/codeql.yml/badge.svg
-      :target: https://github.com/Tatsh/chocolatey-choco/actions/workflows/codeql.yml
+   .. image:: https://github.com/Tatsh/pychoco/actions/workflows/codeql.yml/badge.svg
+      :target: https://github.com/Tatsh/pychoco/actions/workflows/codeql.yml
       :alt: CodeQL
 
-   .. image:: https://github.com/Tatsh/chocolatey-choco/actions/workflows/qa.yml/badge.svg
-      :target: https://github.com/Tatsh/chocolatey-choco/actions/workflows/qa.yml
+   .. image:: https://github.com/Tatsh/pychoco/actions/workflows/qa.yml/badge.svg
+      :target: https://github.com/Tatsh/pychoco/actions/workflows/qa.yml
       :alt: QA
 
-   .. image:: https://github.com/Tatsh/chocolatey-choco/actions/workflows/tests.yml/badge.svg
-      :target: https://github.com/Tatsh/chocolatey-choco/actions/workflows/tests.yml
+   .. image:: https://github.com/Tatsh/pychoco/actions/workflows/tests.yml/badge.svg
+      :target: https://github.com/Tatsh/pychoco/actions/workflows/tests.yml
       :alt: Tests
 
-   .. image:: https://coveralls.io/repos/github/Tatsh/chocolatey-choco/badge.svg?branch=master
-      :target: https://coveralls.io/github/Tatsh/chocolatey-choco?branch=master
+   .. image:: https://coveralls.io/repos/github/Tatsh/pychoco/badge.svg?branch=master
+      :target: https://coveralls.io/github/Tatsh/pychoco?branch=master
       :alt: Coverage Status
 
    .. image:: https://img.shields.io/badge/Dependabot-enabled-blue?logo=dependabot
       :target: https://github.com/dependabot
       :alt: Dependabot
 
-   .. image:: https://readthedocs.org/projects/chocolatey-choco/badge/?version=latest
-      :target: https://chocolatey-choco.readthedocs.org/?badge=latest
+   .. image:: https://readthedocs.org/projects/pychoco/badge/?version=latest
+      :target: https://pychoco.readthedocs.org/?badge=latest
       :alt: Documentation Status
 
    .. image:: https://www.mypy-lang.org/static/mypy_badge.svg
@@ -64,8 +64,8 @@
       :target: https://pepy.tech/project/chocolatey-choco
       :alt: Downloads
 
-   .. image:: https://img.shields.io/github/stars/Tatsh/chocolatey-choco?logo=github&style=flat
-      :target: https://github.com/Tatsh/chocolatey-choco/stargazers
+   .. image:: https://img.shields.io/github/stars/Tatsh/pychoco?logo=github&style=flat
+      :target: https://github.com/Tatsh/pychoco/stargazers
       :alt: Stargazers
 
    .. image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit

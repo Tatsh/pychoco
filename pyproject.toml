@@ -4,14 +4,14 @@ requires = ["hatchling"]
 
 [dependency-groups]
 dev = [
-  "commitizen>=4.13.9",
+  "commitizen>=4.13.10",
   "cz-path>=0.0.6",
   "mypy>=1.20.0",
-  "ruff>=0.15.9",
+  "ruff>=0.15.10",
   "ty>=0.0.29",
-  "types-defusedxml>=0.7.0.20260402",
-  "types-python-dateutil>=2.9.0.20260402",
-  "types-requests>=2.33.0.20260402",
+  "types-defusedxml>=0.7.0.20260408",
+  "types-python-dateutil>=2.9.0.20260408",
+  "types-requests>=2.33.0.20260408",
   "yapf>=0.43.0",
 ]
 docs = [
@@ -19,7 +19,7 @@ docs = [
   "doc8>=2.0.0",
   "docutils<0.22",
   "enum-tools[sphinx]>=0.13.0",
-  "esbonio>=1.1.0",
+  "esbonio>=2.0.0",
   "numpydoc>=1.10.0",
   "restructuredtext-lint>=2.0.2",
   "sphinx-click>=6.2.0",
@@ -33,7 +33,7 @@ tests = [
   "mock>=5.2.0",
   "pytest-cov>=7.1.0",
   "pytest-mock>=3.15.1",
-  "pytest>=9.0.2",
+  "pytest>=9.0.3",
   "requests-mock>=1.12.1",
 ]
 
@@ -53,7 +53,7 @@ dependencies = [
   "bascom>=0.1.2",
   "click>=8.3.2",
   "defusedxml>=0.7.1",
-  "platformdirs>=4.9.4",
+  "platformdirs>=4.9.6",
   "python-dateutil>=2.9.0.post0",
   "requests>=2.33.1",
   "tomlkit>=0.14.0",
