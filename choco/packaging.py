@@ -4,10 +4,12 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from os import chdir
 from pathlib import Path
+import asyncio
 import hashlib
 import re
 import zipfile
 
+from anyio import Path as AsyncPath
 from defusedxml.ElementTree import parse as parse_xml
 
 from .constants import (
@@ -57,7 +59,7 @@ class InvalidPackageName(ValueError):
         super().__init__(f'Invalid package name. Name must match "{VALID_NAME_RE}".')
 
 
-def new_package(name: str) -> Path:
+async def new_package(name: str) -> Path:
     """
     Scaffolding to create a new package.
 
@@ -79,18 +81,19 @@ def new_package(name: str) -> Path:
     """
     if not is_valid_package_name(name):
         raise InvalidPackageName
-    if Path(name).exists():
+    p_name = AsyncPath(name)
+    if await p_name.exists():
         raise DirectoryExistsError
-    p_name = Path(name)
-    p_name.mkdir()
-    Path(p_name / f'{name}.nuspec').write_text(NUSPEC_TEMPLATE.safe_substitute(package_id=name),
-                                               encoding='utf-8')
+    await p_name.mkdir()
     tools = p_name / 'tools'
-    tools.mkdir()
-    Path(tools / 'chocolateyInstall.ps1').write_text(
-        CHOCOLATEY_INSTALL_PS1_TEMPLATE.safe_substitute(package_id=name), encoding='utf-8')
-    Path(tools / 'chocolateyUninstall.ps1').write_text(CHOCOLATEY_UNINSTALL_PS1, encoding='utf-8')
-    return p_name
+    await tools.mkdir()
+    await asyncio.gather((p_name / f'{name}.nuspec').write_text(
+        NUSPEC_TEMPLATE.safe_substitute(package_id=name), encoding='utf-8'),
+                         (tools / 'chocolateyInstall.ps1').write_text(
+                             CHOCOLATEY_INSTALL_PS1_TEMPLATE.safe_substitute(package_id=name),
+                             encoding='utf-8'), (tools / 'chocolateyUninstall.ps1').write_text(
+                                 CHOCOLATEY_UNINSTALL_PS1, encoding='utf-8'))
+    return Path(name)
 
 
 class NoNuspecFilesFound(FileNotFoundError):
@@ -103,7 +106,7 @@ class TooManyNuspecFiles(RuntimeError):
         super().__init__(f'Only one nuspec file should be present in {work_dir}.')
 
 
-def pack(work_dir: str = '.') -> zipfile.ZipFile:
+async def pack(work_dir: str = '.') -> zipfile.ZipFile:
     """
     Pack a package directory for distribution (create a nupkg).
 
@@ -120,11 +123,12 @@ def pack(work_dir: str = '.') -> zipfile.ZipFile:
     RuntimeError
         If the nuspec file cannot be parsed.
     """
-    if not (nuspecs := list(Path(work_dir).glob('*.nuspec'))):
+    nuspecs = [p async for p in AsyncPath(work_dir).glob('*.nuspec')]
+    if not nuspecs:
         raise NoNuspecFilesFound
     if len(nuspecs) > 1:
         raise TooManyNuspecFiles(work_dir)
-    root = parse_xml(Path(work_dir) / nuspecs[0]).getroot()
+    root = parse_xml(Path(work_dir) / str(nuspecs[0])).getroot()
     if root is None:  # pragma: no cover
         msg = 'Failed to parse nuspec file.'
         raise RuntimeError(msg)

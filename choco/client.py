@@ -2,12 +2,14 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+import asyncio
 import contextlib
 import logging
 
 from defusedxml.ElementTree import fromstring as parse_xml
-from requests.auth import HTTPBasicAuth
-import requests
+from niquests import AsyncSession, Request
+from niquests.auth import HTTPBasicAuth
+from niquests_cache import AsyncCachedSession
 
 from .constants import (
     DEFAULT_CONFIG,
@@ -21,7 +23,7 @@ from .constants import (
 from .utils import InvalidEntryError, entry_to_search_result, tag_text_or
 
 if TYPE_CHECKING:
-    from collections.abc import Iterator
+    from collections.abc import AsyncIterator
     from pathlib import Path
 
     from .typing import Config, ConfigKey, SearchResult
@@ -42,17 +44,19 @@ class ChocolateyClient:
                  api_keys: dict[str, str] | None = None) -> None:
         self.config = config
         self.api_keys = api_keys or {}
-        self.session = requests.Session()
+        self.session: AsyncSession = AsyncCachedSession(allowable_codes=(200, 201),
+                                                        always_revalidate=True,
+                                                        cache_control=True)
 
-    def get_keys_available(self) -> Iterator[str]:
+    def get_keys_available(self) -> list[str]:
         """
-        Return an iterator of the sources that have keys.
+        Return a list of the sources that have keys.
 
-        Yields
-        ------
-        str
+        Returns
+        -------
+        list[str]
         """
-        yield from self.api_keys.keys()
+        return list(self.api_keys.keys())
 
     def add_key(self, key: str, source: str) -> None:
         """Add an API key for a source."""
@@ -86,35 +90,40 @@ class ChocolateyClient:
             with contextlib.suppress(KeyError):
                 del self.session.headers[NUGET_API_KEY_HTTP_HEADER]
 
-    def push(self, package: Path, source: str | None = None, auth: Auth | None = None) -> None:
+    async def push(self,
+                   package: Path,
+                   source: str | None = None,
+                   auth: Auth | None = None) -> None:
         """Push a package to a source."""
         source = source or self.get_default_push_source()
         self.update_api_key_header(source)
         api_v2 = self._get_api_v2(source)
         with package.open('rb') as f:
-            r = self.session.put(f'{source}{api_v2}/package/', auth=auth, files={package.name: f})
+            r = await self.session.put(f'{source}{api_v2}/package/',
+                                       auth=auth,
+                                       files={package.name: f})
             r.raise_for_status()
 
     def _get_api_v2(self, source: str | None = None) -> str:
         source = source or self.get_default_push_source()
         return '/api/v2' if '/api/v2' not in source else ''
 
-    def search(self,
-               terms: str,
-               *,
-               auth: Auth | None = None,
-               all_versions: bool = False,
-               by_id_only: bool = False,
-               by_tag_only: bool = False,
-               exact: bool = False,
-               id_starts_with: bool = False,
-               include_prerelease: bool = False,
-               order_by_popularity: bool = False,
-               page: int | None = None,
-               page_size: int = 30,
-               source: str | None = None) -> Iterator[SearchResult]:
+    async def search(self,
+                     terms: str,
+                     *,
+                     auth: Auth | None = None,
+                     all_versions: bool = False,
+                     by_id_only: bool = False,
+                     by_tag_only: bool = False,
+                     exact: bool = False,
+                     id_starts_with: bool = False,
+                     include_prerelease: bool = False,
+                     order_by_popularity: bool = False,
+                     page: int | None = None,
+                     page_size: int = 30,
+                     source: str | None = None) -> AsyncIterator[SearchResult]:
         """
-        Search packages. Returns a deduplicated iterator of results.
+        Search packages. Returns a deduplicated async iterator of results.
 
         Yields
         ------
@@ -125,29 +134,27 @@ class ChocolateyClient:
         ns = FEED_NAMESPACES
         api_v2 = self._get_api_v2(source)
         source = source or self.get_default_push_source()
-        searches: list[requests.Request] = []
+        searches: list[Request] = []
         order_by = 'Id' if not order_by_popularity else 'DownloadCount desc,Id'
         if (not all_versions and not by_id_only and not by_tag_only and not exact
-                and not id_starts_with):  # Default case
+                and not id_starts_with):
             searches.append(
-                requests.Request(
-                    'GET',
-                    f'{source}{api_v2}/Packages',
-                    params={
-                        '$filter':
-                            f"((((Id ne null) and substringof('{terms}',tolower(Id))) or "
-                            f"((Description ne null) and substringof('{terms}',"
-                            'tolower(Description))))'
-                            f" or ((Tags ne null) and substringof(' {terms} ',tolower(Tags)))) "
-                            "and IsLatestVersion",
-                        '$orderby': order_by,
-                        '$skip': str(0 if page is None else page * page_size),
-                        '$top': str(page_size)
-                    }))
+                Request('GET',
+                        f'{source}{api_v2}/Packages',
+                        params={
+                            '$filter':
+                                f"((((Id ne null) and substringof('{terms}',tolower(Id))) or "
+                                f"((Description ne null) and substringof('{terms}',"
+                                'tolower(Description))))'
+                                f" or ((Tags ne null) and substringof(' {terms} ',tolower(Tags)))) "
+                                "and IsLatestVersion",
+                            '$orderby': order_by,
+                            '$skip': str(0 if page is None else page * page_size),
+                            '$top': str(page_size)
+                        }))
         else:
             if all_versions:
                 searches.append(
-                    requests.
                     Request('GET',
                             f'{source}{api_v2}/Search()',
                             params={
@@ -156,18 +163,17 @@ class ChocolateyClient:
                                 'includePrerelease': 'true' if include_prerelease else 'false',
                                 'searchTerm': f"'{terms}'",
                                 'targetFramework': "''"
-                            }) if not exact else requests.
-                    Request(
-                        'GET', f'{source}{api_v2}/FindPackagesById()', params={'id': f"'{terms}'"}))
+                            }) if not exact else Request('GET',
+                                                         f'{source}{api_v2}/FindPackagesById()',
+                                                         params={'id': f"'{terms}'"}))
             elif exact:
                 searches.append(
-                    requests.Request(
-                        'GET',
-                        f'{source}{api_v2}/Packages',
-                        params={'$filter': f"(tolower(Id) eq '{terms}') and IsLatestVersion"}))
+                    Request('GET',
+                            f'{source}{api_v2}/Packages',
+                            params={'$filter': f"(tolower(Id) eq '{terms}') and IsLatestVersion"}))
             if by_id_only:
                 searches.append(
-                    requests.Request(
+                    Request(
                         'GET',
                         f'{source}{api_v2}/Packages',
                         params={
@@ -181,21 +187,20 @@ class ChocolateyClient:
                         }))
             if by_tag_only:
                 searches.append(
-                    requests.Request(
-                        'GET',
-                        f'{source}{api_v2}/Packages',
-                        params={
-                            '$filter': f"(substringof('{terms}',Tags)) and IsLatestVersion",
-                            '$orderby': order_by,
-                            '$skip': str(0 if page is None else page * page_size),
-                            '$top': str(page_size),
-                            'includePrerelease': 'true' if include_prerelease else 'false',
-                            'searchTerm': f"'{terms}'",
-                            'targetFramework': "''"
-                        }))
+                    Request('GET',
+                            f'{source}{api_v2}/Packages',
+                            params={
+                                '$filter': f"(substringof('{terms}',Tags)) and IsLatestVersion",
+                                '$orderby': order_by,
+                                '$skip': str(0 if page is None else page * page_size),
+                                '$top': str(page_size),
+                                'includePrerelease': 'true' if include_prerelease else 'false',
+                                'searchTerm': f"'{terms}'",
+                                'targetFramework': "''"
+                            }))
             if id_starts_with:
                 searches.append(
-                    requests.Request(
+                    Request(
                         'GET',
                         f'{source}{api_v2}/Search()',
                         params={
@@ -209,39 +214,62 @@ class ChocolateyClient:
         results: dict[str, SearchResult] = {}
         for req in searches:
             req.auth = auth
-            req.params['semVerLevel'] = '2.0.0'
-            next_url: str | None = 'initial'  # Use a sentinel value for first iteration.
-            while next_url:
-                if next_url and next_url != 'initial':
-                    # For pagination, use the full URL from the next link.
-                    log.debug('Using next_url: %s', next_url)
-                    prepared_req = requests.Request('GET', next_url, auth=auth).prepare()
-                else:
-                    prepared_req = req.prepare()
-                if prepared_req.url is None:  # pragma: no cover
+            params = dict(req.params) if isinstance(req.params, dict) else {}
+            params['semVerLevel'] = '2.0.0'
+            req.params = params
+        initial_responses = await asyncio.gather(*(self._send_prepared(req) for req in searches))
+        for content in initial_responses:
+            await self._process_pages(content, auth, ns, results)
+        for result in reversed(results.values()):
+            yield result
+
+    async def _send_prepared(self, req: Request) -> str:
+        prepared_req = req.prepare()
+        if prepared_req.url is None:  # pragma: no cover
+            return ''
+        prepared_req.url = prepared_req.url.replace('%28', '(').replace('%29', ')').replace(
+            "'", '%27').replace('+', '%20')
+        r = await self.session.send(prepared_req)
+        r.raise_for_status()
+        return r.text or ''
+
+    async def _process_pages(self, content: str, auth: Auth | None, ns: dict[str, str],
+                             results: dict[str, SearchResult]) -> None:
+        if OBJECT_REF_NOT_SET_ERROR_MESSAGE in content:
+            content += '\n  </link>\n</feed>'
+        root = parse_xml(content)
+        for entry in root.findall(FEED_ENTRY_TAG, ns):
+            id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
+            if not id_url or id_url in results:
+                continue
+            with contextlib.suppress(InvalidEntryError):
+                results[id_url] = entry_to_search_result(entry, ns)
+        next_link = root.find("link[@rel='next']", ns)
+        if results and next_link is not None:
+            href = next_link.get('href')
+            next_url = href if isinstance(href, str) and href else None
+        else:
+            next_url = None
+        while next_url:
+            log.debug('Using next_url: %s', next_url)
+            prepared_req = Request('GET', next_url, auth=auth).prepare()
+            if prepared_req.url is None:  # pragma: no cover
+                break
+            r = await self.session.send(prepared_req)
+            r.raise_for_status()
+            content = r.text or ''
+            if OBJECT_REF_NOT_SET_ERROR_MESSAGE in content:
+                content += '\n  </link>\n</feed>'
+            root = parse_xml(content)
+            for entry in root.findall(FEED_ENTRY_TAG, ns):
+                id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
+                if not id_url or id_url in results:
                     continue
-                # chocolatey.org requires ()'+ to be unescaped.
-                prepared_req.url = prepared_req.url.replace('%28', '(').replace('%29', ')').replace(
-                    "'", '%27').replace('+', '%20')
-                r = self.session.send(prepared_req)
-                r.raise_for_status()
-                content = r.text
-                # There appears to be a bug on chocolatey.org where their pagination throws an
-                # exception.
-                if OBJECT_REF_NOT_SET_ERROR_MESSAGE in content:
-                    content += '\n  </link>\n</feed>'
-                root = parse_xml(content)
-                for entry in root.findall(FEED_ENTRY_TAG, ns):
-                    id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
-                    if not id_url or id_url in results:
-                        continue
-                    with contextlib.suppress(InvalidEntryError):
-                        results[id_url] = entry_to_search_result(entry, ns)
-                # Check for pagination link
-                next_link = root.find("link[@rel='next']", ns)
-                if results and next_link is not None:
-                    href = next_link.get('href')
-                    next_url = href if isinstance(href, str) and href else None
-                else:
-                    next_url = None
-        yield from reversed(results.values())
+                with contextlib.suppress(InvalidEntryError):
+                    results[id_url] = entry_to_search_result(entry, ns)
+            next_link = root.find("link[@rel='next']", ns)
+            if results and next_link is not None:
+                href = next_link.get('href')
+                next_url = href if isinstance(href, str) and href else None
+            else:
+                next_url = None

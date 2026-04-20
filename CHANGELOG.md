@@ -9,6 +9,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [unreleased]
 
+### Changed
+
+- Switched HTTP client from `requests` to `niquests` with `niquests-cache` for conditional
+  revalidation (ETag/Last-Modified).
+- Converted all I/O to async using `asyncio` and `anyio.Path`.
+
 ## [0.1.5]
 
 ### Added

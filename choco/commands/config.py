@@ -1,7 +1,9 @@
 """Manage configuration."""
 from __future__ import annotations
 
+from pathlib import Path
 from typing import TYPE_CHECKING
+import asyncio
 
 from bascom import setup_logging
 from choco.config import read_config, write_config
@@ -28,16 +30,20 @@ __all__ = ('config',)
               default=PYCHOCO_TOML_PATH,
               help='Storage file.',
               metavar='PATH',
-              type=click.Path(dir_okay=False, resolve_path=True))
-def set_(name: ConfigKey, value: str, path: str | None, *, debug: bool = False) -> None:
+              type=click.Path(dir_okay=False, path_type=Path, resolve_path=True))
+def set_(name: ConfigKey, value: str, path: Path | None, *, debug: bool = False) -> None:
     """Set a configuration value."""
-    setup_logging(debug=debug, loggers={'choco': {'handlers': ('console',), 'propagate': False}})
+    setup_logging(debug=debug, loggers={'choco': {}})
+    asyncio.run(_set_async(name=name, path=path, value=value))
+
+
+async def _set_async(name: ConfigKey, value: str, path: Path | None) -> None:
     try:
-        config = read_config(path)
+        config = await read_config(path)
     except FileNotFoundError:
         config = DEFAULT_CONFIG
     config['pychoco'][name] = value
-    write_config(config, path)
+    await write_config(config, path)
 
 
 @click.group()

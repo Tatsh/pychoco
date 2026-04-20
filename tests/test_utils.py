@@ -7,6 +7,7 @@ from choco.client import ChocolateyClient
 from choco.config import read_all
 from choco.constants import DEFAULT_CONFIG
 from choco.utils import append_dir_to_zip_recursive, parse_int_tag
+import pytest
 
 if TYPE_CHECKING:
     from collections.abc import Iterator
@@ -17,10 +18,10 @@ if TYPE_CHECKING:
 
 def test_client_keys_available() -> None:
     client = ChocolateyClient()
-    keys = list(client.get_keys_available())
+    keys = client.get_keys_available()
     assert len(keys) == 0
     client.add_key('key1', 'https://new-source')
-    keys = list(client.get_keys_available())
+    keys = client.get_keys_available()
     assert len(keys) == 1
     assert keys[0] == 'https://new-source'
 
@@ -31,12 +32,13 @@ def test_client_config_set() -> None:
     assert client.config['pychoco'].get('defaultPushSource') == 'https://new-source'
 
 
-def test_config_read_all_defaults(mocker: MockerFixture) -> None:
+@pytest.mark.asyncio
+async def test_config_read_all_defaults(mocker: MockerFixture) -> None:
     read_config_mock = mocker.patch('choco.config.read_config')
     read_config_mock.side_effect = FileNotFoundError()
     read_api_keys_mock = mocker.patch('choco.config.read_api_keys')
     read_api_keys_mock.side_effect = FileNotFoundError()
-    config, api_keys = read_all()
+    config, api_keys = await read_all()
     assert config == DEFAULT_CONFIG
     assert api_keys is None
 

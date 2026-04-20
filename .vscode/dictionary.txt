@@ -5,6 +5,7 @@ apikey
 appauthor
 appdir
 appimage
+anyio
 appinfo
 asyncio
 autodoc
@@ -35,6 +36,7 @@ doctrees
 dunder
 eeyore
 elif
+errpkg
 esac
 esbenp
 esbonio
@@ -45,6 +47,7 @@ foxundermoon
 functools
 genindex
 globaltoc
+googlechrome
 hoverxref
 htmlcov
 idonly
@@ -72,6 +75,7 @@ monkeypatch
 myproject
 mypy
 namedtuples
+niquests
 norecursedirs
 notarytool
 npmjs
@@ -84,6 +88,7 @@ openxmlformats
 pathlib
 pavelzw
 pipx
+pkga
 platformdirs
 plistlib
 prodvers

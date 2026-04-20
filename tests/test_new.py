@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
+from unittest.mock import AsyncMock
 
-from choco.constants import CHOCOLATEY_UNINSTALL_PS1
 from choco.main import main as choco
 
 if TYPE_CHECKING:
@@ -11,24 +11,25 @@ if TYPE_CHECKING:
 
 
 def test_new(runner: CliRunner, mocker: MockerFixture) -> None:
-    path_mock = mocker.patch('choco.packaging.Path')
-    path_mock.return_value.exists.return_value = False
+    path_mock = mocker.patch('choco.packaging.AsyncPath')
+    path_mock.return_value.exists = AsyncMock(return_value=False)
+    path_mock.return_value.mkdir = AsyncMock()
+    path_mock.return_value.__truediv__ = lambda _self, _x: path_mock.return_value
+    path_mock.return_value.write_text = AsyncMock()
     run = runner.invoke(choco, ('new', 'okay-name'))
     assert run.exit_code == 0
-    assert path_mock.call_count == 5
-    path_mock.assert_any_call('okay-name')
-    path_mock.return_value.write_text.assert_called_with(CHOCOLATEY_UNINSTALL_PS1, encoding='utf-8')
+    assert path_mock.return_value.write_text.call_count == 3
 
 
 def test_new_file_exists(runner: CliRunner, mocker: MockerFixture) -> None:
-    path_mock = mocker.patch('choco.packaging.Path')
-    path_mock.return_value.exists.return_value = True
+    path_mock = mocker.patch('choco.packaging.AsyncPath')
+    path_mock.return_value.exists = AsyncMock(return_value=True)
     run = runner.invoke(choco, ('new', 'okay-name.install'))
     assert isinstance(run.exception, SystemExit)
     assert run.exit_code != 0
 
 
-def test_new_bad_name(runner: CliRunner, mocker: MockerFixture) -> None:
+def test_new_bad_name(runner: CliRunner) -> None:
     run = runner.invoke(choco, ('new', 'bad_name'))
     assert isinstance(run.exception, SystemExit)
     assert run.exit_code != 0

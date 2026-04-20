@@ -15,21 +15,33 @@ from choco.packaging import TooManyNuspecFiles
 from choco.templates import NUSPEC_TEMPLATE
 
 if TYPE_CHECKING:
+    from collections.abc import AsyncGenerator
+
     from click.testing import CliRunner
     from pytest_mock.plugin import MockerFixture
 
 
 def test_pack_not_exist(runner: CliRunner, mocker: MockerFixture) -> None:
-    path_mock = mocker.patch('choco.packaging.Path')
-    path_mock.return_value.glob.return_value = []
+    path_mock = mocker.patch('choco.packaging.AsyncPath')
+
+    async def empty_glob(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:  # noqa: RUF029
+        return
+        yield
+
+    path_mock.return_value.glob = empty_glob
     run = runner.invoke(choco, ('pack', 'okay-name'))
     assert isinstance(run.exception, SystemExit)
     assert run.exit_code != 0
 
 
 def test_pack_too_many_nuspec(runner: CliRunner, mocker: MockerFixture) -> None:
-    path_mock = mocker.patch('choco.packaging.Path')
-    path_mock.return_value.glob.return_value = ['a.nuspec', 'b.nuspec']
+    path_mock = mocker.patch('choco.packaging.AsyncPath')
+
+    async def two_nuspecs(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:  # noqa: RUF029
+        yield 'a.nuspec'
+        yield 'b.nuspec'
+
+    path_mock.return_value.glob = two_nuspecs
     run = runner.invoke(choco, ('pack', 'okay-name'))
     assert isinstance(run.exception, TooManyNuspecFiles)
     assert run.exit_code != 0
@@ -60,8 +72,13 @@ def test_pack_normal(runner: CliRunner, mocker: MockerFixture) -> None:
     chdir_mock = mocker.patch('choco.packaging.chdir')
     parse_xml_mock = mocker.patch('choco.packaging.parse_xml')
     zip_mock = mocker.patch('choco.packaging.zipfile.ZipFile')
-    path_mock = mocker.patch('choco.packaging.Path')
-    path_mock.return_value.glob.return_value = ['a.nuspec']
+    path_mock = mocker.patch('choco.packaging.AsyncPath')
+
+    async def one_nuspec(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:  # noqa: RUF029
+        yield 'a.nuspec'
+
+    path_mock.return_value.glob = one_nuspec
+    mocker.patch('choco.packaging.Path')
     NUSPEC_TEMPLATE.safe_substitute(package_id='okay-name')
     parse_xml_mock.return_value.getroot.return_value = FakeRoot()
     run = runner.invoke(choco, ('pack', 'okay-name'))

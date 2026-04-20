@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, cast
+import asyncio
 
 from bascom import setup_logging
 from choco.client import ChocolateyClient
@@ -31,7 +32,7 @@ __all__ = ('search',)
               'id_only',
               help='Only return Package IDs in the list results.',
               is_flag=True)
-@click.option('--order-by-popularity', is_flag=True, help='Sort by package results by popularity.')
+@click.option('--order-by-popularity', is_flag=True, help='Sort package results by popularity.')
 @click.option('--page', type=int, help='The "page" of results to return.', default=None)
 @click.option('--page-size',
               type=int,
@@ -58,21 +59,32 @@ __all__ = ('search',)
 def search(page: int | None, password: str, source: str, terms: str, user: str, *,
            all_versions: bool, by_id_only: bool, by_tag_only: bool, debug: bool, exact: bool,
            id_only: bool, id_starts_with: bool, include_prerelease: bool, order_by_popularity: bool,
-           page_size: bool) -> None:
+           page_size: int) -> None:
     """Search a source."""
-    setup_logging(debug=debug,
-                  loggers={
-                      'choco': {
-                          'handlers': ('console',),
-                          'propagate': False
-                      },
-                      'urllib3': {
-                          'handlers': ('console',),
-                          'propagate': False
-                      }
-                  })
-    config, api_keys = read_all()
-    for result in ChocolateyClient(config, api_keys).search(
+    setup_logging(debug=debug, loggers={'choco': {}, 'urllib3': {}})
+    asyncio.run(
+        _search_async(all_versions=all_versions,
+                      by_id_only=by_id_only,
+                      by_tag_only=by_tag_only,
+                      exact=exact,
+                      id_only=id_only,
+                      id_starts_with=id_starts_with,
+                      include_prerelease=include_prerelease,
+                      order_by_popularity=order_by_popularity,
+                      page=page,
+                      page_size=page_size,
+                      password=password,
+                      source=source,
+                      terms=terms,
+                      user=user))
+
+
+async def _search_async(terms: str, *, all_versions: bool, by_id_only: bool, by_tag_only: bool,
+                        exact: bool, id_only: bool, id_starts_with: bool, include_prerelease: bool,
+                        order_by_popularity: bool, page: int | None, page_size: int, password: str,
+                        source: str, user: str) -> None:
+    config, api_keys = await read_all()
+    async for result in ChocolateyClient(config, api_keys).search(
             terms,
             auth=(user, password) if user and password else None,
             all_versions=all_versions,

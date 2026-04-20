@@ -27,12 +27,25 @@ local utils = import 'utils.libjsonnet';
       },
     },
     tool+: {
+      pytest+: {
+        ini_options+: {
+          asyncio_mode: 'strict',
+        },
+      },
+      uv+: {
+        'exclude-newer-package'+: {
+          'niquests-cache': false,
+          'niquests-mock': false,
+        },
+      },
       poetry+: {
         dependencies+: {
+          anyio: utils.latestPypiPackageVersionCaret('anyio'),
           defusedxml: utils.latestPypiPackageVersionCaret('defusedxml'),
+          niquests: utils.latestPypiPackageVersionCaret('niquests'),
+          'niquests-cache': utils.latestPypiPackageVersionCaret('niquests-cache'),
           platformdirs: utils.latestPypiPackageVersionCaret('platformdirs'),
           'python-dateutil': utils.latestPypiPackageVersionCaret('python-dateutil'),
-          requests: utils.latestPypiPackageVersionCaret('requests'),
           tomlkit: utils.latestPypiPackageVersionCaret('tomlkit'),
         },
         group+: {
@@ -40,12 +53,12 @@ local utils = import 'utils.libjsonnet';
             dependencies+: {
               'types-defusedxml': utils.latestPypiPackageVersionCaret('types-defusedxml'),
               'types-python-dateutil': utils.latestPypiPackageVersionCaret('types-python-dateutil'),
-              'types-requests': utils.latestPypiPackageVersionCaret('types-requests'),
             },
           },
           tests+: {
             dependencies+: {
-              'requests-mock': utils.latestPypiPackageVersionCaret('requests-mock'),
+              'niquests-mock': utils.latestPypiPackageVersionCaret('niquests-mock'),
+              'pytest-asyncio': utils.latestPypiPackageVersionCaret('pytest-asyncio'),
             },
           },
         },

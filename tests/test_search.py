@@ -1,52 +1,53 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from urllib.parse import quote, urlencode
 
 from choco.main import main as choco
 import pytest
 
 if TYPE_CHECKING:
+    from collections.abc import AsyncGenerator
+
     from click.testing import CliRunner
+    from niquests_mock import MockRouter
     from pytest_mock import MockerFixture
-    import requests_mock as req_mock
 
 
-def test_search_no_options_bad_entry(runner: CliRunner, requests_mock: req_mock.Mocker,
+def test_search_no_options_bad_entry(runner: CliRunner, niquests_mock: MockRouter,
                                      bad_feed: str) -> None:
     terms = 'rt-hd-dump'
-    qs = urlencode(
-        {
+    niquests_mock.get(
+        'https://somehost/api/v2/Packages',
+        params={
             '$filter': f"((((Id ne null) and substringof('{terms}',tolower(Id))) or "
                        f"((Description ne null) and substringof('{terms}',tolower(Description))))"
                        f" or ((Tags ne null) and substringof(' {terms} ',tolower(Tags)))) "
                        "and IsLatestVersion",
             '$orderby': 'Id',
             '$skip': '0',
-            '$top': '30'
-        },
-        quote_via=quote)
-    requests_mock.get(f'https://somehost/api/v2/Packages?{qs}', text=bad_feed)
+            '$top': '30',
+            'semVerLevel': '2.0.0'
+        }).respond(text=bad_feed)
     run = runner.invoke(choco, ('search', '-s', 'https://somehost', terms))
     assert not run.stdout
     assert run.exit_code == 0
 
 
-def test_search_no_options_bad_entry_id_only(runner: CliRunner, requests_mock: req_mock.Mocker,
+def test_search_no_options_bad_entry_id_only(runner: CliRunner, niquests_mock: MockRouter,
                                              bad_feed: str) -> None:
     terms = 'rt-hd-dump'
-    qs = urlencode(
-        {
+    niquests_mock.get(
+        'https://somehost/api/v2/Packages',
+        params={
             '$filter': f"((((Id ne null) and substringof('{terms}',tolower(Id))) or "
                        f"((Description ne null) and substringof('{terms}',tolower(Description))))"
                        f" or ((Tags ne null) and substringof(' {terms} ',tolower(Tags)))) "
                        "and IsLatestVersion",
             '$orderby': 'Id',
             '$skip': '0',
-            '$top': '30'
-        },
-        quote_via=quote)
-    requests_mock.get(f'https://somehost/api/v2/Packages?{qs}', text=bad_feed)
+            '$top': '30',
+            'semVerLevel': '2.0.0'
+        }).respond(text=bad_feed)
     for run in (runner.invoke(choco, ('search', '--id-only', '-s', 'https://somehost', terms)),
                 runner.invoke(choco, ('search', '--idonly', '-s', 'https://somehost', terms))):
         assert not run.stdout
@@ -58,17 +59,20 @@ def test_search_no_options_bad_entry_id_only(runner: CliRunner, requests_mock: r
                           ('search', '--all', '--exact', '-s', 'https://somehost', 'chrome'),
                           ('search', '--allversions', '-e', '-s', 'https://somehost', 'chrome'),
                           ('search', '--all-versions', '-e', '-s', 'https://somehost', 'chrome')])
-def test_search_all_versions_exact(runner: CliRunner, requests_mock: req_mock.Mocker,
+def test_search_all_versions_exact(runner: CliRunner, niquests_mock: MockRouter,
                                    chrome_all_versions_exact_feed: str, args: tuple[str,
                                                                                     ...]) -> None:
     terms = 'chrome'
-    qs = urlencode({'id': f"'{terms}'"})
-    requests_mock.get(f'https://somehost/api/v2/FindPackagesById()?{qs}',
-                      text=chrome_all_versions_exact_feed)
-    requests_mock.get(
-        ("http://community.chocolatey.org/api/v2/FindPackagesById()?id='googlechrome'&"
-         "$skiptoken='GoogleChrome','111.0.5563.111'"),
-        text="""<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+    niquests_mock.get('https://somehost/api/v2/FindPackagesById()',
+                      params={
+                          'id': f"'{terms}'",
+                          'semVerLevel': '2.0.0'
+                      }).respond(text=chrome_all_versions_exact_feed)
+    niquests_mock.get('http://community.chocolatey.org/api/v2/FindPackagesById()',
+                      params={
+                          'id': "'googlechrome'",
+                          '$skiptoken': "'GoogleChrome','111.0.5563.111'"
+                      }).respond(text="""<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title type="text">FindPackagesById</title>
   <id>http://somehost/api/v2/FindPackagesById</id>
@@ -81,11 +85,13 @@ def test_search_all_versions_exact(runner: CliRunner, requests_mock: req_mock.Mo
     assert lines[-1].strip() == 'GoogleChrome 10.0.0 [Approved]'
 
 
-def test_search_no_duplicates(runner: CliRunner, requests_mock: req_mock.Mocker,
-                              dupe_feed: str) -> None:
+def test_search_no_duplicates(runner: CliRunner, niquests_mock: MockRouter, dupe_feed: str) -> None:
     terms = 'chrome'
-    qs = urlencode({'id': f"'{terms}'"}, quote_via=quote)
-    requests_mock.get(f'https://somehost/api/v2/FindPackagesById()?{qs}', text=dupe_feed)
+    niquests_mock.get('https://somehost/api/v2/FindPackagesById()',
+                      params={
+                          'id': f"'{terms}'",
+                          'semVerLevel': '2.0.0'
+                      }).respond(text=dupe_feed)
     run = runner.invoke(choco, ('search', '-a', '-e', '-s', 'https://somehost', terms))
     lines = run.stdout.splitlines()
     assert len(lines) == 1
@@ -93,9 +99,9 @@ def test_search_no_duplicates(runner: CliRunner, requests_mock: req_mock.Mocker,
 
 def test_search_id_only(runner: CliRunner, mocker: MockerFixture) -> None:
     mocker.patch('choco.commands.search.ChocolateyClient.search',
-                 return_value=[{
+                 return_value=_async_iter([{
                      'title': 'chrome1'
-                 }])
+                 }]))
     run = runner.invoke(choco, ('search', '--idonly', "'chrome'"))
     assert run.exit_code == 0
     assert run.output.strip() == 'chrome1'
@@ -103,7 +109,7 @@ def test_search_id_only(runner: CliRunner, mocker: MockerFixture) -> None:
 
 def test_search_else_case(runner: CliRunner, mocker: MockerFixture) -> None:
     mocker.patch('choco.commands.search.ChocolateyClient.search',
-                 return_value=[{
+                 return_value=_async_iter([{
                      'title': 'chrome1',
                      'testing_status': 'testing',
                      'version': '1.0.0',
@@ -111,7 +117,7 @@ def test_search_else_case(runner: CliRunner, mocker: MockerFixture) -> None:
                      'is_approved': True,
                      'testing_date': '2023-10-01T00:00:00Z',
                      'tags': ['tag1', 'tag2']
-                 }])
+                 }]))
     run = runner.invoke(choco, ('search', "'chrome'"))
     assert run.exit_code == 0
     assert run.output.strip() == """chrome1 1.0.0 [Approved] Downloads cached for licensed users
@@ -132,7 +138,7 @@ def test_search_else_case(runner: CliRunner, mocker: MockerFixture) -> None:
 
 def test_search_else_case_no_title(runner: CliRunner, mocker: MockerFixture) -> None:
     mocker.patch('choco.commands.search.ChocolateyClient.search',
-                 return_value=[{
+                 return_value=_async_iter([{
                      'title': None,
                      'testing_status': 'testing',
                      'version': '1.0.0',
@@ -140,7 +146,7 @@ def test_search_else_case_no_title(runner: CliRunner, mocker: MockerFixture) -> 
                      'is_approved': True,
                      'testing_date': '2023-10-01T00:00:00Z',
                      'tags': ['tag1', 'tag2']
-                 }])
+                 }]))
     run = runner.invoke(choco, ('search', "'chrome'"))
     assert run.exit_code == 0
     assert run.output.strip() == """no title? 1.0.0 [Approved] Downloads cached for licensed users
@@ -161,7 +167,7 @@ def test_search_else_case_no_title(runner: CliRunner, mocker: MockerFixture) -> 
 
 def test_search_else_case_no_version(runner: CliRunner, mocker: MockerFixture) -> None:
     mocker.patch('choco.commands.search.ChocolateyClient.search',
-                 return_value=[{
+                 return_value=_async_iter([{
                      'title': 'chrome1',
                      'version': None,
                      'testing_status': 'testing',
@@ -169,7 +175,7 @@ def test_search_else_case_no_version(runner: CliRunner, mocker: MockerFixture) -
                      'is_approved': True,
                      'testing_date': '2023-10-01T00:00:00Z',
                      'tags': ['tag1', 'tag2']
-                 }])
+                 }]))
     run = runner.invoke(choco, ('search', "'chrome'"))
     assert run.exit_code == 0
     assert run.output.strip(
@@ -191,7 +197,7 @@ def test_search_else_case_no_version(runner: CliRunner, mocker: MockerFixture) -
 
 def test_search_else_case_no_testing_date(runner: CliRunner, mocker: MockerFixture) -> None:
     mocker.patch('choco.commands.search.ChocolateyClient.search',
-                 return_value=[{
+                 return_value=_async_iter([{
                      'title': 'chrome1',
                      'version': '1.0.0',
                      'testing_status': 'testing',
@@ -199,7 +205,7 @@ def test_search_else_case_no_testing_date(runner: CliRunner, mocker: MockerFixtu
                      'is_approved': True,
                      'testing_date': None,
                      'tags': ['tag1', 'tag2']
-                 }])
+                 }]))
     run = runner.invoke(choco, ('search', "'chrome'"))
     assert run.exit_code == 0
     assert run.output.strip() == """chrome1 1.0.0 [Approved] Downloads cached for licensed users
@@ -218,10 +224,9 @@ def test_search_else_case_no_testing_date(runner: CliRunner, mocker: MockerFixtu
  Release Notes: ${release_notes_uri}"""
 
 
-def test_search_pagination_exact(runner: CliRunner, requests_mock: req_mock.Mocker) -> None:
+def test_search_pagination_exact(runner: CliRunner, niquests_mock: MockRouter) -> None:
     """Test that pagination works correctly for exact searches."""
     terms = 'testpkg'
-    # First page with 2 entries and a next link
     page1_feed = """<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <feed xmlns="http://www.w3.org/2005/Atom"
       xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
@@ -250,7 +255,6 @@ def test_search_pagination_exact(runner: CliRunner, requests_mock: req_mock.Mock
   <link rel="next"
         href="https://somehost/P?f=test&amp;skip=2" />
 </feed>"""
-    # Second page with 1 entry and no next link
     page2_feed = """<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <feed xmlns="http://www.w3.org/2005/Atom"
       xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices"
@@ -268,33 +272,44 @@ def test_search_pagination_exact(runner: CliRunner, requests_mock: req_mock.Mock
     </m:properties>
   </entry>
 </feed>"""
-    qs = urlencode({'$filter': f"(tolower(Id) eq '{terms}') and IsLatestVersion"}, quote_via=quote)
-    requests_mock.get(f'https://somehost/api/v2/Packages?{qs}', text=page1_feed)
-    requests_mock.get('https://somehost/P?f=test&skip=2', text=page2_feed)
+    niquests_mock.get('https://somehost/api/v2/Packages',
+                      params={
+                          '$filter': f"(tolower(Id) eq '{terms}') and IsLatestVersion",
+                          'semVerLevel': '2.0.0'
+                      }).respond(text=page1_feed)
+    niquests_mock.get('https://somehost/P', params={
+        'f': 'test',
+        'skip': '2'
+    }).respond(text=page2_feed)
 
     run = runner.invoke(choco, ('search', '-e', '-s', 'https://somehost', terms))
     assert run.exit_code == 0
     output = run.stdout
-    # Should have all 3 entries from both pages
     assert 'TestPkg 3.0.0' in output
     assert 'TestPkg 2.0.0' in output
     assert 'TestPkg 1.0.0' in output
 
 
 def test_search_handles_error_at_end_of_xml(logparser_search_error_feed: str, runner: CliRunner,
-                                            requests_mock: req_mock.Mocker) -> None:
-    params = urlencode({
-        '$filter': "(startswith(tolower(Id),'logparser')) and IsLatestVersion",
-        '$orderby': 'Id',
-        '$skip': '0',
-        '$top': '30',
-        'includePrerelease': 'false',
-        'searchTerm': "'logparser'"
-    })
-    requests_mock.get(f'https://somehost/api/v2/Search()?{params}',
-                      text=logparser_search_error_feed)
+                                            niquests_mock: MockRouter) -> None:
+    niquests_mock.get('https://somehost/api/v2/Search()',
+                      params={
+                          '$filter': "(startswith(tolower(Id),'logparser')) and IsLatestVersion",
+                          '$orderby': 'Id',
+                          '$skip': '0',
+                          '$top': '30',
+                          'includePrerelease': 'false',
+                          'searchTerm': "'logparser'",
+                          'semVerLevel': '2.0.0'
+                      }).respond(text=logparser_search_error_feed)
     run = runner.invoke(choco,
                         ('search', '-s', 'https://somehost', '--id-starts-with', 'logparser'))
     assert run.exit_code == 0
     output = run.stdout
     assert 'logparser.lizardgui' in output
+
+
+async def _async_iter(  # noqa: RUF029
+        items: list[dict[str, object]]) -> AsyncGenerator[dict[str, object]]:
+    for item in items:
+        yield item

@@ -2,29 +2,25 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import TYPE_CHECKING
+from unittest.mock import AsyncMock
 
 from choco.main import main as choco
 
 if TYPE_CHECKING:
     from click.testing import CliRunner
+    from niquests_mock import MockRouter
     from pytest_mock.plugin import MockerFixture
-    import requests_mock as req_mock
 
 
 def test_push_error(
     runner: CliRunner,
     mocker: MockerFixture,
-    requests_mock: req_mock.Mocker,
+    niquests_mock: MockRouter,
 ) -> None:
     saved = '[pychoco]\ndefaultPushSource = "http://old-value"\n'
-
-    def read_config(encoding: str | None = None) -> str:
-        nonlocal saved
-        return saved
-
-    path_mock = mocker.patch('choco.config.Path')
-    path_mock.return_value.read_text.side_effect = read_config
-    requests_mock.put('http://old-value/api/v2/package/', status_code=400)
+    path_mock = mocker.patch('choco.config.AsyncPath')
+    path_mock.return_value.read_text = AsyncMock(return_value=saved)
+    niquests_mock.put('http://old-value/api/v2/package/').respond(status_code=400)
     with runner.isolated_filesystem():
         Path('okay-name-1.0.0.nuget').write_text('', encoding='utf-8')
         run = runner.invoke(choco, ('push', 'okay-name-1.0.0.nuget'))
@@ -35,17 +31,12 @@ def test_push_error(
 def test_push_normal(
     runner: CliRunner,
     mocker: MockerFixture,
-    requests_mock: req_mock.Mocker,
+    niquests_mock: MockRouter,
 ) -> None:
     saved = '[pychoco]\ndefaultPushSource = "http://old-value"\n'
-
-    def read_config(encoding: str | None = None) -> str:
-        nonlocal saved
-        return saved
-
-    path_mock = mocker.patch('choco.config.Path')
-    path_mock.return_value.read_text.side_effect = read_config
-    requests_mock.put('http://old-value/api/v2/package/', status_code=201)
+    path_mock = mocker.patch('choco.config.AsyncPath')
+    path_mock.return_value.read_text = AsyncMock(return_value=saved)
+    niquests_mock.put('http://old-value/api/v2/package/').respond(status_code=201)
     with runner.isolated_filesystem():
         Path('okay-name-1.0.0.nuget').write_text('', encoding='utf-8')
         run = runner.invoke(choco, ('push', 'okay-name-1.0.0.nuget'))
