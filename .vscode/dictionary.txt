@@ -1,11 +1,11 @@
 allversions
 anchore
 Ångström
+anyio
 apikey
 appauthor
 appdir
 appimage
-anyio
 appinfo
 asyncio
 autodoc
@@ -80,7 +80,6 @@ norecursedirs
 notarytool
 npmjs
 numpy
-numpydoc
 nuspecs
 onefile
 oneline

@@ -6,9 +6,9 @@ requires = ["hatchling"]
 dev = [
   "commitizen>=4.13.10",
   "cz-path>=0.0.6",
-  "mypy>=1.20.0",
-  "ruff>=0.15.10",
-  "ty>=0.0.29",
+  "mypy>=1.20.1",
+  "ruff==0.15.11",
+  "ty>=0.0.31",
   "types-defusedxml>=0.7.0.20260408",
   "types-python-dateutil>=2.9.0.20260408",
   "yapf>=0.43.0",
@@ -16,22 +16,19 @@ dev = [
 docs = [
   "autodoc-pydantic>=2.2.0",
   "doc8>=2.0.0",
-  "docutils<0.22",
   "enum-tools[sphinx]>=0.13.0",
   "esbonio>=2.0.0",
-  "numpydoc>=1.10.0",
   "restructuredtext-lint>=2.0.2",
   "sphinx-click>=6.2.0",
   "sphinx-datatables>=1.0.0",
   "sphinx-immaterial>=0.13.9",
   "sphinx>=9.1.0; python_version >= \"3.13\"",
-  "tomlkit>=0.14.0",
 ]
 tests = [
   "coveralls>=4.1.0",
   "mock>=5.2.0",
-  "niquests-mock",
-  "pytest-asyncio",
+  "niquests-mock>=0.3.1",
+  "pytest-asyncio>=1.3.0",
   "pytest-cov>=7.1.0",
   "pytest-mock>=3.15.1",
   "pytest>=9.0.3",
@@ -54,8 +51,8 @@ dependencies = [
   "bascom>=0.1.2",
   "click>=8.3.2",
   "defusedxml>=0.7.1",
+  "niquests-cache>=0.0.3",
   "niquests>=3.18.6",
-  "niquests-cache",
   "platformdirs>=4.9.6",
   "python-dateutil>=2.9.0.post0",
   "tomlkit>=0.14.0",
@@ -113,7 +110,7 @@ omit = ["choco/__main__.py", "conftest.py", "tests.py", "tests/*/test_*.py", "te
 max-line-length = 100
 
 [tool.hatch.build.targets.sdist]
-include = ["choco", "tests"]
+include = ["choco", "man", "tests"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["choco"]
@@ -146,6 +143,7 @@ venv = ".venv"
 venvPath = "."
 
 [tool.pytest.ini_options]
+asyncio_mode = "strict"
 mock_use_standalone_module = true
 norecursedirs = ["node_modules"]
 python_files = ["tests.py", "test_*.py", "*_tests.py"]
@@ -208,7 +206,10 @@ max-statements = 100
 [tool.uv]
 default-groups = "all"
 exclude-newer = "1 week"
-exclude-newer-package = { niquests-cache = false, niquests-mock = false }
+
+[tool.uv.exclude-newer-package]
+niquests-cache = false
+niquests-mock = false
 
 [tool.yapf]
 align_closing_bracket_with_visual_indent = true
@@ -257,4 +258,4 @@ split_penalty_logical_operator = 300
 use_tabs = false
 
 [tool.yapfignore]
-ignore_patterns = [".venv/**", "node_modules/**"]
+ignore_patterns = [".venv", ".wiswa-ci", "node_modules"]
