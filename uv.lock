@@ -9,10 +9,11 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-04-18T14:03:40.984693286Z"
+exclude-newer = "2026-04-19T03:30:53.739537965Z"
 exclude-newer-span = "P1W"
 
 [options.exclude-newer-package]
+gitpython = false
 niquests-cache = false
 niquests-mock = false
 
@@ -805,14 +806,14 @@ wheels = [
 
 [[package]]
 name = "gitpython"
-version = "3.1.46"
+version = "3.1.47"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "gitdb" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/df/b5/59d16470a1f0dfe8c793f9ef56fd3826093fc52b3bd96d6b9d6c26c7e27b/gitpython-3.1.46.tar.gz", hash = "sha256:400124c7d0ef4ea03f7310ac2fbf7151e09ff97f2a3288d64a440c584a29c37f", size = 215371, upload-time = "2026-01-01T15:37:32.073Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/c1/bd/50db468e9b1310529a19fce651b3b0e753b5c07954d486cba31bbee9a5d5/gitpython-3.1.47.tar.gz", hash = "sha256:dba27f922bd2b42cb54c87a8ab3cb6beb6bf07f3d564e21ac848913a05a8a3cd", size = 216978, upload-time = "2026-04-22T02:44:44.059Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/6a/09/e21df6aef1e1ffc0c816f0522ddc3f6dcded766c3261813131c78a704470/gitpython-3.1.46-py3-none-any.whl", hash = "sha256:79812ed143d9d25b6d176a10bb511de0f9c67b1fa641d82097b0ab90398a2058", size = 208620, upload-time = "2026-01-01T15:37:30.574Z" },
+    { url = "https://files.pythonhosted.org/packages/f2/c5/a1bc0996af85757903cf2bf444a7824e68e0035ce63fb41d6f76f9def68b/gitpython-3.1.47-py3-none-any.whl", hash = "sha256:489f590edfd6d20571b2c0e72c6a6ac6915ee8b8cd04572330e3842207a78905", size = 209547, upload-time = "2026-04-22T02:44:41.271Z" },
 ]
 
 [[package]]
@@ -1329,7 +1330,7 @@ wheels = [
 
 [[package]]
 name = "niquests-cache"
-version = "0.2.2"
+version = "0.2.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiosqlite" },
@@ -1338,9 +1339,9 @@ dependencies = [
     { name = "platformdirs" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/72/92/9932df20668a075b56c173e26a5877ffd6fb72edee08ac28967246b039b3/niquests_cache-0.2.2.tar.gz", hash = "sha256:919332a63e763335e45e56defbeed93f1f208ea85d5b14ce93c747f8b3ac3ea6", size = 23132, upload-time = "2026-04-21T07:50:24.071Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/8e/3f/5a65ac5a4b253589835f55f0866c312ec94b9b83e8348e66ba378bbc205e/niquests_cache-0.2.3.tar.gz", hash = "sha256:96db6ce1315e71d71327de3b7eca6f67ad2868d521862624a79d0c22d5598a41", size = 23792, upload-time = "2026-04-26T02:44:41.763Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ab/ae/ba19d171d8ae7e31f16c94b86e156c873f07fd6a182d7d4ab01632cd81cf/niquests_cache-0.2.2-py3-none-any.whl", hash = "sha256:4092f9d03f3763c54dab2dbdda5778b1a48c9b118c05d2074b67fa5da226b76c", size = 19171, upload-time = "2026-04-21T07:50:22.628Z" },
+    { url = "https://files.pythonhosted.org/packages/44/52/d703f7047be25bdf7517f2beaa818aca4fccff31649adcffb6c19569cf13/niquests_cache-0.2.3-py3-none-any.whl", hash = "sha256:69c050355e382500d8d62e0aff0121dd2e6dd761af305f9237e46af153653e56", size = 19559, upload-time = "2026-04-26T02:44:40.067Z" },
 ]
 
 [[package]]
