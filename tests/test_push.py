@@ -12,11 +12,7 @@ if TYPE_CHECKING:
     from pytest_mock.plugin import MockerFixture
 
 
-def test_push_error(
-    runner: CliRunner,
-    mocker: MockerFixture,
-    niquests_mock: MockRouter,
-) -> None:
+def test_push_error(runner: CliRunner, mocker: MockerFixture, niquests_mock: MockRouter) -> None:
     saved = '[pychoco]\ndefaultPushSource = "http://old-value"\n'
     path_mock = mocker.patch('choco.config.AsyncPath')
     path_mock.return_value.read_text = AsyncMock(return_value=saved)
@@ -28,11 +24,7 @@ def test_push_error(
     assert run.exit_code != 0
 
 
-def test_push_normal(
-    runner: CliRunner,
-    mocker: MockerFixture,
-    niquests_mock: MockRouter,
-) -> None:
+def test_push_normal(runner: CliRunner, mocker: MockerFixture, niquests_mock: MockRouter) -> None:
     saved = '[pychoco]\ndefaultPushSource = "http://old-value"\n'
     path_mock = mocker.patch('choco.config.AsyncPath')
     path_mock.return_value.read_text = AsyncMock(return_value=saved)
