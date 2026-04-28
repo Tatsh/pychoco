@@ -23,7 +23,7 @@ from .constants import (
 from .utils import InvalidEntryError, entry_to_search_result, tag_text_or
 
 if TYPE_CHECKING:
-    from collections.abc import AsyncIterator
+    from collections.abc import AsyncIterator, Mapping, MutableMapping
     from pathlib import Path
 
     from .typing import Config, ConfigKey, SearchResult
@@ -41,9 +41,9 @@ class ChocolateyClient:
     """
     def __init__(self,
                  config: Config = DEFAULT_CONFIG,
-                 api_keys: dict[str, str] | None = None) -> None:
+                 api_keys: Mapping[str, str] | None = None) -> None:
         self.config = config
-        self.api_keys = api_keys or {}
+        self.api_keys: dict[str, str] = dict(api_keys) if api_keys else {}
         self.session: AsyncSession = AsyncCachedSession(allowable_codes=(200, 201),
                                                         always_revalidate=True,
                                                         cache_control=True)
@@ -233,18 +233,19 @@ class ChocolateyClient:
         r.raise_for_status()
         return r.text or ''
 
-    async def _process_pages(self, content: str, auth: Auth | None, ns: dict[str, str],
-                             results: dict[str, SearchResult]) -> None:
+    async def _process_pages(self, content: str, auth: Auth | None, ns: Mapping[str, str],
+                             results: MutableMapping[str, SearchResult]) -> None:
+        ns_dict = dict(ns)
         if OBJECT_REF_NOT_SET_ERROR_MESSAGE in content:
             content += '\n  </link>\n</feed>'
         root = parse_xml(content)
-        for entry in root.findall(FEED_ENTRY_TAG, ns):
-            id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
+        for entry in root.findall(FEED_ENTRY_TAG, ns_dict):
+            id_url = tag_text_or(entry.find(FEED_ID_TAG, ns_dict))
             if not id_url or id_url in results:
                 continue
             with contextlib.suppress(InvalidEntryError):
-                results[id_url] = entry_to_search_result(entry, ns)
-        next_link = root.find("link[@rel='next']", ns)
+                results[id_url] = entry_to_search_result(entry, ns_dict)
+        next_link = root.find("link[@rel='next']", ns_dict)
         if results and next_link is not None:
             href = next_link.get('href')
             next_url = href if isinstance(href, str) and href else None
@@ -261,13 +262,13 @@ class ChocolateyClient:
             if OBJECT_REF_NOT_SET_ERROR_MESSAGE in content:
                 content += '\n  </link>\n</feed>'
             root = parse_xml(content)
-            for entry in root.findall(FEED_ENTRY_TAG, ns):
-                id_url = tag_text_or(entry.find(FEED_ID_TAG, ns))
+            for entry in root.findall(FEED_ENTRY_TAG, ns_dict):
+                id_url = tag_text_or(entry.find(FEED_ID_TAG, ns_dict))
                 if not id_url or id_url in results:
                     continue
                 with contextlib.suppress(InvalidEntryError):
-                    results[id_url] = entry_to_search_result(entry, ns)
-            next_link = root.find("link[@rel='next']", ns)
+                    results[id_url] = entry_to_search_result(entry, ns_dict)
+            next_link = root.find("link[@rel='next']", ns_dict)
             if results and next_link is not None:
                 href = next_link.get('href')
                 next_url = href if isinstance(href, str) and href else None

@@ -10,6 +10,7 @@ import tomlkit
 from .constants import DEFAULT_CONFIG, PYCHOCO_API_KEYS_TOML_PATH, PYCHOCO_TOML_PATH
 
 if TYPE_CHECKING:
+    from collections.abc import Mapping
     from pathlib import Path
 
     from .typing import Config
@@ -36,13 +37,13 @@ async def read_api_keys(path: Path | str | None = None) -> dict[str, str]:
                                       or PYCHOCO_API_KEYS_TOML_PATH).read_text(encoding='utf-8')))
 
 
-async def write_api_keys(api_keys: dict[str, str], path: Path | str | None = None) -> None:
+async def write_api_keys(api_keys: Mapping[str, str], path: Path | str | None = None) -> None:
     """
     Write API keys dictionary to the given path or the default path.
 
     Parameters
     ----------
-    api_keys : dict[str, str]
+    api_keys : Mapping[str, str]
         Mapping of source URLs to API keys.
     path : Path | str | None
         Path to the API keys file.
