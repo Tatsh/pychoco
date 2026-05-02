@@ -30,5 +30,5 @@ platforms:
 source-code: 'https://github.com/Tatsh/pychoco'
 summary: 'Minimal choco command for use on non-Windows platforms.'
 title: 'chocolatey-choco'
-version: '0.1.5'
+version: '0.1.6'
 website: 'https://tatsh.github.io/pychoco/'

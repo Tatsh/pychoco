@@ -9,11 +9,14 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [unreleased]
 
+## [0.1.6] - 2026-05-02
+
 ### Changed
 
 - Switched HTTP client from `requests` to `niquests` with `niquests-cache` for conditional
   revalidation (ETag/Last-Modified).
 - Converted all I/O to async using `asyncio` and `anyio.Path`.
+- Public APIs now accept abstract collections (`Mapping`, `MutableMapping`) instead of `dict`.
 
 ## [0.1.5]
 
@@ -68,7 +71,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Upgraded dependencies.
 
-[unreleased]: https://github.com/Tatsh/pychoco/compare/v0.1.5...HEAD
+[unreleased]: https://github.com/Tatsh/pychoco/compare/v0.1.6...HEAD
+[0.1.6]: https://github.com/Tatsh/pychoco/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/Tatsh/pychoco/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/Tatsh/pychoco/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/Tatsh/pychoco/compare/v0.1.2...v0.1.3

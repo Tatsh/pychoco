@@ -6,7 +6,7 @@ local utils = import 'utils.libjsonnet';
   keywords: ['command line', 'windows'],
   project_name: 'chocolatey-choco',
   github_project_name: 'pychoco',
-  version: '0.1.5',
+  version: '0.1.6',
   want_main: true,
   want_flatpak: true,
   publishing+: { flathub: 'sh.tat.chocolatey-choco' },
