@@ -12,7 +12,7 @@
 [![Tests](https://github.com/Tatsh/pychoco/actions/workflows/tests.yml/badge.svg)](https://github.com/Tatsh/pychoco/actions/workflows/tests.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Tatsh/pychoco/badge.svg?branch=master)](https://coveralls.io/github/Tatsh/pychoco?branch=master)
 [![Dependabot](https://img.shields.io/badge/Dependabot-enabled-blue?logo=dependabot)](https://github.com/dependabot)
-[![Documentation Status](https://readthedocs.org/projects/pychoco/badge/?version=latest)](https://pychoco.readthedocs.org/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/chocolatey-choco/badge/?version=latest)](https://chocolatey-choco.readthedocs.org/?badge=latest)
 [![mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 [![uv](https://img.shields.io/badge/uv-261230?logo=astral)](https://docs.astral.sh/uv/)
 [![pytest](https://img.shields.io/badge/pytest-zz?logo=Pytest&labelColor=black&color=black)](https://docs.pytest.org/en/stable/)

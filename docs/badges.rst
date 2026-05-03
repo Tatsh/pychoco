@@ -40,8 +40,8 @@
       :target: https://github.com/dependabot
       :alt: Dependabot
 
-   .. image:: https://readthedocs.org/projects/pychoco/badge/?version=latest
-      :target: https://pychoco.readthedocs.org/?badge=latest
+   .. image:: https://readthedocs.org/projects/chocolatey-choco/badge/?version=latest
+      :target: https://chocolatey-choco.readthedocs.org/?badge=latest
       :alt: Documentation Status
 
    .. image:: https://www.mypy-lang.org/static/mypy_badge.svg

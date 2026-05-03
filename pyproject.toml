@@ -75,7 +75,7 @@ choco = "choco.main:main"
 
 [project.urls]
 Issues = "https://github.com/Tatsh/pychoco/issues"
-documentation = "https://pychoco.readthedocs.org"
+documentation = "https://chocolatey-choco.readthedocs.org"
 homepage = "https://tatsh.github.io/pychoco/"
 repository = "https://github.com/Tatsh/pychoco"
 

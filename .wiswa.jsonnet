@@ -13,6 +13,7 @@ local utils = import 'utils.libjsonnet';
   primary_module: 'choco',
   security_policy_supported_versions: { '0.1.x': ':white_check_mark:' },
   flatpak+: { command: 'choco' },
+  documentation_uri: 'https://%s.readthedocs.org' % self.project_name,
   snapcraft+: {
     apps+: {
       'chocolatey-choco'+: {
