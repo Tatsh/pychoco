@@ -9,6 +9,13 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [unreleased]
 
+## [0.1.7] - 2026-05-02
+
+### Fixed
+
+- Documentation URL in package metadata and README badges now point to the correct Read the Docs
+  host (`chocolatey-choco.readthedocs.org`).
+
 ## [0.1.6] - 2026-05-02
 
 ### Changed
@@ -71,7 +78,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - Upgraded dependencies.
 
-[unreleased]: https://github.com/Tatsh/pychoco/compare/v0.1.6...HEAD
+[unreleased]: https://github.com/Tatsh/pychoco/compare/v0.1.7...HEAD
+[0.1.7]: https://github.com/Tatsh/pychoco/compare/v0.1.6...v0.1.7
 [0.1.6]: https://github.com/Tatsh/pychoco/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/Tatsh/pychoco/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/Tatsh/pychoco/compare/v0.1.3...v0.1.4

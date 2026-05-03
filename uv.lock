@@ -10,7 +10,7 @@ resolution-markers = [
 ]
 
 [options]
-exclude-newer = "2026-04-25T21:59:52.272825777Z"
+exclude-newer = "2026-04-26T01:25:18.280829871Z"
 exclude-newer-span = "P1W"
 
 [options.exclude-newer-package]
@@ -386,7 +386,7 @@ wheels = [
 
 [[package]]
 name = "chocolatey-choco"
-version = "0.1.6"
+version = "0.1.7"
 source = { editable = "." }
 dependencies = [
     { name = "anyio" },
