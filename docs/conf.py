@@ -75,12 +75,14 @@ html_theme_options = {
     'toc_title_is_page_title': True
 }
 intersphinx_mapping = {
+    'anyio': ('https://anyio.readthedocs.io/en/stable/', None),
     'bascom': ('https://bascom.readthedocs.io/en/latest/', None),
     'click': ('https://click.palletsprojects.com/en/latest/', None),
-    'defusedxml': ('https://defusedxml.readthedocs.io/en/latest/', None),
     'niquests': ('https://niquests.readthedocs.io/en/latest/', None),
+    'niquests-cache': ('https://niquests-cache.readthedocs.io/en/latest/', None),
     'platformdirs': ('https://platformdirs.readthedocs.io/en/latest/', None),
     'python': ('https://docs.python.org/3', None),
+    'python-dateutil': ('https://dateutil.readthedocs.io/en/stable/', None),
     'tomlkit': ('https://tomlkit.readthedocs.io/en/latest/', None),
     'typing-extensions': ('https://typing-extensions.readthedocs.io/en/latest/', None)
 }
