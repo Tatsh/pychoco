@@ -134,7 +134,7 @@ async def pack(work_dir: str = '.') -> zipfile.ZipFile:
         raise RuntimeError(msg)
     package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
     version = tag_text_or(root.find(NUSPEC_FIELD_VERSION))
-    sha = hashlib.sha1()  # noqa: S324
+    sha = hashlib.sha1()  # ruff:ignore[hashlib-insecure-hash-function]
     sha.update(f'{package_id}{version}{datetime.now(tz=timezone.utc)}'.encode())
     psmdcp_filename = f'{sha.hexdigest()}.psmdcp'
     with zipfile.ZipFile(f'test-{package_id}.{version}.nupkg', 'w') as z:

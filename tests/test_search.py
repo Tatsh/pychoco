@@ -309,7 +309,7 @@ def test_search_handles_error_at_end_of_xml(logparser_search_error_feed: str, ru
     assert 'logparser.lizardgui' in output
 
 
-async def _async_iter(  # noqa: RUF029
-        items: list[dict[str, object]]) -> AsyncGenerator[dict[str, object]]:
+async def _async_iter(  # ruff:ignore[unused-async]
+    items: list[dict[str, object]]) -> AsyncGenerator[dict[str, object]]:
     for item in items:
         yield item
