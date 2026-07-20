@@ -23,7 +23,7 @@ def test_apikey_list(runner: CliRunner, mocker: MockerFixture) -> None:
 def test_apikey_add_and_list_new_file(runner: CliRunner, mocker: MockerFixture) -> None:
     saved = None
 
-    async def save_key(keys: Any, *_args: Any, **_kwargs: Any) -> None:  # noqa: RUF029
+    async def save_key(keys: Any, *_args: Any, **_kwargs: Any) -> None:  # ruff:ignore[unused-async]
         nonlocal saved
         saved = keys
 

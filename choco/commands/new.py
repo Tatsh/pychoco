@@ -14,7 +14,7 @@ __all__ = ('new',)
 @click.argument('name')
 @click.option('-d', '--debug', is_flag=True, help='Enable debug logging.')
 def new(name: str, *, debug: bool = False) -> None:
-    """Create a new package."""  # noqa: DOC501
+    """Create a new package."""  # ruff:ignore[docstring-missing-exception]
     setup_logging(debug=debug, loggers={'choco': {}})
     try:
         asyncio.run(new_package(name))

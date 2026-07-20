@@ -17,7 +17,7 @@ __all__ = ('pack',)
                 type=click.Path(file_okay=False, path_type=Path, resolve_path=True),
                 default='.')
 def pack(work_dir: Path, *, debug: bool = False) -> None:
-    """Create a package file for distribution."""  # noqa: DOC501
+    """Create a package file for distribution."""  # ruff:ignore[docstring-missing-exception]
     setup_logging(debug=debug, loggers={'choco': {}})
     try:
         asyncio.run(do_pack(str(work_dir)))

@@ -24,7 +24,8 @@ if TYPE_CHECKING:
 def test_pack_not_exist(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.packaging.AsyncPath')
 
-    async def empty_glob(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:  # noqa: RUF029
+    async def empty_glob(*_args: object,
+                         **_kwargs: object) -> AsyncGenerator[str]:  # ruff:ignore[unused-async]
         return
         yield
 
@@ -37,7 +38,8 @@ def test_pack_not_exist(runner: CliRunner, mocker: MockerFixture) -> None:
 def test_pack_too_many_nuspec(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.packaging.AsyncPath')
 
-    async def two_nuspecs(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:  # noqa: RUF029
+    async def two_nuspecs(*_args: object,
+                          **_kwargs: object) -> AsyncGenerator[str]:  # ruff:ignore[unused-async]
         yield 'a.nuspec'
         yield 'b.nuspec'
 
@@ -52,7 +54,7 @@ class FakeRoot:
     class FakeTag:
         text: str
 
-    def find(self, tag_name: str) -> FakeTag:  # noqa: PLR6301
+    def find(self, tag_name: str) -> FakeTag:  # ruff:ignore[no-self-use]
         if tag_name == NUSPEC_FIELD_ID:
             return FakeRoot.FakeTag('okay-name')
         if tag_name == NUSPEC_FIELD_VERSION:
@@ -74,7 +76,8 @@ def test_pack_normal(runner: CliRunner, mocker: MockerFixture) -> None:
     zip_mock = mocker.patch('choco.packaging.zipfile.ZipFile')
     path_mock = mocker.patch('choco.packaging.AsyncPath')
 
-    async def one_nuspec(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:  # noqa: RUF029
+    async def one_nuspec(*_args: object,
+                         **_kwargs: object) -> AsyncGenerator[str]:  # ruff:ignore[unused-async]
         yield 'a.nuspec'
 
     path_mock.return_value.glob = one_nuspec

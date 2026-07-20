@@ -15,10 +15,11 @@ if TYPE_CHECKING:
 def test_config_no_file(runner: CliRunner, mocker: MockerFixture) -> None:
     saved = None
 
-    async def read_error(*_args: Any, **_kwargs: Any) -> None:  # noqa: RUF029
+    async def read_error(*_args: Any, **_kwargs: Any) -> None:  # ruff:ignore[unused-async]
         raise FileNotFoundError
 
-    async def save_config(res: Any, *_args: Any, **_kwargs: Any) -> None:  # noqa: RUF029
+    async def save_config(res: Any, *_args: Any,
+                          **_kwargs: Any) -> None:  # ruff:ignore[unused-async]
         nonlocal saved
         saved = res
 
@@ -34,11 +35,12 @@ def test_config_no_file(runner: CliRunner, mocker: MockerFixture) -> None:
 def test_config_existing_file(runner: CliRunner, mocker: MockerFixture) -> None:
     saved = '[pychoco]\ndefaultPushSource = "http://old-value"\notherValue = "something"\n'
 
-    async def read_config(*_args: Any, **_kwargs: Any) -> str:  # noqa: RUF029
+    async def read_config(*_args: Any, **_kwargs: Any) -> str:  # ruff:ignore[unused-async]
         nonlocal saved
         return saved
 
-    async def save_config(res: Any, *_args: Any, **_kwargs: Any) -> None:  # noqa: RUF029
+    async def save_config(res: Any, *_args: Any,
+                          **_kwargs: Any) -> None:  # ruff:ignore[unused-async]
         nonlocal saved
         saved = res
 
@@ -55,7 +57,7 @@ def test_config_existing_file(runner: CliRunner, mocker: MockerFixture) -> None:
 async def test_write_api_keys(mocker: MockerFixture) -> None:
     written = None
 
-    async def fake_write(content: str, **_kwargs: Any) -> None:  # noqa: RUF029
+    async def fake_write(content: str, **_kwargs: Any) -> None:  # ruff:ignore[unused-async]
         nonlocal written
         written = content
 
