@@ -18,8 +18,7 @@ def test_config_no_file(runner: CliRunner, mocker: MockerFixture) -> None:
     async def read_error(*_args: Any, **_kwargs: Any) -> None:  # ruff:ignore[unused-async]
         raise FileNotFoundError
 
-    async def save_config(res: Any, *_args: Any,
-                          **_kwargs: Any) -> None:  # ruff:ignore[unused-async]
+    async def save_config(res: Any, *_args: Any, **_kwargs: Any) -> None:
         nonlocal saved
         saved = res
 
@@ -39,8 +38,7 @@ def test_config_existing_file(runner: CliRunner, mocker: MockerFixture) -> None:
         nonlocal saved
         return saved
 
-    async def save_config(res: Any, *_args: Any,
-                          **_kwargs: Any) -> None:  # ruff:ignore[unused-async]
+    async def save_config(res: Any, *_args: Any, **_kwargs: Any) -> None:
         nonlocal saved
         saved = res
 
