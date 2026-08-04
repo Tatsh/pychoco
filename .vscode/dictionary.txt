@@ -48,6 +48,7 @@ functools
 genindex
 globaltoc
 googlechrome
+handoff
 hoverxref
 htmlcov
 idonly
@@ -78,7 +79,6 @@ namedtuples
 niquests
 norecursedirs
 notarytool
-npmjs
 numpy
 nuspecs
 onefile
@@ -90,6 +90,7 @@ pipx
 pkga
 platformdirs
 plistlib
+preapproved
 prodvers
 psmdcp
 pycache
@@ -119,9 +120,9 @@ signtool
 skiptoken
 snapcore
 snapcraft
-softprops
 soupsieve
 sphinxcontrib
+statusline
 substringof
 syft
 tatsh
@@ -137,13 +138,18 @@ tostring
 tryfirst
 ubyte
 udvare
+undraft
+undrafted
 vendored
 venv
 vers
 virtualenv
+winget
 wiswa
 wiswa's
+worktree
 xcrun
 yapf
 yapfignore
 yarnrc
+zizmor

@@ -24,7 +24,8 @@ if TYPE_CHECKING:
 def test_pack_not_exist(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.packaging.AsyncPath')
 
-    async def empty_glob(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:
+    async def empty_glob(  # ruff: ignore[unused-async]
+            *_args: object, **_kwargs: object) -> AsyncGenerator[str]:
         return
         yield
 
@@ -37,7 +38,8 @@ def test_pack_not_exist(runner: CliRunner, mocker: MockerFixture) -> None:
 def test_pack_too_many_nuspec(runner: CliRunner, mocker: MockerFixture) -> None:
     path_mock = mocker.patch('choco.packaging.AsyncPath')
 
-    async def two_nuspecs(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:
+    async def two_nuspecs(  # ruff: ignore[unused-async]
+            *_args: object, **_kwargs: object) -> AsyncGenerator[str]:
         yield 'a.nuspec'
         yield 'b.nuspec'
 
@@ -74,7 +76,8 @@ def test_pack_normal(runner: CliRunner, mocker: MockerFixture) -> None:
     zip_mock = mocker.patch('choco.packaging.zipfile.ZipFile')
     path_mock = mocker.patch('choco.packaging.AsyncPath')
 
-    async def one_nuspec(*_args: object, **_kwargs: object) -> AsyncGenerator[str]:
+    async def one_nuspec(  # ruff: ignore[unused-async]
+            *_args: object, **_kwargs: object) -> AsyncGenerator[str]:
         yield 'a.nuspec'
 
     path_mock.return_value.glob = one_nuspec
