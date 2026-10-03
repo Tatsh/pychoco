@@ -3,9 +3,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 from unittest.mock import AsyncMock
 
+import pytest
+
 from choco.config import write_api_keys
 from choco.main import main as choco
-import pytest
 
 if TYPE_CHECKING:
     from click.testing import CliRunner

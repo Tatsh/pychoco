@@ -5,9 +5,10 @@ from pathlib import Path
 import asyncio
 
 from bascom import setup_logging
+import click
+
 from choco.config import read_api_keys, write_api_keys
 from choco.constants import PYCHOCO_API_KEYS_TOML_PATH
-import click
 
 __all__ = ('apikey',)
 

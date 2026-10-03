@@ -3,11 +3,12 @@ from __future__ import annotations
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, cast
 
+import pytest
+
 from choco.client import ChocolateyClient
 from choco.config import read_all
 from choco.constants import DEFAULT_CONFIG
 from choco.utils import append_dir_to_zip_recursive, parse_int_tag
-import pytest
 
 if TYPE_CHECKING:
     from collections.abc import Iterator

@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+import pytest
+
 from choco.client import ChocolateyClient
 from choco.constants import OBJECT_REF_NOT_SET_ERROR_MESSAGE
-import pytest
 
 if TYPE_CHECKING:
     from niquests_mock import MockRouter

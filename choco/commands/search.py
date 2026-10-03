@@ -5,10 +5,11 @@ from typing import TYPE_CHECKING, cast
 import asyncio
 
 from bascom import setup_logging
+import click
+
 from choco.client import ChocolateyClient
 from choco.config import read_all
 from choco.templates import ALL_VERSIONS_SEARCH_RESULT_TEMPLATE, SEARCH_RESULT_TEMPLATE
-import click
 
 if TYPE_CHECKING:
     from datetime import datetime

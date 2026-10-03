@@ -4,8 +4,9 @@ from __future__ import annotations
 import asyncio
 
 from bascom import setup_logging
-from choco.packaging import new_package
 import click
+
+from choco.packaging import new_package
 
 __all__ = ('new',)
 

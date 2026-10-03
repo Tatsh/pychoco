@@ -5,11 +5,12 @@ from pathlib import Path
 import asyncio
 
 from bascom import setup_logging
+from niquests import HTTPError
+import click
+
 from choco.client import ChocolateyClient
 from choco.config import read_all
 from choco.constants import PYCHOCO_API_KEYS_TOML_PATH, PYCHOCO_TOML_PATH
-from niquests import HTTPError
-import click
 
 __all__ = ('push',)
 

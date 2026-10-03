@@ -5,8 +5,9 @@ from pathlib import Path
 import asyncio
 
 from bascom import setup_logging
-from choco.packaging import pack as do_pack
 import click
+
+from choco.packaging import pack as do_pack
 
 __all__ = ('pack',)
 

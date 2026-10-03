@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from choco.main import main as choco
 import pytest
+
+from choco.main import main as choco
 
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
