@@ -4,14 +4,14 @@ requires = ["hatchling"]
 
 [dependency-groups]
 dev = [
-  "commitizen>=4.16.5",
+  "commitizen>=4.19.0",
   "cz-path>=0.0.7",
-  "mypy>=2.3.0",
-  "ruff==0.16.8",
-  "ty>=0.0.64",
+  "mypy>=2.3.1",
+  "ruff==0.16.9",
+  "ty>=0.0.84",
   "types-defusedxml>=0.7.0.20260504",
-  "types-python-dateutil>=2.9.0.20260716",
-  "yapf>=0.43.0",
+  "types-python-dateutil>=2.9.0.20260807",
+  "yapf>=0.43.0"
 ]
 docs = [
   "autodoc-pydantic>=2.2.0",
@@ -22,16 +22,16 @@ docs = [
   "sphinx-click>=6.2.0",
   "sphinx-datatables>=1.0.0",
   "sphinx-immaterial>=0.13.9",
-  "sphinx>=9.1.0; python_version >= \"3.13\"",
+  "sphinx>=9.1.0; python_version >= \"3.13\""
 ]
 tests = [
   "coveralls>=4.1.0",
   "mock>=5.2.0",
-  "niquests-mock>=0.5.0",
+  "niquests-mock>=0.5.1",
   "pytest-asyncio>=1.4.0",
   "pytest-cov>=7.1.0",
   "pytest-mock>=3.15.1",
-  "pytest>=9.1.1",
+  "pytest>=9.1.1"
 ]
 
 [project]
@@ -44,19 +44,19 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
-  "Typing :: Typed",
+  "Typing :: Typed"
 ]
 dependencies = [
-  "anyio>=4.14.2",
-  "bascom>=0.1.3",
-  "click>=8.4.2",
+  "anyio>=4.15.1",
+  "bascom>=0.2.0",
+  "click>=8.5.0",
   "defusedxml>=0.7.1",
   "niquests-cache>=0.2.4",
-  "niquests>=3.20.1",
-  "platformdirs>=4.11.0",
+  "niquests>=3.21.2",
+  "platformdirs>=4.11.14",
   "python-dateutil>=2.9.0.post0",
   "tomlkit>=0.15.1",
-  "typing-extensions>=4.16.0",
+  "typing-extensions>=4.16.0"
 ]
 description = "Minimal choco command for use on non-Windows platforms."
 keywords = ["command line", "windows"]
@@ -94,7 +94,7 @@ version_files = [
   "man/pychoco.1",
   "package.json",
   "sh.tat.chocolatey-choco.yml",
-  "snapcraft.yaml",
+  "snapcraft.yaml"
 ]
 version_provider = "pep621"
 
@@ -129,7 +129,7 @@ warn_unreachable = true
 [tool.pyright]
 deprecateTypingAliases = true
 enableExperimentalFeatures = true
-exclude = [".venv", "**/node_modules", "**/__pycache__", "**/.*"]
+exclude = [".sbclaude-venv", ".venv", "**/node_modules", "**/__pycache__", "**/.*"]
 include = ["./choco", "./tests"]
 pythonPlatform = "Linux"
 pythonVersion = "3.10"
@@ -167,19 +167,16 @@ quote-style = "single"
 [tool.ruff.lint]
 extend-select = ["ALL"]
 ignore = [
-  "ANN401",
-  "COM812",
-  "CPY001",
-  "D203",
-  "D204",
-  "D212",
-  "N818",
-  "RUF105",
-  "RUF106",
-  "RUF201",
-  "S404",
-  "S603",
-  "TD002",
+  "any-type",
+  "error-suffix-on-exception-name",
+  "incorrect-blank-line-after-class",
+  "incorrect-blank-line-before-class",
+  "missing-copyright-notice",
+  "missing-todo-author",
+  "missing-trailing-comma",
+  "multi-line-summary-first-line",
+  "subprocess-without-shell-equals-true",
+  "suspicious-subprocess-import"
 ]
 preview = true
 
@@ -194,8 +191,9 @@ multiline-quotes = "double"
 case-sensitive = true
 combine-as-imports = true
 from-first = true
+known-first-party = ["choco"]
 required-imports = ["from __future__ import annotations"]
-section-order = ["future", "standard-library", "third-party", "local-folder"]
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 20
@@ -204,7 +202,7 @@ max-complexity = 20
 extend-ignore-names = ["test_*"]
 
 [tool.ruff.lint.per-file-ignores]
-"choco/main.py" = ["PLR0913"]
+"choco/main.py" = ["too-many-arguments"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
@@ -273,4 +271,4 @@ split_penalty_logical_operator = 300
 use_tabs = false
 
 [tool.yapfignore]
-ignore_patterns = [".venv", ".wiswa-ci", "node_modules"]
+ignore_patterns = [".sbclaude-venv", ".venv", ".wiswa-ci", "node_modules"]

@@ -1,6 +1,5 @@
 allversions
 anchore
-Ångström
 anyio
 apikey
 appauthor
@@ -10,6 +9,7 @@ appinfo
 asyncio
 autodoc
 automodule
+autouse
 bascom
 bsky
 cdrommsf
@@ -18,7 +18,6 @@ codesign
 colorlog
 commitizen
 conftest
-cooldown
 coveragerc
 coverallsapp
 ctypes
@@ -36,6 +35,7 @@ doctrees
 dunder
 eeyore
 elif
+endswith
 errpkg
 esac
 esbenp
@@ -52,7 +52,6 @@ handoff
 hoverxref
 htmlcov
 idonly
-intersphinx
 isoparse
 isort
 itertools
@@ -77,9 +76,13 @@ myproject
 mypy
 namedtuples
 niquests
+noone
+noqa
 norecursedirs
 notarytool
+nullglob
 numpy
+numpydoc
 nuspecs
 onefile
 oneline
@@ -90,6 +93,7 @@ pipx
 pkga
 platformdirs
 plistlib
+popen
 preapproved
 prodvers
 psmdcp
@@ -110,12 +114,14 @@ regen
 rels
 ripgreprc
 rstcheck
+sbclaude
 schemafile
 sdist
 secho
 setattr
 shellcheck
 shellformat
+shopt
 signtool
 skiptoken
 snapcore
@@ -147,9 +153,9 @@ virtualenv
 winget
 wiswa
 wiswa's
-worktree
 xcrun
 yapf
 yapfignore
 yarnrc
 zizmor
+Ångström
