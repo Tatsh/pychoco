@@ -1,7 +1,7 @@
 """Packaging-related functions."""
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from os import chdir
 from pathlib import Path
 import asyncio
@@ -135,7 +135,7 @@ async def pack(work_dir: str = '.') -> zipfile.ZipFile:
     package_id = tag_text_or(root.find(NUSPEC_FIELD_ID))
     version = tag_text_or(root.find(NUSPEC_FIELD_VERSION))
     sha = hashlib.sha1()  # ruff:ignore[hashlib-insecure-hash-function]
-    sha.update(f'{package_id}{version}{datetime.now(tz=timezone.utc)}'.encode())
+    sha.update(f'{package_id}{version}{datetime.now(tz=UTC)}'.encode())
     psmdcp_filename = f'{sha.hexdigest()}.psmdcp'
     with zipfile.ZipFile(f'test-{package_id}.{version}.nupkg', 'w') as z:
         chdir(work_dir)

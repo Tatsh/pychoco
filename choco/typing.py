@@ -1,9 +1,7 @@
 """Typing helpers."""
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Literal, TypeVar, TypedDict
-
-from typing_extensions import NotRequired
+from typing import TYPE_CHECKING, Literal, NotRequired, TypeVar, TypedDict
 
 if TYPE_CHECKING:
     from datetime import datetime
