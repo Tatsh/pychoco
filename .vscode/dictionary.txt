@@ -64,6 +64,7 @@ launchable
 lextudio
 libera
 libjsonnet
+librsvg
 libsonnet
 linters
 lizardgui
@@ -114,6 +115,7 @@ regen
 rels
 ripgreprc
 rstcheck
+rsvg
 sbclaude
 schemafile
 sdist
