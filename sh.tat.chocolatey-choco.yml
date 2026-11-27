@@ -15,8 +15,9 @@ modules:
     buildsystem: 'simple'
     name: 'chocolatey-choco'
     sources:
-      - path: '.'
-        type: 'dir'
+      - tag: 'v0.1.7'
+        type: 'git'
+        url: 'https://github.com/Tatsh/pychoco'
 runtime: 'org.freedesktop.Platform'
 runtime-version: '26.08'
 sdk: 'org.freedesktop.Sdk'
